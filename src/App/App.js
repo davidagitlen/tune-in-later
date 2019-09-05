@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
+import LoginForm from '../components/Forms/LoginForm/LoginForm';
 import { landingFetch, authorFetch } from '../util/apiCalls';
 import './App.css';
-
 
 class App extends Component{
   constructor() {
@@ -50,10 +50,10 @@ class App extends Component{
       <header>
         <h1>FETCH ATTEMPTS!</h1>
       </header>
-
+      <LoginForm />
     </div>
-  )
-};
+    )
+  }
 }
 
 export default App;
