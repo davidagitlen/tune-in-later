@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import LoginForm from '../components/Forms/LoginForm/LoginForm';
+import LoginForm from '../containers/LoginForm/LoginForm';
 import { landingFetch, authorFetch } from '../util/apiCalls';
 import './App.css';
 import NewUserForm from '../containers/NewUserForm';
