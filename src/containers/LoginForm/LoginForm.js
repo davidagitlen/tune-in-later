@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { loginUser } from '../../util/apiCalls';
 import { connect } from 'react-redux';
 import { setCurrentUser } from '../../actions';
+import { NavLink, Redirect } from 'react-router-dom';
 import './LoginForm.scss';
 
 class LoginForm extends Component {
@@ -47,7 +48,6 @@ class LoginForm extends Component {
   }
 
   render() {
-    console.log(this.props.favorites)
     return (
       <form className="login-form">
         {this.props.currentUser ? <h2>Welcome {this.props.currentUser.name}!</h2> : <h2>Welcome, please login.</h2>}

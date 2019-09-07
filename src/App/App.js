@@ -4,7 +4,7 @@ import LoginForm from '../containers/LoginForm/LoginForm';
 import { landingFetch, authorFetch } from '../util/apiCalls';
 import './App.css';
 import NewUserForm from '../containers/NewUserForm';
-import { Route, NavLink } from 'react-router-dom';
+import { Route, NavLink, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { setCurrentUser } from '../actions';
 
@@ -61,13 +61,14 @@ class App extends Component{
     return (
     <div className="App">
       <header>
-        <h1>FETCH ATTEMPTS!</h1>
+        <h1>FUCKING FETCH!</h1>
         <NavLink to='/' className='nav'>Home</NavLink>
         {!this.props.currentUser && <NavLink to='/login' className='nav'>Sign In</NavLink> }
         {this.props.currentUser && <NavLink to='/' className='nav' onClick={() => this.props.setCurrentUser(null)}>Sign Out</NavLink>}
+        {/* {this.props.currentUser && !this.props.favorites.length && <h2>You haven't favorited any books yet!</h2>} */}
       </header>
       <Route 
-        path='/login' 
+        exact path='/login' 
         render={() => {
          return(
             <>
@@ -76,21 +77,30 @@ class App extends Component{
             </>)
           }} 
         />
-      {this.state.allBooks.length && <BooksDisplay 
-        books={this.filterAllBooks('romance')} 
-        sectionGenre='Romances'/>}
-      {this.state.allBooks.length && <BooksDisplay 
-        books={this.filterAllBooks('fantasy')} 
-        sectionGenre='Fantasies'/>}
-      {this.state.allBooks.length && <BooksDisplay 
-        books={this.filterAllBooks('biography')}
-        sectionGenre='Biographies' />}
-      {this.state.allBooks.length && <BooksDisplay 
-        books={this.filterAllBooks('history')} 
-        sectionGenre='Histories'/>}
-      {this.state.allBooks.length && <BooksDisplay 
-        books={this.filterAllBooks('horror')} 
-        sectionGenre='Horrors'/>}
+      <Route 
+        exact path = '/'
+        render={() => {
+          return(
+            <>
+          {this.state.allBooks.length && <BooksDisplay 
+            books={this.filterAllBooks('romance')} 
+            sectionGenre='Romances'/>}
+          {this.state.allBooks.length && <BooksDisplay 
+            books={this.filterAllBooks('fantasy')} 
+            sectionGenre='Fantasies'/>}
+          {this.state.allBooks.length && <BooksDisplay 
+            books={this.filterAllBooks('biography')}
+            sectionGenre='Biographies' />}
+          {this.state.allBooks.length && <BooksDisplay 
+            books={this.filterAllBooks('history')} 
+            sectionGenre='Histories'/>}
+          {this.state.allBooks.length && <BooksDisplay 
+            books={this.filterAllBooks('horror')} 
+            sectionGenre='Horrors'/>}
+          </>
+          )
+        }} />
+        {this.props.currentUser ? <Redirect to='/' /> : null}
     </div>
     )
   }
