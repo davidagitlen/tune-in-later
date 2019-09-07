@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { loginUser } from '../../../util/apiCalls';
+import { connect } from 'react-redux';
+import { setCurrentUser } from '../../../actions';
 import './LoginForm.scss';
 
 class LoginForm extends Component {
@@ -19,7 +21,7 @@ class LoginForm extends Component {
     e.preventDefault();
     loginUser(this.state.email, this.state.password)
       .then(response => response.json())
-      .then(data => console.log(data))
+      .then(data => this.props.setCurrentUser(data))
       .catch(error => console.error(error));
   }
 
@@ -34,6 +36,10 @@ class LoginForm extends Component {
       </form>
     )
   }
-} 
+}
+// const mapStateToProps = 
+const mapDispatchToProps = dispatch => ({
+  setCurrentUser: user => dispatch(setCurrentUser(user))
+})
 
-export default LoginForm;
+export default connect(null, mapDispatchToProps)(LoginForm);
