@@ -30,7 +30,6 @@ const BooksDisplay = ({books, sectionGenre}) => {
       </div>
     </section>
   )
-
 }
 
 export default BooksDisplay;

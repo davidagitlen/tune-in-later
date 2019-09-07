@@ -50,10 +50,9 @@ class LoginForm extends Component {
   render() {
     return (
       <form className="login-form">
-        {this.props.currentUser ? <h2>Welcome {this.props.currentUser.name}!</h2> : <h2>Welcome, please login.</h2>}
         <input className="email-input" placeholder="joanclarke@fempower.com" alt="email" name="email" value={this.state.email} onChange={this.handleInputs}></input>
         <input className="password-input" placeholder="type password here..." alt="password" name="password" value={this.state.password} onChange={e => this.handleInputs(e)}></input>
-        {this.state.error && <p>Incorrect email or password.</p>}
+        {this.state.error && <p>Email and Password do not match.</p>}
         <button className="login-btn" onClick={this.checkLoginStatus}>Login</button>
       </form>
     )
