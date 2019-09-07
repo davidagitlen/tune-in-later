@@ -72,4 +72,7 @@ export const addFavoritesToApi = (book, userId) => {
     }
   }
   return fetch(`http://localhost:3001/api/v1/users/${userId}/bookfavorites`, options)
+    .then(response => response.json())
+    .then(book => console.log('book', book))
+    .catch(error => console.error(error));
 }
