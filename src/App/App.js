@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import LoginForm from '../components/Forms/LoginForm/LoginForm';
 import { landingFetch, authorFetch } from '../util/apiCalls';
 import './App.css';
+import NewUserForm from '../containers/NewUserForm';
 
 class App extends Component{
   constructor() {
@@ -51,6 +52,7 @@ class App extends Component{
         <h1>FETCH ATTEMPTS!</h1>
       </header>
       <LoginForm />
+      <NewUserForm />
     </div>
     )
   }
