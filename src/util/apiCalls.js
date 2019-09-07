@@ -34,7 +34,5 @@ export const loginUser = (email, password) => {
   }
 
   return fetch('http://localhost:3001/api/v1/login/', options)
-    .then(response => response.json())
-    .then(data => console.log(data))
-    .catch(error => console.error(error));
+    
 }

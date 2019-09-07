@@ -17,7 +17,10 @@ class LoginForm extends Component {
 
   checkLoginStatus = (e) => {
     e.preventDefault();
-    loginUser(this.state.email, this.state.password);
+    loginUser(this.state.email, this.state.password)
+      .then(response => response.json())
+      .then(data => console.log(data))
+      .catch(error => console.error(error));
   }
 
   render() {
