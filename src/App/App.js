@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import BooksDisplay from '../BooksDisplay/BooksDisplay';
+import BooksDisplay from '../containers/BooksDisplay/BooksDisplay';
 import LoginForm from '../containers/LoginForm/LoginForm';
 import { landingFetch, authorFetch } from '../util/apiCalls';
 import './App.css';
-import NewUserForm from '../containers/NewUserForm';
+import NewUserForm from '../containers/NewUserForm/NewUserForm';
 import { Route, NavLink, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { setCurrentUser } from '../actions';
@@ -20,7 +20,7 @@ class App extends Component{
   
   componentDidMount() {
     landingFetch()
-      .then(data => this.setState({allBooks: this.handleInitialData(data)}))
+      .then(data => this.setState({allBooks: this.handleInitialData(data)}, () => {console.log(data)}))
       .catch(err => this.setState({error : 'Sorry, there was a problem loading our suggested audiobooks. Please enter a search term to see specific results!'}, () => {console.error('error in landing fetch', err)}))
 
     authorFetch('lois', 'lowry') 
@@ -47,7 +47,9 @@ class App extends Component{
       title: book.collectionName,
       genre: book.primaryGenreName,
       description: book.description,
-      filterType: book.filterType
+      date: book.releaseDate,
+      filterType: book.filterType,
+      id: book.collectionId
     }));
     return formattedBooks
   }
@@ -65,7 +67,6 @@ class App extends Component{
         <NavLink to='/' className='nav'>Home</NavLink>
         {!this.props.currentUser && <NavLink to='/login' className='nav'>Sign In</NavLink> }
         {this.props.currentUser && <NavLink to='/' className='nav' onClick={() => this.props.setCurrentUser(null)}>Sign Out</NavLink>}
-        {this.props.currentUser ? <h2>Welcome {this.props.currentUser.name}!</h2> : <h2>Welcome, please sign in.</h2>}
         {/* {this.props.currentUser && !this.props.favorites.length && <h2>You haven't favorited any books yet!</h2>} */}
       </header>
       <Route 
@@ -77,14 +78,6 @@ class App extends Component{
               <NewUserForm />
             </>)
           }} 
-        />
-        <Route exact path='/my-collection' render={() => {
-            return (
-              <>
-              {this.props.favorites.length && this.props.currentUser && <BooksDisplay books={this.props.favorites} sectionGenre='My Collection' />}
-              </>
-              )}
-        }
         />
       <Route 
         exact path = '/'
