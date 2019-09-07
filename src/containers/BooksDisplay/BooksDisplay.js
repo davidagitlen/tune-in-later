@@ -1,5 +1,7 @@
 import React from 'react';
 import './BooksDisplay.css';
+import { setCurrentUserFavorites } from '../actions';
+import { connect } from 'react-redux';
 
 const BooksDisplay = ({books, sectionGenre}) => {
   console.log('books in booksdisplay', books)
@@ -31,7 +33,15 @@ const BooksDisplay = ({books, sectionGenre}) => {
       </div>
     </section>
   )
-
 }
 
-export default BooksDisplay;
+const mapStateToProps = state => ({
+  currentUser : state.currentUser,
+  favorites : state.favorites
+})
+
+const mapDispatchToProps = dispatch => ({
+  setCurrentUserFavorites : favorites => dispatch(setCurrentUserFavorites(favorites))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(BooksDisplay);
