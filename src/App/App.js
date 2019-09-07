@@ -86,6 +86,12 @@ class App extends Component{
         render={() => {
           return(
             <>
+
+          {this.props.searchResults && <BooksDisplay 
+            books={this.props.searchResults}
+            sectionGenre='Search Results' />
+            }
+
           {this.state.allBooks.length && <BooksDisplay 
             books={this.filterAllBooks('romance')} 
             sectionGenre='Romances'/>}
