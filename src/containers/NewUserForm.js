@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import './NewUserForm.scss';
+import { setCurrentUser } from '../actions/index'
 
 class NewUserForm extends Component {
   constructor() {
@@ -31,16 +33,18 @@ class NewUserForm extends Component {
     fetch('http://localhost:3001/api/v1/users', options)
       .then(resp => {
         if (!resp.ok) {
-          throw Error('Something went wrong')
+          throw Error('Something went wrong');
         }
         return resp.json()
       })
       .then(data => console.log(data))
-      .catch(err => this.setState({
+      .catch(err => 
+        this.setState({
         name: '',
         email: '',
         password: '',
-        error: err}))
+        error: err.message})
+        )
   }
 
 
@@ -48,10 +52,24 @@ class NewUserForm extends Component {
     this.setState({ [e.target.name]: e.target.value})
   }
 
+  clearNewUserInputs = () => {
+    this.setState({
+      name: '',
+      email: '',
+      password: '',
+      error: ''
+    })
+  }
+
   handleSubmitNewUser = (e) => {
     e.preventDefault();
     this.addNewUserFetch();
-    //set user to selecteduser
+    this.props.setCurrentUser({
+      name: this.state.name,
+      email: this.state.email,
+      password: this.state.password
+    });
+    this.clearNewUserInputs();
     //hide the login/new user sections
   }
 
@@ -86,4 +104,8 @@ class NewUserForm extends Component {
   }
 }
 
-export default NewUserForm;
+const mapDispatchToProps = dispatch => ({
+  setCurrentUser: user => dispatch(setCurrentUser(user))
+})
+
+export default connect(null, mapDispatchToProps)(NewUserForm);
