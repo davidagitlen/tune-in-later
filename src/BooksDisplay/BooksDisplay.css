@@ -29,6 +29,7 @@ section {
   overflow-x: scroll;
   overflow-y: hidden;
   border-radius: 8px;
+  will-change: transform;
 }
 
 section > div {

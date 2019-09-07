@@ -1,60 +1,70 @@
 import React, { Component } from 'react';
+import { loginUser } from '../../../util/apiCalls';
+import { connect } from 'react-redux';
+import { setCurrentUser } from '../../../actions';
 import './LoginForm.scss';
 
 class LoginForm extends Component {
-
-  createNewUser = (e) => {
-    e.preventDefault(e);
-    const bodyInfo = {
-      name: 'Divad',
-      email: 'Divad@gmail.com',
-      password: 'divadspassword'
-    }
-    const options = {
-      method: "POST",
-      body: JSON.stringify(bodyInfo),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    }
-
-    fetch("http://localhost:3001/api/v1/users", options)
-      .then(response => response.json())
-      .then(data => console.log(data))
-      .catch(err => console.log(err))
+  constructor() {
+    super();
+    this.state = {
+      email: '',
+      password: '',
+      error: ''
+    } 
   }
 
-  loginExistingUser = (e) => {
+  handleInputs = (e) => {
+    this.setState({[e.target.name]: e.target.value})
+  }
+
+  checkLoginStatus = (e) => {
     e.preventDefault();
-    const bodyInfo = {
-      email: 'test@turing.io',
-      password: 'TESTpassword'
-    }
-
-    const options = {
-      method: "POST",
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(bodyInfo)
-    }
-
-    fetch("http://localhost:3001/api/v1/login", options)
-      .then(response => response.json())
-      .then(data => console.log(data))
-      .catch(err => console.log(err))
+    loginUser(this.state.email, this.state.password)
+      .then(response => {
+        if(!response.ok){
+          throw Error('Can\'t get user')
+        }
+        return response.json()
+      })
+      .then(data => this.props.setCurrentUser(data))
+      .catch(error => 
+        this.setState({
+          email: '',
+          password: '',
+          error: error.message
+        })
+      );
+      this.clearLoginInputs();
   }
 
+  clearLoginInputs = () => {
+    this.setState({
+      email: '',
+      password: '',
+      error: ''
+    })
+  }
 
   render() {
     return (
       <form className="login-form">
-        <input className="email-input" placeholder="joanclarke@fempower.com" alt="email" name="email"></input>
-        <input className="password-input" placeholder="type password here..." alt="password" name="password"></input>
-        <button onClick={(e) => this.createNewUser(e)} className="login-btn">Login</button>
+        {this.props.currentUser ? <h2>Welcome {this.props.currentUser.name}!</h2> : <h2>Welcome, please login.</h2>}
+        <input className="email-input" placeholder="joanclarke@fempower.com" alt="email" name="email" value={this.state.email} onChange={this.handleInputs}></input>
+        <input className="password-input" placeholder="type password here..." alt="password" name="password" value={this.state.password} onChange={e => this.handleInputs(e)}></input>
+        {this.state.error && <p>Incorrect email or password.</p>}
+        <button className="login-btn" onClick={this.checkLoginStatus}>Login</button>
       </form>
     )
   }
-} 
+}
 
-export default LoginForm;
+const mapStateToProps = state => ({
+  currentUser: state.currentUser
+})
+
+const mapDispatchToProps = dispatch => ({
+  setCurrentUser: user => dispatch(setCurrentUser(user))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);

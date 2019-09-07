@@ -3,6 +3,7 @@ import LoginForm from '../components/Forms/LoginForm/LoginForm';
 import BooksDisplay from '../BooksDisplay/BooksDisplay';
 import { landingFetch, authorFetch } from '../util/apiCalls';
 import './App.css';
+import NewUserForm from '../containers/NewUserForm';
 
 class App extends Component{
   constructor() {
@@ -59,6 +60,7 @@ class App extends Component{
         <h1>FETCH ATTEMPTS!</h1>
       </header>
       <LoginForm />
+      <NewUserForm />
       {this.state.allBooks.length && <BooksDisplay 
         books={this.filterAllBooks('romance')} 
         sectionGenre='Romances'/>}
@@ -73,7 +75,7 @@ class App extends Component{
         sectionGenre='Histories'/>}
       {this.state.allBooks.length && <BooksDisplay 
         books={this.filterAllBooks('horror')} 
-        sectionGenre='Horrors'/>} */}
+        sectionGenre='Horrors'/>}
     </div>
     )
   }
