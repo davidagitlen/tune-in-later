@@ -55,3 +55,11 @@ export const loginUser = (email, password) => {
   return fetch('http://localhost:3001/api/v1/login/', options)
     
 }
+
+
+export const fetchSearch = searchTerm => {
+  const searchURL = searchTerm.split(' ').join('+')
+  return fetch(`https://itunes.apple.com/search?media=audiobook&term=${searchURL}`)
+    .then(response => response.json())
+    .catch(err => console.log(err, 'error in apiCalls authorFetch'))
+}

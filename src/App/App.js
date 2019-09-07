@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import BooksDisplay from '../BooksDisplay/BooksDisplay';
 import LoginForm from '../containers/LoginForm/LoginForm';
 import { landingFetch, authorFetch } from '../util/apiCalls';
-import './App.css';
+import './App.scss';
 import NewUserForm from '../containers/NewUserForm';
 import { Route, NavLink, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { setCurrentUser } from '../actions';
+import SearchForm from '../containers/SearchForm/SearchForm';
 
 class App extends Component{
   constructor() {
@@ -14,7 +15,7 @@ class App extends Component{
     this.state = {
       allBooks : [],
       authorWorks: [],
-      error: ''
+      error: '',
     }
   }
   
@@ -61,11 +62,14 @@ class App extends Component{
     return (
     <div className="App">
       <header>
-        <h1>FUCKING FETCH!</h1>
-        <NavLink to='/' className='nav'>Home</NavLink>
-        {!this.props.currentUser && <NavLink to='/login' className='nav'>Sign In</NavLink> }
-        {this.props.currentUser && <NavLink to='/' className='nav' onClick={() => this.props.setCurrentUser(null)}>Sign Out</NavLink>}
-        {/* {this.props.currentUser && !this.props.favorites.length && <h2>You haven't favorited any books yet!</h2>} */}
+        <SearchForm />
+        <h1>ListenLater</h1>
+        <nav>
+          <NavLink to='/' className='nav'>Home</NavLink>
+          {!this.props.currentUser && <NavLink to='/login' className='nav'>Sign In</NavLink> }
+          {this.props.currentUser && <NavLink to='/' className='nav' onClick={() => this.props.setCurrentUser(null)}>Sign Out</NavLink>}
+          {/* {this.props.currentUser && !this.props.favorites.length && <h2>You haven't favorited any books yet!</h2>} */}
+        </nav>
       </header>
       <Route 
         exact path='/login' 

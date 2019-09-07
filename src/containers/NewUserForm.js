@@ -71,6 +71,8 @@ class NewUserForm extends Component {
     });
     this.clearNewUserInputs();
     //hide the login/new user sections
+    // (This should be done by conditional
+    // rendering based on store.)
   }
 
   render() {

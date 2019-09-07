@@ -1,0 +1,29 @@
+.SearchForm {
+  
+  background: pink;
+
+  & form {
+    display: flex;
+  flex-direction: row;
+    margin: 0;
+
+  }
+      & input{
+        width: 200px;
+        margin: 0;
+      }
+
+      & input[type="image"]{
+        width: 30px;
+      }
+      
+      & button {
+        margin: 0;
+      }
+  
+  & img {
+    width: 30px;
+    height: 30px;
+    margin: 0
+  }
+}
