@@ -55,3 +55,20 @@ export const loginUser = (email, password) => {
   return fetch('http://localhost:3001/api/v1/login/', options)
     
 }
+
+export const addBookToFavorites = (book) => {
+  const favoriteBook = {
+    {
+    "book_id": ,
+    "author_name": ,
+    "book_name": ,
+     "artwork_url": ,
+    "release_date": ,
+    "description": 
+  }
+  }
+  const options = {
+    method: "POST",
+    body:
+  }
+}
