@@ -47,9 +47,9 @@ class LoginForm extends Component {
   }
 
   render() {
-    // console.log(currentUser);
     return (
       <form className="login-form">
+        {this.props.currentUser ? <h2>Welcome {this.props.currentUser.name}!</h2> : <h2>Welcome, please login.</h2>}
         <input className="email-input" placeholder="joanclarke@fempower.com" alt="email" name="email" value={this.state.email} onChange={this.handleInputs}></input>
         <input className="password-input" placeholder="type password here..." alt="password" name="password" value={this.state.password} onChange={e => this.handleInputs(e)}></input>
         {this.state.error && <p>Incorrect email or password.</p>}
@@ -58,9 +58,13 @@ class LoginForm extends Component {
     )
   }
 }
-// const mapStateToProps = 
+
+const mapStateToProps = state => ({
+  currentUser: state.currentUser
+})
+
 const mapDispatchToProps = dispatch => ({
   setCurrentUser: user => dispatch(setCurrentUser(user))
 })
 
-export default connect(null, mapDispatchToProps)(LoginForm);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);
