@@ -1,6 +1,6 @@
 import React from 'react';
 import './BooksDisplay.css';
-import { setCurrentUserFavorites } from '../../actions';
+import { setCurrentUserFavorites, addUserFavorite } from '../../actions';
 import { connect } from 'react-redux';
 
 const BooksDisplay = ({books, sectionGenre}) => {
@@ -41,7 +41,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  setCurrentUserFavorites : favorites => dispatch(setCurrentUserFavorites(favorites))
+  setCurrentUserFavorites : favorites => dispatch(setCurrentUserFavorites(favorites)),
+  addUserFavorite : (favorite, id) => dispatch(addUserFavorite(favorite, id))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(BooksDisplay);
