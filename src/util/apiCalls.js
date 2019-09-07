@@ -52,23 +52,24 @@ export const loginUser = (email, password) => {
     }
   }
 
-  return fetch('http://localhost:3001/api/v1/login/', options)
-    
+  return fetch('http://localhost:3001/api/v1/login/', options)    
 }
 
-export const addBookToFavorites = (book) => {
+export const addFavoritesToApi = (book, userId) => {
   const favoriteBook = {
-    {
-    "book_id": ,
-    "author_name": ,
-    "book_name": ,
-     "artwork_url": ,
-    "release_date": ,
-    "description": 
-  }
+    "book_id": book.id,
+    "author_name": book.artist,
+    "book_name": book.title,
+     "artwork_url": book.image,
+    "release_date": book.date,
+    "description": book.description
   }
   const options = {
     method: "POST",
-    body:
+    body: JSON.stringify(favoriteBook),
+    headers: {
+      "Content-Type": "application/json"
+    }
   }
+  return fetch(`http://localhost:3001/api/v1/users/${userId}/bookfavorites`, options)
 }
