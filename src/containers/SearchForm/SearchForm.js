@@ -3,12 +3,14 @@ import { connect } from 'react-redux';
 import './SearchForm.scss';
 import magnifierTool from '../images/magnifier-tool.svg';
 import { fetchSearch } from '../../util/apiCalls';
+import { displaySearchResults } from '../../actions/';
 
 class SearchForm extends Component {
   constructor() {
     super();
     this.state = {
-      searchTerm: ''
+      searchTerm: '',
+      results: []
     }
   }
 
@@ -26,8 +28,8 @@ class SearchForm extends Component {
     e.preventDefault();
     fetchSearch(this.state.searchTerm)
       .then(resp => {
-        console.log(resp)
-        console.log(this.cleanSearchResults(resp.results))
+        const results = this.cleanSearchResults(resp.results)
+        this.props.displaySearchResults(results)
       }
       )
     this.clearSearch();
@@ -48,8 +50,7 @@ class SearchForm extends Component {
   }
 
   render() {
-
-
+ 
     return(
       <div className="SearchForm">
         <form>
@@ -72,4 +73,8 @@ class SearchForm extends Component {
 }
 
 
-export default SearchForm;
+const mapDispatchToProps = dispatch => ({
+  displaySearchResults: (searchResults) => dispatch(displaySearchResults(searchResults))
+})
+
+export default connect(null, mapDispatchToProps)(SearchForm);
