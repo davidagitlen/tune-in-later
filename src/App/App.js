@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import BooksDisplay from '../containers/BooksDisplay/BooksDisplay';
 import LoginForm from '../containers/LoginForm/LoginForm';
 import { landingFetch, authorFetch } from '../util/apiCalls';
-import './App.css';
+import './App.scss';
 import NewUserForm from '../containers/NewUserForm/NewUserForm';
 import { Route, NavLink, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -106,7 +106,8 @@ class App extends Component{
 
 const mapStateToProps = state => ({
   currentUser: state.currentUser,
-  favorites: state.favorites
+  favorites: state.favorites,
+  searchResults: state.searchResults
 })
 
 const mapDispatchToProps = dispatch => ({
