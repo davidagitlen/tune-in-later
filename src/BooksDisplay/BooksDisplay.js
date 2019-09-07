@@ -2,6 +2,7 @@ import React from 'react';
 import './BooksDisplay.css';
 
 const BooksDisplay = ({books, sectionGenre}) => {
+  console.log('books in booksdisplay', books)
   const bookList = books.map(book => {
     const {artist, image, price, title, filterType} = book;
     return (

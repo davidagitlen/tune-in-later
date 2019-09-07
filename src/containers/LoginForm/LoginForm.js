@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { loginUser } from '../../util/apiCalls';
 import { connect } from 'react-redux';
 import { setCurrentUser } from '../../actions';
-import { NavLink, Redirect } from 'react-router-dom';
 import './LoginForm.scss';
 
 class LoginForm extends Component {

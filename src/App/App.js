@@ -20,7 +20,7 @@ class App extends Component{
   
   componentDidMount() {
     landingFetch()
-      .then(data => this.setState({allBooks: this.handleInitialData(data)}))
+      .then(data => this.setState({allBooks: this.handleInitialData(data)}, () => {console.log(data)}))
       .catch(err => this.setState({error : 'Sorry, there was a problem loading our suggested audiobooks. Please enter a search term to see specific results!'}, () => {console.error('error in landing fetch', err)}))
 
     authorFetch('lois', 'lowry') 
@@ -47,7 +47,9 @@ class App extends Component{
       title: book.collectionName,
       genre: book.primaryGenreName,
       description: book.description,
-      filterType: book.filterType
+      date: book.releaseDate,
+      filterType: book.filterType,
+      id: book.collectionId
     }));
     return formattedBooks
   }
