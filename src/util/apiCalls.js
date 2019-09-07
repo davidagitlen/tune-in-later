@@ -18,3 +18,23 @@ export const authorFetch = (authorFirstName, authorLastName) => {
     .catch(err => console.log(err, 'error in apiCalls authorFetch'))
 
 }
+
+export const loginUser = (email, password) => {
+  const user = {
+    "email": email,
+    "password": password
+  };
+
+  const options = {
+    method: "POST",
+    body: JSON.stringify(user),
+    headers: {
+      "Content-Type": "application/json"
+    }
+  }
+
+  return fetch('http://localhost:3001/api/v1/login/', options)
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error(error));
+}
