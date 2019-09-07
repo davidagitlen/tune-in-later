@@ -4,6 +4,9 @@ import LoginForm from '../containers/LoginForm/LoginForm';
 import { landingFetch, authorFetch } from '../util/apiCalls';
 import './App.css';
 import NewUserForm from '../containers/NewUserForm';
+import { Route, NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { setCurrentUser } from '../actions';
 
 class App extends Component{
   constructor() {
@@ -59,9 +62,20 @@ class App extends Component{
     <div className="App">
       <header>
         <h1>FETCH ATTEMPTS!</h1>
+        <NavLink to='/' className='nav'>Home</NavLink>
+        {!this.props.currentUser && <NavLink to='/login' className='nav'>Sign In</NavLink> }
+        {this.props.currentUser && <NavLink to='/' className='nav' onClick={() => this.props.setCurrentUser(null)}>Sign Out</NavLink>}
       </header>
-      <LoginForm />
-      <NewUserForm />
+      <Route 
+        path='/login' 
+        render={() => {
+         return(
+            <>
+              <LoginForm />
+              <NewUserForm />
+            </>)
+          }} 
+        />
       {this.state.allBooks.length && <BooksDisplay 
         books={this.filterAllBooks('romance')} 
         sectionGenre='Romances'/>}
@@ -82,4 +96,13 @@ class App extends Component{
   }
 }
 
-export default App;
+const mapStateToProps = state => ({
+  currentUser: state.currentUser,
+  favorites: state.favorites
+})
+
+const mapDispatchToProps = dispatch => ({
+  setCurrentUser: user => dispatch(setCurrentUser(user))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
