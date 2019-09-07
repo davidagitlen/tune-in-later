@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './NewUserForm.scss';
-import { setCurrentUser } from '../actions/index'
+import { setCurrentUser } from '../../actions';
 
 class NewUserForm extends Component {
   constructor() {

@@ -11,4 +11,10 @@ export const setCurrentUserFavorites = favorites => ({
 export const displaySearchResults = searchResults => ({
   type: 'DISPLAY_SEARCH_RESULTS',
   searchResults
+
+})
+
+export const addUserFavorite = favorite => ({
+  type: 'ADD_USER_FAVORITE',
+  favorite
 })
