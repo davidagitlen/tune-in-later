@@ -13,7 +13,7 @@ const BooksDisplay = ({books, sectionGenre}) => {
           <h2>{title}</h2>
           <h3>{artist}</h3>
           <h4>{filterType}</h4>
-          <h5>{price}</h5>
+          <h5>${price}</h5>
           <button>Favorite</button>
         </div>
       </article>

@@ -51,7 +51,7 @@ class LoginForm extends Component {
       <form className="login-form">
         <input className="email-input" placeholder="joanclarke@fempower.com" alt="email" name="email"></input>
         <input className="password-input" placeholder="type password here..." alt="password" name="password"></input>
-        <button onClick={(e) => this.loginExistingUser(e)}className="login-btn">Login</button>
+        <button onClick={(e) => this.createNewUser(e)} className="login-btn">Login</button>
       </form>
     )
   }
