@@ -7,7 +7,6 @@ export const landingFetch = () => {
 
   return Promise.all([romanceFetch, fantasyFetch, biographyFetch, historyFetch, horrorFetch])
     .then(responses => Promise.all(responses.map(response => response.json())))
-    // .then(data => console.log('in apiCalls', data))
     .then(data => {
       return data.map((datum, i) => {
         return datum.results.map(obj => {
@@ -33,7 +32,6 @@ export const landingFetch = () => {
 }
 
 export const authorFetch = (authorFirstName, authorLastName) => {
-
   return fetch(`https://itunes.apple.com/search?media=audiobook&term=${authorFirstName+authorLastName}`)
     .then(response => response.json())
     .catch(err => console.log(err, 'error in apiCalls authorFetch'))

@@ -10,14 +10,15 @@ class App extends Component{
     super();
     this.state = {
       allBooks : [],
-      authorWorks: []
+      authorWorks: [],
+      error: ''
     }
   }
   
   componentDidMount() {
     landingFetch()
       .then(data => this.setState({allBooks: this.handleInitialData(data)}))
-      .catch(err => console.log(err, 'error in componentDidMount from landingFetch'))
+      .catch(err => this.setState({error : 'Sorry, there was a problem loading our suggested audiobooks. Please enter a search term to see specific results!'}, () => {console.error('error in landing fetch', err)}))
 
     authorFetch('lois', 'lowry') 
       .then(data => this.setState({
@@ -31,7 +32,7 @@ class App extends Component{
             }
         )
     )}))
-      .catch(err => console.log(err, 'error in componentDidMount from authorFetch'))
+      .catch(err => this.setState({error: 'There was a problem finding your results, please try another search.'}, () => {console.error('error in search fetch', err)}))
   }
 
   handleInitialData = (data) => {
