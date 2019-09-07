@@ -9,7 +9,8 @@ class LoginForm extends Component {
     super();
     this.state = {
       email: '',
-      password: ''
+      password: '',
+      error: ''
     } 
   }
 
@@ -20,18 +21,38 @@ class LoginForm extends Component {
   checkLoginStatus = (e) => {
     e.preventDefault();
     loginUser(this.state.email, this.state.password)
-      .then(response => response.json())
+      .then(response => {
+        if(!response.ok){
+          throw Error('Can\'t get user')
+        }
+        return response.json()
+      })
       .then(data => this.props.setCurrentUser(data))
-      .catch(error => console.error(error));
+      .catch(error => 
+        this.setState({
+          email: '',
+          password: '',
+          error: error.message
+        })
+      );
+      this.clearLoginInputs();
+  }
+
+  clearLoginInputs = () => {
+    this.setState({
+      email: '',
+      password: '',
+      error: ''
+    })
   }
 
   render() {
-    // loginUser(this.state.email, this.state.password);
     
     return (
       <form className="login-form">
         <input className="email-input" placeholder="joanclarke@fempower.com" alt="email" name="email" value={this.state.email} onChange={this.handleInputs}></input>
         <input className="password-input" placeholder="type password here..." alt="password" name="password" value={this.state.password} onChange={e => this.handleInputs(e)}></input>
+        {this.state.error && <p>Incorrect email or password.</p>}
         <button className="login-btn" onClick={this.checkLoginStatus}>Login</button>
       </form>
     )
