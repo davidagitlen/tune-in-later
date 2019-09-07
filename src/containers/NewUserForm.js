@@ -75,7 +75,7 @@ class NewUserForm extends Component {
 
   render() {
     return(
-      <form class="NewUserForm">
+      <form className="NewUserForm">
         <h2>New here? Create an account below:</h2>
         <input 
           name="name"
