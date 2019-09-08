@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import BooksDisplay from '../containers/BooksDisplay/BooksDisplay';
 import LoginForm from '../containers/LoginForm/LoginForm';
-import { landingFetch, authorFetch } from '../util/apiCalls';
+import { landingFetch } from '../util/apiCalls';
 import './App.scss';
 import NewUserForm from '../containers/NewUserForm/NewUserForm';
 import { Route, NavLink, Redirect } from 'react-router-dom';
@@ -22,8 +22,16 @@ class App extends Component{
   
   componentDidMount() {
     landingFetch()
-      .then(data => this.setState({allBooks: this.handleInitialData(data)}, () => {console.log(data)}))
+      .then(data => this.setState({allBooks: this.handleInitialData(data)}))
       .catch(err => this.setState({error : 'Sorry, there was a problem loading our suggested audiobooks. Please enter a search term to see specific results!'}, () => {console.error('error in landing fetch', err)}))
+
+    // if (this.props.currentUser) {
+    //   console.log('it is happening!')
+    //   getUserFavoritesFromApi(this.props.currentUser.id)
+    //     .then(data => console.log('attempting to get back userFavorites from api', data))
+    //     // .then(data => this.props.setCurrentUserFavorites(data))
+    //     .catch(err => this.setState({ error: 'Sorry, there was a problem retrieving your favorites!' }, () => { console.error('error in getUserFavoritesFromApi fetch', err) }))
+    // }
   }
 
   handleInitialData = (data) => {

@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { loginUser } from '../../util/apiCalls';
+import { loginUser, getUserFavoritesFromApi } from '../../util/apiCalls';
 import { connect } from 'react-redux';
-import { setCurrentUser } from '../../actions';
+import { setCurrentUser, setCurrentUserFavorites } from '../../actions';
 import './LoginForm.scss';
 
 class LoginForm extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       email: '',
       password: '',
@@ -18,6 +18,11 @@ class LoginForm extends Component {
     this.setState({[e.target.name]: e.target.value})
   }
 
+  handleGetUserFavorites = (user) => {
+    getUserFavoritesFromApi(user.id)
+      .then(data => this.props.setCurrentUserFavorites(data.favorites))
+  }
+
   checkLoginStatus = (e) => {
     e.preventDefault();
     loginUser(this.state.email, this.state.password)
@@ -27,7 +32,10 @@ class LoginForm extends Component {
         }
         return response.json()
       })
-      .then(data => this.props.setCurrentUser(data))
+      .then(data => {
+        this.props.setCurrentUser(data)
+        this.handleGetUserFavorites(data)
+      })
       .catch(error => 
         this.setState({
           email: '',
@@ -37,6 +45,11 @@ class LoginForm extends Component {
       );
       this.clearLoginInputs();
   }
+
+  // checkUserFavorites = (e) => {
+  //   e.preventDefault();
+  //   getUserFavoritesFromApi()
+  // }
 
   clearLoginInputs = () => {
     this.setState({
@@ -64,7 +77,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  setCurrentUser: user => dispatch(setCurrentUser(user))
+  setCurrentUser: user => dispatch(setCurrentUser(user)),
+  setCurrentUserFavorites: favorites => dispatch(setCurrentUserFavorites(favorites))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);
