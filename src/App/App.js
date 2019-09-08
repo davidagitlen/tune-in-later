@@ -15,7 +15,6 @@ class App extends Component{
     super();
     this.state = {
       allBooks : [],
-      authorWorks: [],
       error: '',
     }
   }
@@ -69,27 +68,34 @@ class App extends Component{
           {/* {this.props.currentUser && !this.props.favorites.length && <h2>You haven't favorited any books yet!</h2>} */}
         </nav>
       </header>
-      <Route 
-        exact path='/login' 
-        render={() => {
-         return(
+
+        <Route exact path='/login' render={() => {
+          return(
             <>
               <LoginForm />
               <NewUserForm />
             </>)
           }} 
-        />
+          />
             
+        
+
+      <Route 
+        path = '/'
+        render={() => {
+          
+
+            
+          
+          return(
+            <>
 
           <section className="main-display">
+            
             {this.props.selectedBook && <BookDetails book={this.props.selectedBook}/>}
           </section>
 
-      <Route 
-        exact path = '/'
-        render={() => {
-          return(
-            <>
+
           {this.props.searchResults.length && <BooksDisplay 
             books={this.props.searchResults}
             sectionGenre='Search Results' />}
@@ -110,6 +116,7 @@ class App extends Component{
             sectionGenre='Horrors'/>}
           </>
           )
+
         }} />
         {this.props.currentUser ? <Redirect to='/' /> : null}
     </div>
