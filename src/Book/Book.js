@@ -5,13 +5,14 @@ import { addFavoritesToApi } from '../util/apiCalls';
 
 
 const Book = (props) => {
+  const { book, currentUser } = props;
+  console.log('in book container checking props', book, currentUser);
   const handleFavorite = () => { 
-    props.addUserFavorite(props.book, props.currentUser.id)
-    addFavoritesToApi(props.book, props.currentUser.id )
+    props.addUserFavorite(book, currentUser.id)
+    addFavoritesToApi(book, currentUser.id )
       .then(response => response.json())
       .then(data => console.log('book', data))
       .catch(error => console.error(error));
-    console.log('after')
   }
 
   const { title, artist, filterType, price, image } = props.book;

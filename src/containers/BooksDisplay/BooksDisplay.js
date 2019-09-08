@@ -1,8 +1,7 @@
 import React from 'react';
 import Book from '../../Book/Book';
 import './BooksDisplay.css';
-import { setCurrentUserFavorites, addUserFavorite } from '../../actions';
-import apiCalls from '../../util/apiCalls';
+import { setCurrentUserFavorites} from '../../actions';
 import { connect } from 'react-redux';
 
 const BooksDisplay = ({books, sectionGenre}) => {
