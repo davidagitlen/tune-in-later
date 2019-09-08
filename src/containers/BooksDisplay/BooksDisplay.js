@@ -1,39 +1,15 @@
 import React from 'react';
+import Book from '../../Book/Book';
 import './BooksDisplay.css';
 import { setCurrentUserFavorites, addUserFavorite } from '../../actions';
 import apiCalls from '../../util/apiCalls';
 import { connect } from 'react-redux';
 
 const BooksDisplay = ({books, sectionGenre}) => {
-  
-  const handleFavorite = () => {
-    console.log('before', this.props.currentUser )
-    // addUserFavorite()
-    // apiCalls.addFavoritesToApi(book, this.props.currentUser.id )
-      // .then(response => response.json())
-      // .then(book => console.log('book', book))
-      // .catch(error => console.error(error));
-    console.log('after')
-  }
 
-  console.log('books in booksdisplay', books)
-  const bookList = books.map(book => {
-    const {artist, image, price, title, filterType} = book;
-    return (
-      <article key={title + price}>
-        <div className="img">
-          <img src={image} alt=''/>
-        </div>
-        <div className="bookInfo">
-          <h2>{title}</h2>
-          <h3>{artist}</h3>
-          <h4>{filterType}</h4>
-          <h5>${price}</h5>
-          <button onClick={handleFavorite}>Favorite</button>
-        </div>
-      </article>
-    )
-  });
+  const bookList = books.map(book => 
+    <Book book={book} key={book.title + book.price}/>
+  );
 
   return(
     <section className='BooksDisplay'>

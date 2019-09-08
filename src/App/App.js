@@ -75,7 +75,6 @@ class App extends Component{
         render={() => {
           return(
             <>
-
           {this.props.searchResults && <BooksDisplay 
             books={this.props.searchResults}
             sectionGenre='Search Results' />

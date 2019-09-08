@@ -14,7 +14,8 @@ export const displaySearchResults = searchResults => ({
 
 })
 
-export const addUserFavorite = favorite => ({
+export const addUserFavorite = (favorite, id) => ({
   type: 'ADD_USER_FAVORITE',
-  favorite
+  favorite,
+  id
 })

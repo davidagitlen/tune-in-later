@@ -26,6 +26,7 @@ class SearchForm extends Component {
 
   handleSearch = (e) => {
     e.preventDefault();
+    this.props.displaySearchResults([]);
     fetchSearch(this.state.searchTerm)
       .then(resp => {
         const results = this.cleanSearchResults(resp.results)
