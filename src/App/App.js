@@ -23,14 +23,6 @@ class App extends Component{
     landingFetch()
       .then(data => this.setState({allBooks: this.handleInitialData(data)}))
       .catch(err => this.setState({error : 'Sorry, there was a problem loading our suggested audiobooks. Please enter a search term to see specific results!'}, () => {console.error('error in landing fetch', err)}))
-
-    // if (this.props.currentUser) {
-    //   console.log('it is happening!')
-    //   getUserFavoritesFromApi(this.props.currentUser.id)
-    //     .then(data => console.log('attempting to get back userFavorites from api', data))
-    //     // .then(data => this.props.setCurrentUserFavorites(data))
-    //     .catch(err => this.setState({ error: 'Sorry, there was a problem retrieving your favorites!' }, () => { console.error('error in getUserFavoritesFromApi fetch', err) }))
-    // }
   }
 
   handleInitialData = (data) => {
@@ -68,7 +60,6 @@ class App extends Component{
           {/* {this.props.currentUser && !this.props.favorites.length && <h2>You haven't favorited any books yet!</h2>} */}
         </nav>
       </header>
-
         <Route exact path='/login' render={() => {
           return(
             <>
@@ -77,25 +68,14 @@ class App extends Component{
             </>)
           }} 
           />
-            
-        
-
       <Route 
         path = '/'
         render={() => {
-          
-
-            
-          
           return(
             <>
-
           <section className="main-display">
-            
             {this.props.selectedBook && <BookDetails book={this.props.selectedBook}/>}
           </section>
-
-
           {this.props.searchResults.length && <BooksDisplay 
             books={this.props.searchResults}
             sectionGenre='Search Results' />}
@@ -116,7 +96,6 @@ class App extends Component{
             sectionGenre='Horrors'/>}
           </>
           )
-
         }} />
         {this.props.currentUser ? <Redirect to='/' /> : null}
     </div>

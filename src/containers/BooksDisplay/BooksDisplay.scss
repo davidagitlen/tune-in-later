@@ -38,58 +38,7 @@ section > div {
   justify-content: flex-start;
 }
 
-article {
-  margin: 15px; 
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-/*   border: 1px solid black; */
-  background: white;
-  width: 280px;
-  height: 160px;
-  border-radius: 8px;
-  margin-top: 45px;
-  box-shadow: 1px 1px 5px 5px lightgray;
-}
-
-div.img {
-  height: 110px;
-  width: 80px;
-  margin: 20px;
-  background: lightblue;
-  
-}
-
-.bookInfo {
-  width: 200px;
-}
-
 h2 {
   margin-bottom: 0px;
-/*   padding: 0; */
-}
-
-h3 {
-  margin-top: 0px;
-}
-
-h4 {
-  margin-top: 35px;
-}
-
-
-h2, h3, h4 {
   font-family: sans-serif;
-}
-
-button {
-  border: none;
-  color: red;
-  position: relative;
-  left: 130px;
-  top: -10px;
-}
-
-button:hover {
-  cursor: pointer;
 }

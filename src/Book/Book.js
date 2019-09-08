@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { addUserFavorite, setCurrentUserFavorites, setSelectedBook, deleteUserFavorite } from '../actions';
 import { addFavoriteToApi, deleteFavoriteFromApi } from '../util/apiCalls';
+import './Book.scss';
 
 
 const Book = (props) => {
@@ -25,9 +26,12 @@ const Book = (props) => {
     } 
   }
 
+
   const { title, artist, filterType, price, image } = props.book;
+  const isFavorite = props.favorites.find(obj => obj.book_id === props.book.id);
+  const favoriteClass = isFavorite ? 'Book favorited' : 'Book'; 
   return(
-    <article onClick={() => props.setSelectedBook(props.book)}>
+    <article onClick={() => props.setSelectedBook(props.book)} className={favoriteClass}>
       <div className="img">
         <img src={image} alt='' />
       </div>
