@@ -1,15 +1,19 @@
 import React from 'react';
 import './BookDetails.scss';
 
-const BookDetails = (selectedBook) => {
+const BookDetails = ({book}) => {
+  
+  const {title, author, genre, price, description} = book
+  
   return(
+  
     <div className="BookDetails">
       <img></img>
       <div class="bookInfo">
-        <h2>Title</h2>
-        <h3>Author</h3>
-        <p>Genre: </p>
-        <p>Price: </p>
+        <h2>{title}</h2>
+        <h3>{author}</h3>
+        <p>{genre} </p>
+        <p>{price}</p>
       </div>
       <div class="description">
         <p>Buffalo brisket tongue burgdoggen ground round pork loin picanha shoulder biltong beef porchetta spare ribs prosciutto bacon landjaeger. Meatloaf pork chop tri-tip buffalo. Drumstick shankle short loin, landjaeger strip steak pork chop sirloin cow flank ham hock ball tip. Andouille short loin drumstick tail kielbasa sirloin cow.

@@ -17,7 +17,7 @@ class App extends Component{
       allBooks : [],
       authorWorks: [],
       error: '',
-      selectedBook: null
+      selectedBook: {title: 'blah'}
     }
   }
   
@@ -77,15 +77,12 @@ class App extends Component{
           return(
             <>
           <section className="main-display">
-            <BookDetails />
+            {this.state.selectedBook && <BookDetails book={this.state.selectedBook}/>}
           </section>
-
 
           {this.props.searchResults.length && <BooksDisplay 
             books={this.props.searchResults}
-            sectionGenre='Search Results' />
-            }
-
+            sectionGenre='Search Results' />}
           {this.state.allBooks.length && <BooksDisplay 
             books={this.filterAllBooks('romance')} 
             sectionGenre='Romances'/>}
