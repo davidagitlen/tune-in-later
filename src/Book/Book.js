@@ -1,15 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { addUserFavorite, setCurrentUserFavorites, setSelectedBook } from '../actions';
-import { addFavoriteToApi } from '../util/apiCalls';
+import { addFavoriteToApi, deleteFavoriteFromApi } from '../util/apiCalls';
 
 
 const Book = (props) => {
   const handleFavorite = () => { 
-    props.addUserFavorite(props.book, props.currentUser.id)
     addFavoriteToApi(props.book, props.currentUser.id )
       .then(response => response.json())
-      .then(data => console.log('book', data))
+      .then(data => props.addUserFavorite(data, props.currentUser.id))
       .catch(error => console.error(error));
   }
 
