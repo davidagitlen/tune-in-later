@@ -9,13 +9,13 @@ const BookDetails = ({book}) => {
   
     <div className="BookDetails">
       <img src={image} alt={title}></img>
-      <div class="bookInfo">
+      <div className="bookInfo">
         <h2>{title}</h2>
         <h3>{author}</h3>
         <p>{genre} </p>
         <p>{price}</p>
       </div>
-      <div class="description">
+      <div className="description">
       <p>{description}</p>
       </div>
     </div>

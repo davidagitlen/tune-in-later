@@ -47,7 +47,7 @@ export const loginUser = (email, password) => {
   return fetch('http://localhost:3001/api/v1/login/', options)
 }
 
-export const addFavoritesToApi = (book, userId) => {
+export const addFavoriteToApi = (book, userId) => {
   const favoriteBook = {
     "book_id": book.id,
     "author_name": book.artist,
@@ -66,6 +66,8 @@ export const addFavoritesToApi = (book, userId) => {
   }
   return fetch(`http://localhost:3001/api/v1/users/${userId}/bookfavorites`, options)
 } 
+
+// export const deleteFavovorite
 
 export const fetchSearch = searchTerm => {
   const searchURL = searchTerm.split(' ').join('+')
