@@ -68,24 +68,12 @@ export const addFavoriteToApi = (book, userId) => {
 } 
 
 export const deleteFavoriteFromApi = (book, userId) => {
-  const unFavoritedBook = {
-    "book_id": book.id,
-    "author_name": book.artist,
-    "book_name": book.title,
-    "artwork_url": book.image,
-    "release_date": book.date,
-    "description": book.description,
-    "primary_genre_name": book.genre
-  }
+  const bookId = book.id
   const options = {
-    method: "DELETE",
-    body: JSON.stringify(unFavoritedBook),
-    headers: {
-      "Content-Type": "application/json"
-    }
+    method: "DELETE"
   }
 
-  return fetch(`http://localhost:3001/api/v1/users/${userId}/bookfavorites${book.id}`, options)
+  return fetch(`http://localhost:3001/api/v1/users/${userId}/bookfavorites/${bookId}`, options)
 }
 
 export const fetchSearch = searchTerm => {

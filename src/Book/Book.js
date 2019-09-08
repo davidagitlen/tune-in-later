@@ -5,11 +5,19 @@ import { addFavoriteToApi, deleteFavoriteFromApi } from '../util/apiCalls';
 
 
 const Book = (props) => {
-  const handleFavorite = () => { 
-    addFavoriteToApi(props.book, props.currentUser.id )
-      .then(response => response.json())
-      .then(data => props.addUserFavorite(data, props.currentUser.id))
-      .catch(error => console.error(error));
+  const handleFavorite = (e) => {
+    e.stopPropagation();
+    if (!props.favorites.find(obj => obj.book_id === props.book.id)) {
+      addFavoriteToApi(props.book, props.currentUser.id)
+        .then(response => response.json())
+        .then(data => props.addUserFavorite(data, props.currentUser.id))
+        .then(data => console.log('added book', data))
+        .catch(error => console.error(error));
+    } else {
+      deleteFavoriteFromApi(props.book, props.currentUser.id)
+        .then(data => console.log('book removed', data))
+        .catch(error => console.error(error));
+    } 
   }
 
   const { title, artist, filterType, price, image } = props.book;
