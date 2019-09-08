@@ -19,3 +19,8 @@ export const addUserFavorite = (favorite, id) => ({
   favorite,
   id
 })
+
+export const setSelectedBook = book => ({
+  type: 'SET_SELECTED_BOOK',
+  book
+})

@@ -17,7 +17,6 @@ class App extends Component{
       allBooks : [],
       authorWorks: [],
       error: '',
-      selectedBook: {title: 'blah'}
     }
   }
   
@@ -70,15 +69,17 @@ class App extends Component{
             </>)
           }} 
         />
+            
+
+          <section className="main-display">
+            {this.props.selectedBook && <BookDetails book={this.props.selectedBook}/>}
+          </section>
+
       <Route 
         exact path = '/'
         render={() => {
           return(
             <>
-          <section className="main-display">
-            {this.state.selectedBook && <BookDetails book={this.state.selectedBook}/>}
-          </section>
-
           {this.props.searchResults.length && <BooksDisplay 
             books={this.props.searchResults}
             sectionGenre='Search Results' />}
@@ -109,7 +110,8 @@ class App extends Component{
 const mapStateToProps = state => ({
   currentUser: state.currentUser,
   favorites: state.favorites,
-  searchResults: state.searchResults
+  searchResults: state.searchResults,
+  selectedBook: state.selectedBook
 })
 
 const mapDispatchToProps = dispatch => ({

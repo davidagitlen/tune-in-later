@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { setSelectedBook } from '../actions';
 
 
-const Book = ({book}) => {
-  const { title, artist, filterType, price, image } = book;
+const Book = (props) => {
+  const { title, artist, filterType, price, image } = props.book;
   return(
-    <article>
+    <article onClick={() => props.setSelectedBook(props.book)}>
       <div className="img">
         <img src={image} alt='' />
       </div>
@@ -19,4 +21,8 @@ const Book = ({book}) => {
   )
 }
 
-export default Book;
+const mapDispatchToProps = dispatch => ({
+  setSelectedBook: book => dispatch(setSelectedBook(book))
+})
+
+export default connect(null, mapDispatchToProps)(Book);
