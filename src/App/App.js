@@ -8,6 +8,7 @@ import { Route, NavLink, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { setCurrentUser } from '../actions';
 import SearchForm from '../containers/SearchForm/SearchForm';
+import BookDetails from '../containers/BookDetails/BookDetails'
 
 class App extends Component{
   constructor() {
@@ -16,6 +17,7 @@ class App extends Component{
       allBooks : [],
       authorWorks: [],
       error: '',
+      selectedBook: null
     }
   }
   
@@ -74,8 +76,12 @@ class App extends Component{
         render={() => {
           return(
             <>
+          <section className="main-display">
+            <BookDetails />
+          </section>
 
-          {this.props.searchResults && <BooksDisplay 
+
+          {this.props.searchResults.length && <BooksDisplay 
             books={this.props.searchResults}
             sectionGenre='Search Results' />
             }

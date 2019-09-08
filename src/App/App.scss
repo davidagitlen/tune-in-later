@@ -6,6 +6,12 @@
     padding: 20px;
   }
 
+  & .main-display {
+    min-height: 40vh;
+    justify-content: center;
+    align-items: center;
+  }
+
   & h1 {
     font-size: 50px
   }
