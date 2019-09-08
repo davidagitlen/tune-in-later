@@ -6,7 +6,6 @@ import apiCalls from '../../util/apiCalls';
 import { connect } from 'react-redux';
 
 const BooksDisplay = ({books, sectionGenre}) => {
-
   const bookList = books.map(book => 
     <Book book={book} key={book.title + book.price}/>
   );
