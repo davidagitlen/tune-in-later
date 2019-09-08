@@ -1,45 +1,81 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addUserFavorite, setCurrentUserFavorites, setSelectedBook, deleteUserFavorite } from '../actions';
 import { addFavoriteToApi, deleteFavoriteFromApi } from '../util/apiCalls';
+import { Redirect } from 'react-router-dom';
+
+class Book extends Component {
+
+  state={
+    buttonWasClicked: false
+  }
 
 
-const Book = (props) => {
-  const handleFavorite = (e) => {
+  handleFavorite = (e) => {
     e.stopPropagation();
-    if (!props.favorites.find(obj => obj.book_id === props.book.id)) {
-      addFavoriteToApi(props.book, props.currentUser.id)
+    e.preventDefault();
+    if (!this.props.favorites.find(obj => obj.book_id === this.props.book.id)) {
+      addFavoriteToApi(this.props.book, this.props.currentUser.id)
         .then(response => response.json())
-        .then(data => props.addUserFavorite(data, props.currentUser.id))
+        .then(data => this.props.addUserFavorite(data, this.props.currentUser.id))
         .then(data => console.log('added book', data))
         .catch(error => console.error(error));
     } else {
-      deleteFavoriteFromApi(props.book, props.currentUser.id)
+      deleteFavoriteFromApi(this.props.book, this.props.currentUser.id)
         .then(resp => {
           if(!resp.ok) {
           throw Error('There was an error deleting the favorite')
         }
-          props.deleteUserFavorite(props.book)
+          this.props.deleteUserFavorite(this.props.book)
         })
         .catch(error => console.error(error.message));
     } 
   }
 
-  const { title, artist, filterType, price, image } = props.book;
-  return(
-    <article onClick={() => props.setSelectedBook(props.book)}>
-      <div className="img">
-        <img src={image} alt='' />
-      </div>
-      <div className="bookInfo">
-        <h2>{title}</h2>
-        <h3>{artist}</h3>
-        <h4>{filterType}</h4>
-        <h5>${price}</h5>
-        <button onClick={handleFavorite}>Favorite</button>
-      </div>
-    </article>
-  )
+  handleButtonClick = (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+    this.setState({buttonWasClicked: true});
+    if (this.props.currentUser) {
+      this.handleFavorite(e)
+      this.setState({buttonWasClicked: false})
+    }
+  }
+
+  
+  render() {
+    const bookElement = <article onClick={() => this.props.setSelectedBook(this.props.book)}>
+    <div className="img">
+      <img src={this.props.book.image} alt='' />
+    </div>
+    <div className="bookInfo">
+      <h2>{this.props.book.title}</h2>
+      <h3>{this.props.book.artist}</h3>
+      <h4>{this.props.book.filterType}</h4>
+      <h5>${this.props.book.price}</h5>
+      <button onClick={this.handleButtonClick}>Favorite</button>
+    </div>
+  </article>;
+
+
+
+
+    if (!this.props.currentUser && this.state.buttonWasClicked) {
+      console.log(this.props.currentUser, this.state)
+      window.scrollTo(0,0);
+      return (
+        <>
+          {bookElement}
+          <Redirect to='/login' />
+        </>
+      )
+    }
+    return(
+      <>
+      {bookElement}
+      </>
+    )
+  }
 }
 
 const mapStateToProps = state => ({
