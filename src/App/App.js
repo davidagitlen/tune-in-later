@@ -54,6 +54,7 @@ class App extends Component{
         <h1>ListenLater</h1>
         <nav>
           <NavLink to='/' className='nav'>Home</NavLink>
+          {this.props.currentUser && <NavLink to='/my-collection' className='nav'>My Collection</NavLink>}
           {!this.props.currentUser && <NavLink to='/login' className='nav'>Sign In</NavLink> }
           {this.props.currentUser && <NavLink to='/' className='nav' onClick={() => this.props.setCurrentUser(null)}>Sign Out</NavLink>}
           {this.props.currentUser ? <h2 className='welcome-message'>Welcome {this.props.currentUser.name}</h2> : <h2>Welcome, please sign in!</h2>}
@@ -68,6 +69,7 @@ class App extends Component{
             </>)
           }} 
           />
+         
       <Route 
         path = '/'
         render={() => {
@@ -76,6 +78,14 @@ class App extends Component{
           <section className="main-display">
             {this.props.selectedBook && <BookDetails book={this.props.selectedBook}/>}
           </section>
+          <Route path='/my-collection' render={() => {
+            return(
+              <>
+              <BooksDisplay books={this.props.favorites} />
+              </>
+            )
+          }}
+          />
           {this.props.searchResults.length && <BooksDisplay 
             books={this.props.searchResults}
             sectionGenre='Search Results' />}
