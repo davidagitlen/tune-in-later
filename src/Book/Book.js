@@ -1,9 +1,19 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import { setSelectedBook } from '../actions';
+import { addUserFavorite, setCurrentUserFavorites, setSelectedBook } from '../actions';
+import { addFavoritesToApi } from '../util/apiCalls';
 
 
 const Book = (props) => {
+  const handleFavorite = () => { 
+    props.addUserFavorite(props.book, props.currentUser.id)
+    addFavoritesToApi(props.book, props.currentUser.id )
+      .then(response => response.json())
+      .then(data => console.log('book', data))
+      .catch(error => console.error(error));
+    console.log('after')
+  }
+
   const { title, artist, filterType, price, image } = props.book;
   return(
     <article onClick={() => props.setSelectedBook(props.book)}>
@@ -15,14 +25,21 @@ const Book = (props) => {
         <h3>{artist}</h3>
         <h4>{filterType}</h4>
         <h5>${price}</h5>
-        <button>Favorite</button>
+        <button onClick={handleFavorite}>Favorite</button>
       </div>
     </article>
   )
 }
 
-const mapDispatchToProps = dispatch => ({
-  setSelectedBook: book => dispatch(setSelectedBook(book))
+const mapStateToProps = state => ({
+  currentUser: state.currentUser,
+  favorites: state.favorites
 })
 
-export default connect(null, mapDispatchToProps)(Book);
+const mapDispatchToProps = dispatch => ({
+  setSelectedBook: book => dispatch(setSelectedBook(book)),
+  setCurrentUserFavorites: favorites => dispatch(setCurrentUserFavorites(favorites)),
+  addUserFavorite: (favorite, id) => dispatch(addUserFavorite(favorite, id))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Book);

@@ -47,6 +47,25 @@ export const loginUser = (email, password) => {
   return fetch('http://localhost:3001/api/v1/login/', options)
 }
 
+export const addFavoritesToApi = (book, userId) => {
+  const favoriteBook = {
+    "book_id": book.id,
+    "author_name": book.artist,
+    "book_name": book.title,
+     "artwork_url": book.image,
+    "release_date": book.date,
+    "description": book.description,
+    "primary_genre_name": book.genre
+  }
+  const options = {
+    method: "POST",
+    body: JSON.stringify(favoriteBook),
+    headers: {
+      "Content-Type": "application/json"
+    }
+  }
+  return fetch(`http://localhost:3001/api/v1/users/${userId}/bookfavorites`, options)
+} 
 
 export const fetchSearch = searchTerm => {
   const searchURL = searchTerm.split(' ').join('+')
