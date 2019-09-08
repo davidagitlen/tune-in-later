@@ -58,7 +58,6 @@ class App extends Component{
           <NavLink to='/' className='nav'>Home</NavLink>
           {!this.props.currentUser && <NavLink to='/login' className='nav'>Sign In</NavLink> }
           {this.props.currentUser && <NavLink to='/' className='nav' onClick={() => this.props.setCurrentUser(null)}>Sign Out</NavLink>}
-          {/* {this.props.currentUser && !this.props.favorites.length && <h2>You haven't favorited any books yet!</h2>} */}
         </nav>
       </header>
       <Route 
