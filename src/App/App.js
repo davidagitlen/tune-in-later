@@ -8,7 +8,8 @@ import { Route, NavLink, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { setCurrentUser } from '../actions';
 import SearchForm from '../containers/SearchForm/SearchForm';
-import BookDetails from '../containers/BookDetails/BookDetails'
+import BookDetails from '../containers/BookDetails/BookDetails';
+import PropTypes from 'prop-types';
 
 class App extends Component{
   constructor() {
@@ -46,7 +47,7 @@ class App extends Component{
     return filteredBooks;
   }
 
-  render() { 
+  render() {
     return (
     <div className="App">
       <header>
@@ -115,3 +116,11 @@ const mapDispatchToProps = dispatch => ({
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
+
+App.propTypes = {
+  currentUser: PropTypes.string,
+  favorites: PropTypes.array.isRequired,
+  searchResults: PropTypes.array.isRequired,
+  selectedBook: PropTypes.object,
+  setCurrentUser: PropTypes.func.isRequired
+}

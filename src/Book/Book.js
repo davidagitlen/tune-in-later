@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { addUserFavorite, setCurrentUserFavorites, setSelectedBook, deleteUserFavorite } from '../actions';
 import { addFavoriteToApi, deleteFavoriteFromApi } from '../util/apiCalls';
 import { Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import './Book.scss';
 
 class Book extends Component {
@@ -45,6 +46,8 @@ class Book extends Component {
 
   
   render() {
+
+    // console.log(this.props.selectedBook)
     const { title, artist, filterType, price, image } = this.props.book;
     const isFavorite = this.props.favorites.find(obj => obj.book_id === this.props.book.id);
     const favoriteClass = isFavorite ? 'Book favorited' : 'Book'; 
@@ -94,3 +97,12 @@ const mapDispatchToProps = dispatch => ({
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Book);
+
+Book.propTypes = {
+  currentUser: PropTypes.string,
+  favorites: PropTypes.array.isRequired,
+  setSelectedBook: PropTypes.func.isRequired,
+  setCurrentUserFavorites: PropTypes.func.isRequired,
+  addUserFavorite: PropTypes.func.isRequired,
+  deleteUserFavorite: PropTypes.func.isRequired,
+}
