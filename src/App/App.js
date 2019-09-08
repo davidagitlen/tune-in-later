@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import BooksDisplay from '../containers/BooksDisplay/BooksDisplay';
 import LoginForm from '../containers/LoginForm/LoginForm';
 import { landingFetch, authorFetch } from '../util/apiCalls';
-import './App.css';
+import './App.scss';
 import NewUserForm from '../containers/NewUserForm/NewUserForm';
 import { Route, NavLink, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { setCurrentUser } from '../actions';
+import SearchForm from '../containers/SearchForm/SearchForm';
 
 class App extends Component{
   constructor() {
@@ -14,7 +15,7 @@ class App extends Component{
     this.state = {
       allBooks : [],
       authorWorks: [],
-      error: ''
+      error: '',
     }
   }
   
@@ -22,20 +23,6 @@ class App extends Component{
     landingFetch()
       .then(data => this.setState({allBooks: this.handleInitialData(data)}, () => {console.log(data)}))
       .catch(err => this.setState({error : 'Sorry, there was a problem loading our suggested audiobooks. Please enter a search term to see specific results!'}, () => {console.error('error in landing fetch', err)}))
-
-    authorFetch('lois', 'lowry') 
-      .then(data => this.setState({
-        authorWorks : data.results.map(datum => ({
-          artist: datum.artistName,
-          image: datum.artworkUrl100,
-          price: datum.collectionPrice,
-          title: datum.collectionName,
-          genre: datum.primaryGenreName,
-          description: datum.description
-            }
-        )
-    )}))
-      .catch(err => this.setState({error: 'There was a problem finding your results, please try another search.'}, () => {console.error('error in search fetch', err)}))
   }
 
   handleInitialData = (data) => {
@@ -63,11 +50,15 @@ class App extends Component{
     return (
     <div className="App">
       <header>
-        <h1>FUCKING FETCH!</h1>
-        <NavLink to='/' className='nav'>Home</NavLink>
-        {!this.props.currentUser && <NavLink to='/login' className='nav'>Sign In</NavLink> }
-        {this.props.currentUser && <NavLink to='/' className='nav' onClick={() => this.props.setCurrentUser(null)}>Sign Out</NavLink>}
-        {/* {this.props.currentUser && !this.props.favorites.length && <h2>You haven't favorited any books yet!</h2>} */}
+        <SearchForm />
+        <h1>ListenLater</h1>
+        <nav>
+          <NavLink to='/' className='nav'>Home</NavLink>
+          {!this.props.currentUser && <NavLink to='/login' className='nav'>Sign In</NavLink> }
+          {this.props.currentUser && <NavLink to='/' className='nav' onClick={() => this.props.setCurrentUser(null)}>Sign Out</NavLink>}
+          {this.props.currentUser ? <h2>Welcome {this.props.currentUser.name}</h2> : <h2>Welcome, please sign in!</h2>}
+          {/* {this.props.currentUser && !this.props.favorites.length && <h2>You haven't favorited any books yet!</h2>} */}
+        </nav>
       </header>
       <Route 
         exact path='/login' 
@@ -84,6 +75,11 @@ class App extends Component{
         render={() => {
           return(
             <>
+
+          {this.props.searchResults && <BooksDisplay 
+            books={this.props.searchResults}
+            sectionGenre='Search Results' />
+            }
           {this.state.allBooks.length && <BooksDisplay 
             books={this.filterAllBooks('romance')} 
             sectionGenre='Romances'/>}
@@ -110,7 +106,8 @@ class App extends Component{
 
 const mapStateToProps = state => ({
   currentUser: state.currentUser,
-  favorites: state.favorites
+  favorites: state.favorites,
+  searchResults: state.searchResults
 })
 
 const mapDispatchToProps = dispatch => ({

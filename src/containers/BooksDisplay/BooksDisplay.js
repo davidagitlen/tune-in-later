@@ -10,6 +10,9 @@ const BooksDisplay = ({books, sectionGenre}) => {
     console.log('before', this.props.currentUser )
     // addUserFavorite()
     // apiCalls.addFavoritesToApi(book, this.props.currentUser.id )
+      // .then(response => response.json())
+      // .then(book => console.log('book', book))
+      // .catch(error => console.error(error));
     console.log('after')
   }
 

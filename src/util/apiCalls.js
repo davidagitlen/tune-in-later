@@ -51,8 +51,8 @@ export const loginUser = (email, password) => {
       "Content-Type": "application/json"
     }
   }
+  return fetch('http://localhost:3001/api/v1/login/', options)
 
-  return fetch('http://localhost:3001/api/v1/login/', options)    
 }
 
 export const addFavoritesToApi = (book, userId) => {
@@ -72,7 +72,11 @@ export const addFavoritesToApi = (book, userId) => {
     }
   }
   return fetch(`http://localhost:3001/api/v1/users/${userId}/bookfavorites`, options)
+} 
+
+export const fetchSearch = searchTerm => {
+  const searchURL = searchTerm.split(' ').join('+')
+  return fetch(`https://itunes.apple.com/search?media=audiobook&term=${searchURL}`)
     .then(response => response.json())
-    .then(book => console.log('book', book))
-    .catch(error => console.error(error));
+    .catch(err => console.log(err, 'error in apiCalls authorFetch'))
 }
