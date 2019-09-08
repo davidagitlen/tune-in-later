@@ -8,14 +8,17 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import { rootReducer } from './reducers';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 
 const store = createStore(rootReducer, composeWithDevTools());
 
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter >
-      <App />
+      <Switch>
+        <Route exact path='/' component={App} />
+        <Route path='*' component={App} />
+      </Switch>
     </BrowserRouter>
   </Provider>
 
