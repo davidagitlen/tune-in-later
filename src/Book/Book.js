@@ -45,15 +45,18 @@ class Book extends Component {
 
   
   render() {
-    const bookElement = <article onClick={() => this.props.setSelectedBook(this.props.book)}>
+    const { title, artist, filterType, price, image } = this.props.book;
+    const isFavorite = this.props.favorites.find(obj => obj.book_id === this.props.book.id);
+    const favoriteClass = isFavorite ? 'Book favorited' : 'Book'; 
+    const bookElement = <article className={favoriteClass} onClick={() => this.props.setSelectedBook(this.props.book)}>
     <div className="img">
-      <img src={this.props.book.image} alt='' />
+      <img src={image} alt='' />
     </div>
     <div className="bookInfo">
-      <h2>{this.props.book.title}</h2>
-      <h3>{this.props.book.artist}</h3>
-      <h4>{this.props.book.filterType}</h4>
-      <h5>${this.props.book.price}</h5>
+      <h2>{title}</h2>
+      <h3>{artist}</h3>
+      <h4>{filterType}</h4>
+      <h5>${price}</h5>
       <button onClick={this.handleButtonClick}>Favorite</button>
     </div>
   </article>;
@@ -62,7 +65,6 @@ class Book extends Component {
 
 
     if (!this.props.currentUser && this.state.buttonWasClicked) {
-      console.log(this.props.currentUser, this.state)
       window.scrollTo(0,0);
       return (
         <>
