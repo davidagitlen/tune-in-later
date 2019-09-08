@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addUserFavorite, setCurrentUserFavorites, setSelectedBook } from '../actions';
+import { addUserFavorite, setCurrentUserFavorites, setSelectedBook, deleteUserFavorite } from '../actions';
 import { addFavoriteToApi, deleteFavoriteFromApi } from '../util/apiCalls';
 
 
@@ -15,8 +15,13 @@ const Book = (props) => {
         .catch(error => console.error(error));
     } else {
       deleteFavoriteFromApi(props.book, props.currentUser.id)
-        .then(data => console.log('book removed', data))
-        .catch(error => console.error(error));
+        .then(resp => {
+          if(!resp.ok) {
+          throw Error('There was an error deleting the favorite')
+        }
+          props.deleteUserFavorite(props.book)
+        })
+        .catch(error => console.error(error.message));
     } 
   }
 
@@ -45,7 +50,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   setSelectedBook: book => dispatch(setSelectedBook(book)),
   setCurrentUserFavorites: favorites => dispatch(setCurrentUserFavorites(favorites)),
-  addUserFavorite: (favorite, id) => dispatch(addUserFavorite(favorite, id))
+  addUserFavorite: (favorite, id) => dispatch(addUserFavorite(favorite, id)),
+  deleteUserFavorite: (favorite) => dispatch(deleteUserFavorite(favorite))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Book);
