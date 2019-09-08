@@ -1,6 +1,6 @@
 import React from 'react';
 import Book from '../../Book/Book';
-import './BooksDisplay.css';
+import './BooksDisplay.scss';
 import { setCurrentUserFavorites } from '../../actions';
 import { connect } from 'react-redux';
 

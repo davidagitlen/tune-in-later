@@ -28,7 +28,6 @@ export const landingFetch = () => {
         })
       })
     .catch(err => console.log(err, 'error in apiCalls landingFetch'))
-
 }
 
 export const loginUser = (email, password) => {
@@ -84,7 +83,6 @@ export const fetchSearch = searchTerm => {
 }
 
 export const getUserFavoritesFromApi = userId => {
-
   return fetch(`http://localhost:3001/api/v1/users/${userId}/bookfavorites/`)
     .then(resp => resp.json())
     .catch(err => console.log('error in apiCalls getUserFavoritesFromApi', err))
