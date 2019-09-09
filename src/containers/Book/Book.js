@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addUserFavorite, setCurrentUserFavorites, setSelectedBook, deleteUserFavorite } from '../actions';
-import { addFavoriteToApi, deleteFavoriteFromApi } from '../util/apiCalls';
+import { addUserFavorite, setCurrentUserFavorites, setSelectedBook, deleteUserFavorite } from '../../actions';
+import { addFavoriteToApi, deleteFavoriteFromApi } from '../../util/apiCalls';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './Book.scss';
