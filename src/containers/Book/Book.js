@@ -12,7 +12,6 @@ export class Book extends Component {
     buttonWasClicked: false
   }
 
-
   handleFavorite = (e) => {
     e.stopPropagation();
     e.preventDefault();
@@ -46,9 +45,7 @@ export class Book extends Component {
 
   
   render() {
-
-    // console.log(this.props.selectedBook)
-    const { title, artist, filterType, price, image } = this.props.book;
+    const { title, artist, image } = this.props.book;
     const isFavorite = this.props.favorites.find(obj => obj.book_id === this.props.book.id);
     const favoriteClass = isFavorite ? 'Book favorited' : 'Book'; 
     const bookElement = <article className={favoriteClass} onClick={() => this.props.setSelectedBook(this.props.book)}>
