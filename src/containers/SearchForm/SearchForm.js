@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './SearchForm.scss';
-import magnifierTool from '../images/magnifier-tool.svg';
+import magnifierTool from '../../images/magnifier-tool.svg';
 import { fetchSearch } from '../../util/apiCalls';
 import { displaySearchResults } from '../../actions/';
 

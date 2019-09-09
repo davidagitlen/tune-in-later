@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { addUserFavorite, setCurrentUserFavorites, setSelectedBook, deleteUserFavorite } from '../actions';
 import { addFavoriteToApi, deleteFavoriteFromApi } from '../util/apiCalls';
+import star from '../images/star.svg';
+import activeStar from '../images/active-star.svg';
 import './Book.scss';
 
 
@@ -27,21 +29,20 @@ const Book = (props) => {
   }
 
 
-  const { title, artist, filterType, price, image } = props.book;
+  const { title, artist, image } = props.book;
   const isFavorite = props.favorites.find(obj => obj.book_id === props.book.id);
-  const favoriteClass = isFavorite ? 'Book favorited' : 'Book'; 
+  const favoriteClass = isFavorite ? 'Book favorited' : 'Book';
+  const favoriteStar = isFavorite ? activeStar : star;
   return(
     <article onClick={() => props.setSelectedBook(props.book)} className={favoriteClass}>
       <div className="img">
-        <img src={image} alt='' />
+        <img src={image} alt=''/>
       </div>
       <div className="bookInfo">
         <h2>{title}</h2>
         <h3>{artist}</h3>
-        <h4>{filterType}</h4>
-        <h5>${price}</h5>
-        <button onClick={handleFavorite}>Favorite</button>
       </div>
+      <button onClick={handleFavorite}><img src={favoriteStar} alt='' />Favorite</button>
     </article>
   )
 }

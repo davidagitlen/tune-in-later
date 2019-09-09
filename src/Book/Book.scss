@@ -1,55 +1,65 @@
-
-
-
 .Book {
-  margin: 15px; 
+  width: 400px;
+  min-width: 465px;
+  max-height: 200px;
+  margin: 25px 10px 25px 35px; 
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-/*   border: 1px solid black; */
   background: white;
-  width: 280px;
-  height: 160px;
   border-radius: 8px;
-  margin-top: 45px;
   box-shadow: 1px 1px 5px 5px lightgray;
 
-  & div.img {
-  height: 110px;
-  width: 80px;
+  & div.img img{
+  min-height: 140px;
+  min-width: 140px;
   margin: 20px;
-  background: lightblue;
-  
+  border-radius: 8px;
+  border: 1px solid black;
   }
 
   &.favorited {
-    background-color: yellow;
+    background-color: #F7E1DA;
   }
 
   & .bookInfo {
-    width: 200px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    height: 60%;
+    margin: 25px 0px 0px auto;
   }
 
   & h2 {
-    margin-bottom: 0px;
-/*   padding: 0; */
+    margin: 25px 0px 0px 0px;
   }
 
   & h3 {
-    margin-top: 0px;
+    margin: 25px 0px 0px 0px;
+    font-style: italic;
+    color: #666888;
   }
 
   & h4 {
-    margin-top: 35px;
+    margin-top: 10px;
   }
 
 
   & button {
     border: none;
-    color: red;
+    background-color: transparent;
+    color: #666888;
     position: relative;
-    left: 130px;
-    top: -10px;
+    margin: 0px 2px 0px 0px;
+    top: 115px;
+    height: 30px;
+    width: 75px;
+
+    & img {
+      height: 45px;
+      width: 45px;
+      margin: 0px 0px 5px 0px;
+    }
   }
 
   & button:hover {
