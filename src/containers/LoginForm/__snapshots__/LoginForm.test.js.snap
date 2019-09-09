@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`LoginForm should match the snapshot when a user is logged in 1`] = `
+exports[`LoginFormContainer LoginForm should match the snapshot when a user is logged in 1`] = `
 <form
   className="login-form"
 >
