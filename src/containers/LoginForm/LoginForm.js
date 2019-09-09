@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { loginUser, getUserFavoritesFromApi } from '../../util/apiCalls';
 import { connect } from 'react-redux';
 import { setCurrentUser, setCurrentUserFavorites } from '../../actions';
+import PropTypes from 'prop-types';
 import './LoginForm.scss';
 
 class LoginForm extends Component {
@@ -45,12 +46,7 @@ class LoginForm extends Component {
       );
       this.clearLoginInputs();
   }
-
-  // checkUserFavorites = (e) => {
-  //   e.preventDefault();
-  //   getUserFavoritesFromApi()
-  // }
-
+  
   clearLoginInputs = () => {
     this.setState({
       email: '',
@@ -82,3 +78,10 @@ const mapDispatchToProps = dispatch => ({
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);
+
+LoginForm.propTypes = {
+  currentUser: PropTypes.string,
+  favorites: PropTypes.array.isRequired,
+  setCurrentUser: PropTypes.func.isRequired,
+  setCurrentUserFavorites: PropTypes.func.isRequired
+}

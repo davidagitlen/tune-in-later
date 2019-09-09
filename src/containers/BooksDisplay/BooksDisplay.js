@@ -3,9 +3,10 @@ import Book from '../../Book/Book';
 import './BooksDisplay.scss';
 import { setCurrentUserFavorites } from '../../actions';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+
 
 const BooksDisplay = ({books, sectionGenre}) => {
-  // console.log(books)
   let booksToRender = books;  
 
   const handleFavoritesList = () => {
@@ -53,3 +54,9 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(BooksDisplay);
+
+BooksDisplay.propTypes = {
+  currentUser: PropTypes.string,
+  favorites: PropTypes.array.isRequired,
+  setCurrentUserFavorites: PropTypes.func.isRequired
+}
