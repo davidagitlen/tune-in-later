@@ -56,6 +56,7 @@ export class LoginForm extends Component {
   }
 
   render() {
+    console.log(this.state.currentUser)
     return (
       <form className="login-form">
         <input className="email-input" placeholder="joanclarke@fempower.com" alt="email" name="email" value={this.state.email} onChange={this.handleInputs}></input>

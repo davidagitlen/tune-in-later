@@ -39,10 +39,23 @@ describe('LoginFormContainer', () => {
       it('should match the snapshot when a user is logged in', () => {
         expect(wrapper).toMatchSnapshot();
       });
+    });
 
-  // describe('mapStateToProps', () => {
-  //     it('should return a current user', () => {
+  describe('mapStateToProps', () => {
+    
+      it('should return a current user object and a favorites array', () => {
+        const mockState = {
+          currentUser: { mockCurrentUser },
+          favorites: { mockFavorites }
+        };
+        const mappedProps = mapStateToProps(mockState);
+        expect(mappedProps).toEqual(mockState);
+      });
+  });
 
-  //     });
+  describe('mapDispatchToProps', () => {
+
+    it('calls', () => {
+    });
   });
 });
