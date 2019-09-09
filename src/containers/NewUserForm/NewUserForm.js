@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './NewUserForm.scss';
 import { setCurrentUser } from '../../actions';
+import PropTypes from 'prop-types';
+
 
 class NewUserForm extends Component {
   constructor() {
@@ -70,9 +72,6 @@ class NewUserForm extends Component {
       password: this.state.password
     });
     this.clearNewUserInputs();
-    //hide the login/new user sections
-    // (This should be done by conditional
-    // rendering based on store.)
   }
 
   render() {
@@ -111,3 +110,7 @@ const mapDispatchToProps = dispatch => ({
 })
 
 export default connect(null, mapDispatchToProps)(NewUserForm);
+
+NewUserForm.propTypes = {
+  setCurrentUser: PropTypes.func.isRequired
+}

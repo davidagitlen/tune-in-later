@@ -8,7 +8,8 @@ import { Route, NavLink, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { setCurrentUser } from '../actions';
 import SearchForm from '../containers/SearchForm/SearchForm';
-import BookDetails from '../containers/BookDetails/BookDetails'
+import BookDetails from '../containers/BookDetails/BookDetails';
+import PropTypes from 'prop-types';
 
 class App extends Component{
   constructor() {
@@ -46,7 +47,7 @@ class App extends Component{
     return filteredBooks;
   }
 
-  render() { 
+  render() {
     return (
     <div className="App">
       <header>
@@ -54,6 +55,7 @@ class App extends Component{
         <h1>ListenLater</h1>
         <nav>
           <NavLink to='/' className='nav'>Home</NavLink>
+          {this.props.currentUser && <NavLink to='/my-collection' className='nav'>My Collection</NavLink>}
           {!this.props.currentUser && <NavLink to='/login' className='nav'>Sign In</NavLink> }
           {this.props.currentUser && <NavLink to='/' className='nav' onClick={() => this.props.setCurrentUser(null)}>Sign Out</NavLink>}
           {this.props.currentUser ? <h2 className='welcome-message'>Welcome {this.props.currentUser.name}</h2> : <h2>Welcome, please sign in!</h2>}
@@ -68,6 +70,7 @@ class App extends Component{
             </>)
           }} 
           />
+         
       <Route 
         path = '/'
         render={() => {
@@ -76,6 +79,14 @@ class App extends Component{
           <section className="main-display">
             {this.props.selectedBook && <BookDetails book={this.props.selectedBook}/>}
           </section>
+          <Route path='/my-collection' render={() => {
+            return(
+              <>
+              <BooksDisplay books={this.props.favorites} sectionGenre='Favorites' />
+              </>
+            )
+          }}
+          />
           {this.props.searchResults.length && <BooksDisplay 
             books={this.props.searchResults}
             sectionGenre='Search Results' />}
@@ -115,3 +126,11 @@ const mapDispatchToProps = dispatch => ({
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
+
+App.propTypes = {
+  currentUser: PropTypes.object,
+  favorites: PropTypes.array.isRequired,
+  searchResults: PropTypes.array.isRequired,
+  selectedBook: PropTypes.object,
+  setCurrentUser: PropTypes.func.isRequired
+}
