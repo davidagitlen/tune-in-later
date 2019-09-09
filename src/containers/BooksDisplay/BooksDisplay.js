@@ -1,5 +1,5 @@
 import React from 'react';
-import Book from '../../Book/Book';
+import Book from '../Book/Book';
 import './BooksDisplay.scss';
 import { setCurrentUserFavorites } from '../../actions';
 import { connect } from 'react-redux';

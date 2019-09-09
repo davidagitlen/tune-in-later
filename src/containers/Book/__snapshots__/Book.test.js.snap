@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Book should match the snapshot with all data passed in correctly 1`] = `
+<Fragment>
+  <article
+    className="Book"
+    onClick={[Function]}
+  >
+    <div
+      className="img"
+    >
+      <img
+        alt=""
+      />
+    </div>
+    <div
+      className="bookInfo"
+    >
+      <h2>
+        Book
+      </h2>
+      <h3 />
+      <button
+        onClick={[Function]}
+      >
+        Favorite
+      </button>
+    </div>
+  </article>
+</Fragment>
+`;

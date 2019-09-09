@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addUserFavorite, setCurrentUserFavorites, setSelectedBook, deleteUserFavorite } from '../actions';
-import { addFavoriteToApi, deleteFavoriteFromApi } from '../util/apiCalls';
-import star from '../images/star.svg';
-import activeStar from '../images/active-star.svg';
+import { addUserFavorite, setCurrentUserFavorites, setSelectedBook, deleteUserFavorite } from '../../actions';
+import { addFavoriteToApi, deleteFavoriteFromApi } from '../../util/apiCalls';
+import star from '../../images/star.svg';
+import activeStar from '../../images/active-star.svg';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './Book.scss';
 
-class Book extends Component {
+export class Book extends Component {
+
   state={
     buttonWasClicked: false
   }
@@ -95,6 +96,7 @@ const mapDispatchToProps = dispatch => ({
 export default connect(mapStateToProps, mapDispatchToProps)(Book);
 
 Book.propTypes = {
+  book: PropTypes.object.isRequired,
   currentUser: PropTypes.object,
   favorites: PropTypes.array.isRequired,
   setSelectedBook: PropTypes.func.isRequired,

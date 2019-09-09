@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
-import BooksDisplay from '../containers/BooksDisplay/BooksDisplay';
-import LoginForm from '../containers/LoginForm/LoginForm';
-import { landingFetch } from '../util/apiCalls';
+import BooksDisplay from '../BooksDisplay/BooksDisplay';
+import LoginForm from '../LoginForm/LoginForm';
+import { landingFetch } from '../../util/apiCalls';
 import './App.scss';
-import NewUserForm from '../containers/NewUserForm/NewUserForm';
+import NewUserForm from '../NewUserForm/NewUserForm';
 import { Route, NavLink, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { setCurrentUser } from '../actions';
-import SearchForm from '../containers/SearchForm/SearchForm';
-import BookDetails from '../containers/BookDetails/BookDetails';
+import { setCurrentUser } from '../../actions';
+import SearchForm from '../SearchForm/SearchForm';
+import BookDetails from '../BookDetails/BookDetails';
 import PropTypes from 'prop-types';
 
-class App extends Component{
+export class App extends Component{
   constructor() {
     super();
     this.state = {
@@ -114,16 +114,17 @@ class App extends Component{
   }
 }
 
-const mapStateToProps = state => ({
+export const mapStateToProps = state => ({
   currentUser: state.currentUser,
   favorites: state.favorites,
   searchResults: state.searchResults,
   selectedBook: state.selectedBook
 })
 
-const mapDispatchToProps = dispatch => ({
+export const mapDispatchToProps = dispatch => ({
   setCurrentUser: user => dispatch(setCurrentUser(user))
 })
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
 

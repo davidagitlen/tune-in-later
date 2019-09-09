@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App should match the snapshot 1`] = `
+<div
+  className="App"
+>
+  <header>
+    <Connect(SearchForm) />
+    <h1>
+      ListenLater
+    </h1>
+    <nav>
+      <NavLink
+        className="nav"
+        to="/"
+      >
+        Home
+      </NavLink>
+      <NavLink
+        className="nav"
+        to="/login"
+      >
+        Sign In
+      </NavLink>
+      <h2>
+        Welcome, please sign in!
+      </h2>
+    </nav>
+  </header>
+  <Route
+    exact={true}
+    path="/login"
+    render={[Function]}
+  />
+  <Route
+    path="/"
+    render={[Function]}
+  />
+</div>
+`;
