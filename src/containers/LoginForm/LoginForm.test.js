@@ -4,10 +4,9 @@ import { shallow } from 'enzyme';
 
 describe('LoginForm', () => {
   let wrapper;
-  
+
   const mockSetCurrentUser = jest.fn();
   const mockSetCurrentUserFavorites = jest.fn();
-
   const mockFavorites = [{
     id: 11,
     book_id: 918578041,
@@ -20,10 +19,11 @@ describe('LoginForm', () => {
     primary_genre_name: "Biographies & Memoirs"
   }];
   const mockCurrentUser = {
-    email: 'joanclarke@turing.io',
-    password: 'exceeding@this'
+    id: 1,
+    name: "Joan",
+    email: "exceeding@this.io"
   };
-
+  
   beforeEach(() => {
     wrapper = shallow(<LoginForm 
       currentUser={ mockCurrentUser } 
@@ -34,7 +34,9 @@ describe('LoginForm', () => {
 
   });
 
-    it('should match the snapshot with the correct information passed', () => {
+    it('should match the snapshot when a user is logged in', () => {
       expect(wrapper).toMatchSnapshot();
     });
+
+    // it('should return a current user')
 });
