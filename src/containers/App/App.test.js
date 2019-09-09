@@ -84,7 +84,26 @@ describe('App', () => {
   })
 
   describe('filterAllBooks', () => {
+    it('should filter books based on filter passed through', () => {
+      let mockNonHistoryBook = {
+          artist: 'Ron Swanson & Tammy 2',
+          image: 'bacon.jpg',
+          price: 200.99,
+          title: 'Cornrows and Patriotism',
+          genre: 'History',
+          description: 'Ron Loves Tammy',
+          date: '1776',
+          filterType: 'Romance',
+          id: 994923
+        }
+      
+      
+      wrapper.setState({allBooks: [...expectedFormattedBooks, mockNonHistoryBook]})
+      wrapper.update()
 
+      expect(wrapper.instance().filterAllBooks('History')).toEqual(expectedFormattedBooks)
+
+    })
   })
 
   describe('mapDispatchToProps', () => {
@@ -106,3 +125,7 @@ describe('App', () => {
 
 
 
+// To Test:
+// componentDidMount
+// Router?
+// 
