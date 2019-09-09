@@ -20,12 +20,16 @@ exports[`Book should match the snapshot with all data passed in correctly 1`] = 
         Book
       </h2>
       <h3 />
-      <button
-        onClick={[Function]}
-      >
-        Favorite
-      </button>
     </div>
+    <button
+      onClick={[Function]}
+    >
+      <img
+        alt=""
+        src="star.svg"
+      />
+      Favorite
+    </button>
   </article>
 </Fragment>
 `;
