@@ -1,12 +1,10 @@
 .SearchForm {
-  
   background: pink;
 
   & form {
     display: flex;
-  flex-direction: row;
+    flex-direction: row;
     margin: 0;
-
   }
       & input{
         width: 200px;
@@ -26,4 +24,5 @@
     height: 30px;
     margin: 0
   }
+  
 }

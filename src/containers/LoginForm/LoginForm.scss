@@ -2,6 +2,23 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 0px 0px 10px 0px;
+
+  & button {
+  height: 30px;
+  width: 100px;
+  border: .5px solid #666888;
+  border-radius: 8px;
+
+    &:hover,
+    &:focus {
+      font-style: italic;
+      color: #3EB560;
+      border: 1.5px solid #4A62C3;
+    }
+
+  }
+
 }
 
 input {
@@ -9,4 +26,12 @@ input {
   margin: 10px;
   padding: 5px;
   width: 25%;
+  border: 1px solid #666888;
+  border-radius: 8px;
+
+  &:focus {
+    border: 1.5px solid #4A62C3;
+  }
+
 }
+

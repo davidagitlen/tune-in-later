@@ -9,11 +9,9 @@ import PropTypes from 'prop-types';
 import './Book.scss';
 
 class Book extends Component {
-
   state={
     buttonWasClicked: false
   }
-
 
   handleFavorite = (e) => {
     e.stopPropagation();
@@ -48,22 +46,21 @@ class Book extends Component {
 
   
   render() {
-
-    // console.log(this.props.selectedBook)
     const { title, artist, image } = this.props.book;
     const isFavorite = this.props.favorites.find(obj => obj.book_id === this.props.book.id);
     const favoriteClass = isFavorite ? 'Book favorited' : 'Book'; 
     const favoriteStar = isFavorite ? activeStar : star;
-    const bookElement = <article className={favoriteClass} onClick={() => this.props.setSelectedBook(this.props.book)}>
-    <div className="img">
-      <img src={image} alt='' />
-    </div>
-    <div className="bookInfo">
-      <h2>{title}</h2>
-      <h3>{artist}</h3>
-        <button onClick={this.handleButtonClick}><img src={favoriteStar} alt='' />Favorite</button>
-    </div>
-  </article>;
+    const bookElement = 
+    <article className={favoriteClass} onClick={() => this.props.setSelectedBook(this.props.book)}>
+      <div className="img">
+        <img src={image} alt='' />
+      </div>
+      <div className="bookInfo">
+        <h2>{title}</h2>
+        <h3>{artist}</h3>
+      </div>
+      <button onClick={this.handleButtonClick}><img src={favoriteStar} alt=''/>Favorite</button>
+    </article>;
 
     if (!this.props.currentUser && this.state.buttonWasClicked) {
       window.scrollTo(0,0);
@@ -80,6 +77,7 @@ class Book extends Component {
       </>
     )
   }
+
 }
 
 const mapStateToProps = state => ({
