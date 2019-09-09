@@ -6,7 +6,7 @@ import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './Book.scss';
 
-class Book extends Component {
+export class Book extends Component {
 
   state={
     buttonWasClicked: false
@@ -58,8 +58,6 @@ class Book extends Component {
     <div className="bookInfo">
       <h2>{title}</h2>
       <h3>{artist}</h3>
-      <h4>{filterType}</h4>
-      <h5>${price}</h5>
       <button onClick={this.handleButtonClick}>Favorite</button>
     </div>
   </article>;
@@ -99,6 +97,7 @@ const mapDispatchToProps = dispatch => ({
 export default connect(mapStateToProps, mapDispatchToProps)(Book);
 
 Book.propTypes = {
+  book: PropTypes.object.isRequired,
   currentUser: PropTypes.object,
   favorites: PropTypes.array.isRequired,
   setSelectedBook: PropTypes.func.isRequired,

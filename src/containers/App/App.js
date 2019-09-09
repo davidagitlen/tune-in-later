@@ -11,7 +11,7 @@ import SearchForm from '../SearchForm/SearchForm';
 import BookDetails from '../BookDetails/BookDetails';
 import PropTypes from 'prop-types';
 
-class App extends Component{
+export class App extends Component{
   constructor() {
     super();
     this.state = {
@@ -124,6 +124,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   setCurrentUser: user => dispatch(setCurrentUser(user))
 })
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
 

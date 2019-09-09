@@ -1,9 +1,30 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
+import { App } from './App';
+import { shallow } from 'enzyme';
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<App />, div);
-  ReactDOM.unmountComponentAtNode(div);
-});
+describe('App', () => {
+
+  let wrapper;
+  let mockCurrentUser = null;
+  let mockFavorites = [];
+  let mockSearchResults = [];
+  let mockSelectedBook = null;
+
+  beforeEach(() => {
+
+    wrapper = shallow(
+      <App 
+        favorites={mockFavorites}
+        currentUser={mockCurrentUser}
+        searchResults={mockSearchResults}
+        selectedBook={mockSelectedBook}
+        setCurrentUser={jest.fn()}
+      />
+    )
+  })
+  it('should match the snapshot', () => {
+    expect(wrapper).toMatchSnapshot();
+  })
+})
+
+
