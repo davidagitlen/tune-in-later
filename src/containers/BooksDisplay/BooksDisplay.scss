@@ -30,15 +30,15 @@ section {
   overflow-y: hidden;
   border-radius: 8px;
   will-change: transform;
-}
 
-section > div {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-}
+  & div {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+  }
 
-h2 {
-  margin-bottom: 0px;
-  font-family: sans-serif;
+  & h2 {
+    margin-bottom: 0px;
+    font-family: sans-serif;
+  }
 }

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addUserFavorite, setCurrentUserFavorites, setSelectedBook, deleteUserFavorite } from '../../actions';
 import { addFavoriteToApi, deleteFavoriteFromApi } from '../../util/apiCalls';
+import star from '../../images/star.svg';
+import activeStar from '../../images/active-star.svg';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './Book.scss';
@@ -48,19 +50,18 @@ export class Book extends Component {
     const { title, artist, image } = this.props.book;
     const isFavorite = this.props.favorites.find(obj => obj.book_id === this.props.book.id);
     const favoriteClass = isFavorite ? 'Book favorited' : 'Book'; 
-    const bookElement = <article className={favoriteClass} onClick={() => this.props.setSelectedBook(this.props.book)}>
-    <div className="img">
-      <img src={image} alt='' />
-    </div>
-    <div className="bookInfo">
-      <h2>{title}</h2>
-      <h3>{artist}</h3>
-      <button onClick={this.handleButtonClick}>Favorite</button>
-    </div>
-  </article>;
-
-
-
+    const favoriteStar = isFavorite ? activeStar : star;
+    const bookElement = 
+    <article className={favoriteClass} onClick={() => this.props.setSelectedBook(this.props.book)}>
+      <div className="img">
+        <img src={image} alt='' />
+      </div>
+      <div className="bookInfo">
+        <h2>{title}</h2>
+        <h3>{artist}</h3>
+      </div>
+      <button onClick={this.handleButtonClick}><img src={favoriteStar} alt=''/>Favorite</button>
+    </article>;
 
     if (!this.props.currentUser && this.state.buttonWasClicked) {
       window.scrollTo(0,0);
@@ -77,6 +78,7 @@ export class Book extends Component {
       </>
     )
   }
+
 }
 
 const mapStateToProps = state => ({
