@@ -1,6 +1,7 @@
 import React from 'react';
-import { App } from './App';
+import { mapDispatchToProps, App } from './App'
 import { shallow } from 'enzyme';
+import { setCurrentUser } from '../../actions';
 
 describe('App', () => {
 
@@ -25,6 +26,23 @@ describe('App', () => {
   it('should match the snapshot', () => {
     expect(wrapper).toMatchSnapshot();
   })
+
+  describe('mapDispatchToProps', () => {
+    it('calls dispatch with a setCurrentUser action when setCurrentUser is called', () => {
+      const mockDispatch = jest.fn();
+      const actionToDispatch = setCurrentUser({name:'Dorbid'})
+
+      const mappedProps = mapDispatchToProps(mockDispatch);
+      mappedProps.setCurrentUser({name:'Dorbid'})
+
+      expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch)
+
+    })
+  })
 })
+
+// const mapDispatchToProps = dispatch => ({
+//   setCurrentUser: user => dispatch(setCurrentUser(user))
+// })
 
 

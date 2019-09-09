@@ -114,14 +114,14 @@ export class App extends Component{
   }
 }
 
-const mapStateToProps = state => ({
+export const mapStateToProps = state => ({
   currentUser: state.currentUser,
   favorites: state.favorites,
   searchResults: state.searchResults,
   selectedBook: state.selectedBook
 })
 
-const mapDispatchToProps = dispatch => ({
+export const mapDispatchToProps = dispatch => ({
   setCurrentUser: user => dispatch(setCurrentUser(user))
 })
 
