@@ -2,6 +2,9 @@ import React from 'react';
 import { mapDispatchToProps, App } from './App'
 import { shallow } from 'enzyme';
 import { setCurrentUser } from '../../actions';
+import { landingFetch } from '../../util/apiCalls';
+
+jest.mock('../../util/apiCalls')
 
 describe('App', () => {
 
@@ -17,16 +20,6 @@ describe('App', () => {
 
 
   beforeEach(() => {
-
-    wrapper = shallow(
-      <App 
-        favorites={mockFavorites}
-        currentUser={mockCurrentUser}
-        searchResults={mockSearchResults}
-        selectedBook={mockSelectedBook}
-        setCurrentUser={jest.fn()}
-      />
-    )
 
     mockBook = {
       artistName: 'Ron Swanson',
@@ -67,6 +60,20 @@ describe('App', () => {
       mockFormattedBook,    
     ]
 
+    landingFetch.mockImplementation(() => {
+      return Promise.resolve(mockData)
+    })
+
+  
+    wrapper = shallow(
+      <App 
+        favorites={mockFavorites}
+        currentUser={mockCurrentUser}
+        searchResults={mockSearchResults}
+        selectedBook={mockSelectedBook}
+        setCurrentUser={jest.fn()}
+      />
+    )
   })
 
   it('should match the snapshot', () => {
@@ -76,11 +83,8 @@ describe('App', () => {
   describe('handleInitialData', () => {
 
     it('should format the arrays coming from the fetch', () => {
-
-      
       expect(wrapper.instance().handleInitialData(mockData)).toEqual(expectedFormattedBooks)
     })
-
   })
 
   describe('filterAllBooks', () => {
@@ -97,13 +101,40 @@ describe('App', () => {
           id: 994923
         }
       
-      
       wrapper.setState({allBooks: [...expectedFormattedBooks, mockNonHistoryBook]})
       wrapper.update()
 
       expect(wrapper.instance().filterAllBooks('History')).toEqual(expectedFormattedBooks)
 
     })
+  })
+
+  describe('componentDidMount', () => {
+    it('fire landingFetch', () => {  
+      expect(landingFetch).toHaveBeenCalled();
+    })
+    
+    // it('should catch an Error if fetch isrejected', () => {
+
+
+    //   landingFetch.mockImplementation(() => {
+    //     return Promise.reject(Error('There was an error'))
+    //   })
+  
+    
+    //   const wrapper2 = shallow(
+    //     <App 
+    //       favorites={mockFavorites}
+    //       currentUser={mockCurrentUser}
+    //       searchResults={mockSearchResults}
+    //       selectedBook={mockSelectedBook}
+    //       setCurrentUser={jest.fn()}
+    //     />
+    //   )
+
+        
+    // })
+
   })
 
   describe('mapDispatchToProps', () => {
@@ -122,10 +153,3 @@ describe('App', () => {
 
 })
 
-
-
-
-// To Test:
-// componentDidMount
-// Router?
-// 
