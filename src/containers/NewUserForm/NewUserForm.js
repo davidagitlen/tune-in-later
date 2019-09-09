@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './NewUserForm.scss';
 import { setCurrentUser } from '../../actions';
+import PropTypes from 'prop-types';
+
 
 class NewUserForm extends Component {
   constructor() {
@@ -111,3 +113,7 @@ const mapDispatchToProps = dispatch => ({
 })
 
 export default connect(null, mapDispatchToProps)(NewUserForm);
+
+NewUserForm.propTypes = {
+  setCurrentUser: PropTypes.func.isRequired
+}

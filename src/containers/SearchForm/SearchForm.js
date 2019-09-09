@@ -4,6 +4,7 @@ import './SearchForm.scss';
 import magnifierTool from '../images/magnifier-tool.svg';
 import { fetchSearch } from '../../util/apiCalls';
 import { displaySearchResults } from '../../actions/';
+import PropTypes from 'prop-types';
 
 class SearchForm extends Component {
   constructor() {
@@ -73,9 +74,12 @@ class SearchForm extends Component {
   }
 }
 
-
 const mapDispatchToProps = dispatch => ({
   displaySearchResults: (searchResults) => dispatch(displaySearchResults(searchResults))
 })
 
 export default connect(null, mapDispatchToProps)(SearchForm);
+
+SearchForm.propTypes = {
+  displaySearchResults: PropTypes.func.isRequired
+}

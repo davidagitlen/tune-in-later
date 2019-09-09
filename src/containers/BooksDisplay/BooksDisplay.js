@@ -56,7 +56,7 @@ const mapDispatchToProps = dispatch => ({
 export default connect(mapStateToProps, mapDispatchToProps)(BooksDisplay);
 
 BooksDisplay.propTypes = {
-  currentUser: PropTypes.string,
+  currentUser: PropTypes.object,
   favorites: PropTypes.array.isRequired,
   setCurrentUserFavorites: PropTypes.func.isRequired
 }

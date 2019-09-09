@@ -80,7 +80,7 @@ const mapDispatchToProps = dispatch => ({
 export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);
 
 LoginForm.propTypes = {
-  currentUser: PropTypes.string,
+  currentUser: PropTypes.object,
   favorites: PropTypes.array.isRequired,
   setCurrentUser: PropTypes.func.isRequired,
   setCurrentUserFavorites: PropTypes.func.isRequired
