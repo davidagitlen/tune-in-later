@@ -126,13 +126,71 @@ describe('SearchForm', () => {
     })
 
     it('should fire clearSearch', () => {
-
+      wrapper.instance().cleanSearchResults = jest.fn().mockImplementation(() => {
+        return [{title:'blah'}, {title: 'blah blah'}]
+      })
+      wrapper.instance().clearSearch = jest.fn();    
       
+      wrapper.instance().handleSearch(mockEvent)
+
+      expect(wrapper.instance().clearSearch).toHaveBeenCalled();
+
     })
   })
 
   describe('cleanSearchResults', () => {
+    it('should return properly formatted books', () => {
+      
+      let mockBook = {"wrapperType":"audiobook",
+      "artistId":152264779,
+      "collectionId":366048490,
+      "artistName":"Kurt Bruner and Jim Ware",
+      "collectionName":"Finding God in The Lord of the Rings (Unabridged)",
+      "collectionCensoredName":"Finding God in The Lord of the Rings (Unabridged)",
+      "artistViewUrl":"https://books.apple.com/us/author/kurt-bruner-and-jim-ware/id152264779?uo=4",
+      "collectionViewUrl":"https://books.apple.com/us/audiobook/finding-god-in-the-lord-of-the-rings-unabridged/id366048490?uo=4",
+      "artworkUrl60":"https://is2-ssl.mzstatic.com/image/thumb/Music/c2/d9/90/mzi.dgbadmjh.jpg/60x60bb.jpg",
+      "artworkUrl100":"https://is2-ssl.mzstatic.com/image/thumb/Music/c2/d9/90/mzi.dgbadmjh.jpg/100x100bb.jpg",
+      "collectionPrice":11.99,
+      "collectionExplicitness":"notExplicit",
+      "trackCount":1,
+      "copyright":"℗ © 2003 Oasis Audio",
+      "country":"USA",
+      "currency":"USD",
+      "releaseDate":"2003-01-01T08:00:00Z",
+      "primaryGenreName":"Religion & Spirituality",
+      "previewUrl":"https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview113/v4/bc/f1/f6/bcf1f6b3-988d-7594-3ded-64cc9f9fb34f/mzaf_255838896557730526.std.aac.p.m4a",
+      "description":"Recently named the #1 piece of 20th century literature, <i>The Lord of the Rings<\/i> trilogy is more than a great story. It's a much-needed reminder that, like J.R.R. Tolkien's hobbits, Christians are all on an epic quest. In examining the Christian themes in the trilogy, authors Kurt Bruner and Jim Ware find that truth and fiction are not as far apart as they seem. Even though Tolkien never intended for these books to present the Gospel, when read in the light of the Scripture, they offer a rich tapestry of redemption, values, and faith against all odds.",
+      "filterType": "History"  
+    }
 
+     
+      let mockSearchResults = [
+        mockBook,
+        mockBook
+      ]
+
+
+      let mockCleanedBook = {
+        id: 366048490,
+        date: "2003-01-01T08:00:00Z", 
+        artist: "Kurt Bruner and Jim Ware",
+        image: "https://is2-ssl.mzstatic.com/image/thumb/Music/c2/d9/90/mzi.dgbadmjh.jpg/100x100bb.jpg",
+        price: 11.99,
+        title: "Finding God in The Lord of the Rings (Unabridged)",
+        genre: "Religion & Spirituality",
+        description: "Recently named the #1 piece of 20th century literature, The Lord of the Rings trilogy is more than a great story. It\'s a much-needed reminder that, like J.R.R. Tolkien\'s hobbits, Christians are all on an epic quest. In examining the Christian themes in the trilogy, authors Kurt Bruner and Jim Ware find that truth and fiction are not as far apart as they seem. Even though Tolkien never intended for these books to present the Gospel, when read in the light of the Scripture, they offer a rich tapestry of redemption, values, and faith against all odds.",
+        filterType: "History"
+        }
+        
+      let expected = [
+        mockCleanedBook,
+        mockCleanedBook
+      ]
+
+      expect(wrapper.instance().cleanSearchResults(mockSearchResults)).toEqual(expected)
+
+    })
   })
 
   describe('matchDispatchToProps', () => {
