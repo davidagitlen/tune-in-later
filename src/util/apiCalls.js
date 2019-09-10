@@ -110,6 +110,11 @@ export const fetchSearch = searchTerm => {
 
 export const getUserFavoritesFromApi = userId => {
   return fetch(`http://localhost:3001/api/v1/users/${userId}/bookfavorites/`)
-    .then(resp => resp.json())
-    .catch(err => console.log('error in apiCalls getUserFavoritesFromApi', err))
+  .then (resp => {
+    if (!resp.ok) {
+      throw Error('Error getting favorites')
+    }
+    return resp.json();
+  })
+  .catch(err => err)
 }

@@ -4,6 +4,7 @@ import {
   fetchSearch,
   addFavoriteToApi, 
   deleteFavoriteFromApi, 
+  getUserFavoritesFromApi
 } from './apiCalls';
 
 
@@ -215,13 +216,30 @@ describe('apiCalls', () => {
         }) 
       })
 
-      
-
       expect(fetchSearch('blah')).resolves.toEqual(Error('Error getting search results'));
     })
   })
   
   describe('getUserFavoritesFromApi', () => {
+
+    it('should fire fetch with the correct url', () => {
+
+    })
+
+    it('should return favorites', () => {
+
+    })
+
+    it('should throw an error if status is not ok', () => {
+      window.fetch = jest.fn().mockImplementation(() => {
+        return Promise.resolve({
+          ok: false,
+          json: () => Promise.resolve()
+        }) 
+      })
+
+      expect(getUserFavoritesFromApi(2)).resolves.toEqual(Error('Error getting favorites'))
+    })
 
   })
   
