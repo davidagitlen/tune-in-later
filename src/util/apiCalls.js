@@ -99,8 +99,13 @@ export const deleteFavoriteFromApi = (book, userId) => {
 export const fetchSearch = searchTerm => {
   const searchURL = searchTerm.split(' ').join('+')
   return fetch(`https://itunes.apple.com/search?media=audiobook&term=${searchURL}`)
-    .then(response => response.json())
-    .catch(err => console.log(err, 'error in apiCalls fetchSearch'))
+    .then(resp => {
+      if (!resp.ok) {
+        throw Error('Error getting search results')
+      }
+      return resp.json();
+    })
+    .catch(err => err)
 }
 
 export const getUserFavoritesFromApi = userId => {

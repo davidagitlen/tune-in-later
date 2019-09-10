@@ -216,6 +216,8 @@ describe('apiCalls', () => {
       })
 
       
+
+      expect(fetchSearch('blah')).resolves.toEqual(Error('Error getting search results'));
     })
   })
   
