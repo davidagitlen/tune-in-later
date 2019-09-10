@@ -8,7 +8,7 @@
   justify-content: flex-start;
   background: white;
   border-radius: 8px;
-  box-shadow: 1px 1px 5px 5px lightgray;
+  // box-shadow: 1px 1px 5px 5px lightgray;
 
   & div.img img{
   min-height: 140px;
@@ -16,10 +16,6 @@
   margin: 20px;
   border-radius: 8px;
   border: 1px solid black;
-  }
-
-  &.favorited {
-    background-color: #E8E8FF;
   }
 
   & .bookInfo {

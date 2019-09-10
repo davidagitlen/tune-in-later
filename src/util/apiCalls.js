@@ -27,7 +27,7 @@ export const landingFetch = () => {
           })
         })
       })
-      .catch(err => {throw Error(err.message)})
+      .catch(err => {throw err})
 }
 
 export const loginUser = (email, password) => {
