@@ -6,6 +6,7 @@ import { shallow } from 'enzyme';
 describe('LoginFormContainer', () => {
   let wrapper;
 
+  const mockHandleInputs = jest.fn();
   const mockSetCurrentUser = jest.fn();
   const mockSetCurrentUserFavorites = jest.fn();
   const mockCurrentUser = {
@@ -28,6 +29,9 @@ describe('LoginFormContainer', () => {
 
   beforeEach(() => {
     wrapper = shallow(<LoginForm
+      handleInputs={mockHandleInputs}
+      loginUser={jest.fn()}
+      getUserFavoritesFromApi={jest.fn()}
       currentUser={mockCurrentUser}
       favorites={mockFavorites}
       setCurrentUser={mockSetCurrentUser}
@@ -39,6 +43,14 @@ describe('LoginFormContainer', () => {
     
       it('should match the snapshot when a user is logged in', () => {
         expect(wrapper).toMatchSnapshot();
+      });
+
+      it('should change the state on the input change within the form', () => {
+        wrapper.find('input').at(0).simulate('change', {target: {value: 'joanclarke@turing.io', name: 'email'}});
+        wrapper.find('input').at(1).simulate('change', {target: {value: 'freedom', name: 'password'}})
+
+        expect(wrapper.state('email')).toEqual('joanclarke@turing.io');
+        expect(wrapper.state('password')).toEqual('freedom');
       });
     });
 

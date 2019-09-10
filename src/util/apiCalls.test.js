@@ -1,25 +1,62 @@
-import { 
-  landingFetch, 
+import {
+  addNewUserFetch,
+  landingFetch,
   loginUser, 
   fetchSearch,
   addFavoriteToApi, 
   deleteFavoriteFromApi, 
   getUserFavoritesFromApi
 } from './apiCalls';
-import { placeholder } from '@babel/types';
 
 
 describe('apiCalls', () => {
 
 
+  describe('landingFetch', () => {
 
-  // describe('landingFetch', () => {
-    //mock out 4 arrays of objects
-    //mock out all genre fetches
-    //check them for being called with the correct url
-    //mock out expected response
-    //check for any error response
-  // })
+    it('should call fetch with the correct urls passed in', () => {
+      window.fetch = jest.fn().mockImplementation(() => {
+        return Promise.resolve({
+          ok: true,
+          json: () => Promise.resolve()
+        });
+      });
+
+      const mockUrlsArray = ['https://itunes.apple.com/search?media=audiobook&term=romance&explicit=No', 'https://itunes.apple.com/search?media=audiobook&term=fantasy&explicit=No', 'https://itunes.apple.com/search?media=audiobook&term=biography&explicit=No', 'https://itunes.apple.com/search?media=audiobook&term=history&explicit=No', 'https://itunes.apple.com/search?media=audiobook&term=horror&explicit=No'];
+
+      landingFetch();
+      expect(window.fetch).toHaveBeenCalledWith(mockUrlsArray[0]);
+      expect(window.fetch).toHaveBeenCalledWith(mockUrlsArray[1]);
+      expect(window.fetch).toHaveBeenCalledWith(mockUrlsArray[2]);
+      expect(window.fetch).toHaveBeenCalledWith(mockUrlsArray[3]);
+      expect(window.fetch).toHaveBeenCalledWith(mockUrlsArray[4]);
+    });
+
+    it('should return an array of objects with the appropriate keys added (HAPPY)', () => {
+      window.fetch = jest.fn().mockImplementation(() => {
+        return Promise.resolve({
+          ok: true,
+          json: () => Promise.resolve([{title: 'Romance'}, {title: 'Fantasy'}, {title: 'Biography'}, {title: 'History'}, {title: 'Horror'} ])
+        });
+      });
+
+      const expected = [{ title: 'Romance', filterType: 'romance' }, { title: 'Fantasy', filterType: 'fantasy' }, { title: 'Biography', filterType: 'biography' }, { title: 'History', filterType: 'history' }, { title: 'Horror', filterType: 'horror' }]
+
+      landingFetch();
+
+      expect(landingFetch()).resolves.toEqual(expected);
+    });
+
+    it('should return an error message when the fetch is not successful(SAD)', () => {
+
+      window.fetch = jest.fn().mockImplementation(() => {
+        return Promise.reject('Landing fetch was not successful.')
+      });
+
+      landingFetch();
+      expect(landingFetch()).rejects.toEqual('Landing fetch was not successful');
+    });
+  });
 
   describe('loginUser', () => {
 
@@ -90,7 +127,6 @@ describe('apiCalls', () => {
       })
 
       expect(loginUser('lknope@pawnee.gov', 'MichelleObama')).rejects.toEqual(Error('Error logging in'))
-
     })
 
   })
@@ -177,9 +213,8 @@ describe('apiCalls', () => {
         })
       })
 
-      expect(addFavoriteToApi(mockBook, 2)).rejects.toEqual(Error('There was an error adding the favorite'))
+      expect(addFavoriteToApi(mockBook, 2)).rejects.toEqual(Error('Error posting favorite'))
     })
-
     it('should throw an error if fetch is unsuccessful', () => {
       window.fetch = jest.fn().mockImplementation(() => {
         return Promise.reject(Error('There was an error adding the favorite'))
@@ -221,7 +256,10 @@ describe('apiCalls', () => {
 
     it('should return an ok status if successful', () => {
       window.fetch = jest.fn().mockImplementation(() => {
-        return Promise.resolve('success');
+        return Promise.resolve({
+          ok: true,
+          json: () => Promise.resolve('success')
+        })
       })
     
       expect(deleteFavoriteFromApi(mockBook, 5)).resolves.toEqual('success')
@@ -231,9 +269,11 @@ describe('apiCalls', () => {
 
       window.fetch = jest.fn().mockImplementation(() => {
         return Promise.resolve({
-          ok: false
+          ok: false,
+          
         })
       })
+
       expect(deleteFavoriteFromApi(mockBook, 5)).rejects.toEqual(Error('There was an error deleting the favorite'))
     })
 
@@ -242,13 +282,11 @@ describe('apiCalls', () => {
         return Promise.reject(Error('There was an error deleting the favorite'))
       })
 
-      
-      expect(deleteFavoriteFromApi(mockBook, 5)).rejects.toEqual(Error('There was an error deleting the favorite'))
 
+      expect(deleteFavoriteFromApi(mockBook, 5)).rejects.toEqual(Error('There was an error deleting the favorite'))
+    })
     
   })
-
-})
 
   describe('fetchSearch', () => {
     it('should fire the fetch call with the correct URL', () => {
@@ -294,7 +332,6 @@ describe('apiCalls', () => {
 
       expect(fetchSearch('blah')).rejects.toEqual(Error('Error getting search results'));
     })
-
     it('should throw an error when rejected', () => {
       window.fetch = jest.fn().mockImplementation(() => {
         return Promise.reject(Error('Error getting search results'))
@@ -319,7 +356,7 @@ describe('apiCalls', () => {
       getUserFavoritesFromApi(6);
 
       expect(window.fetch).toHaveBeenCalledWith(expectedURL);
-    })
+    });
 
     it('should return an array of favorites when successful', () => {
 
@@ -337,7 +374,7 @@ describe('apiCalls', () => {
 
       expect(getUserFavoritesFromApi(6)).resolves.toEqual(expectedResponse);
 
-    })
+    });
 
     it('should throw an error if status is not ok', () => {
       window.fetch = jest.fn().mockImplementation(() => {
@@ -348,17 +385,98 @@ describe('apiCalls', () => {
       })
 
       expect(getUserFavoritesFromApi(2)).rejects.toEqual(Error('Error getting favorites'))
-    })
+    });
+  });
 
-    it('should throw an error if fetch is not successful', () => {
+  describe('addNewUserFetch', () => {
+
+    it('should fire fetch with the correct url', () => {
       window.fetch = jest.fn().mockImplementation(() => {
-        return Promise.reject(Error('Error getting favorites'))
+        return Promise.resolve({
+          ok: true,
+          json: () => Promise.resolve()
+        })
+      });
+      const mockUser = {
+        name: 'Bernonda OfTheValley',
+        email: 'perfidious_punctuation@gmail.com',
+        password: 'lieslieslies'
+      };
+
+      const body = mockUser;
+
+      const options = {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(body)
+      };
+
+      const expectedURL = 'http://localhost:3001/api/v1/users'
+
+      addNewUserFetch(mockUser);
+
+      expect(window.fetch).toHaveBeenCalledWith(expectedURL, options);
+    });
+
+    it('should return the passed in user object with an id assigned to it', () => {
+
+      const mockUser = {
+        name: 'Bernonda OfTheValley',
+        email: 'perfidious_punctuation@gmail.com',
+        password: 'lieslieslies'
+      }
+
+      const expectedResponse = {
+        name: 'Bernonda OfTheValley',
+        email: 'perfidious_punctuation@gmail.com',
+        password: 'lieslieslies',
+        id: 12
+      }
+
+      window.fetch = jest.fn().mockImplementation(() => {
+        return Promise.resolve({
+          ok: true,
+          json: () => Promise.resolve({...mockUser, id: 12})
+        })
       })
 
-      expect(getUserFavoritesFromApi(2)).rejects.toEqual(Error('Error getting favorites'))
+      expect(addNewUserFetch(mockUser)).resolves.toEqual(expectedResponse);
 
-    })
+    });
 
-  })
+    it('should throw an error if status is not ok', () => {
+      window.fetch = jest.fn().mockImplementation(() => {
+        return Promise.resolve({
+          ok: false,
+          json: () => Promise.resolve()
+        })
+      });
+
+      const mockUser = {
+        name: 'Bernonda OfTheValley',
+        email: 'perfidious_punctuation@gmail.com',
+        password: 'lieslieslies'
+      }
+
+      expect(addNewUserFetch(mockUser)).rejects.toEqual(Error('Something went wrong'))
+    });
+
+    it('should throw an error if the promise is rejected', () => {
+      window.fetch = jest.fn().mockImplementation(() => {
+        return Promise.reject(Error('There was a problem adding the new user!'))
+      });
+
+      const mockUser = {
+        name: 'Bernonda OfTheValley',
+        email: 'perfidious_punctuation@gmail.com',
+        password: 'lieslieslies'
+      };
+
+      expect(addNewUserFetch(mockUser)).rejects.toEqual('There was a problem adding the new user!');
+    });
+
+  });
   
 })

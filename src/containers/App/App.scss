@@ -13,16 +13,22 @@
     min-height: 40vh;
     justify-content: center;
     align-items: center;
+
+    & h2 {
+      font-size: 28px;
+    }
+
   }
 
   & h1 {
     font-size: 50px;
     margin: 0px auto;
-    color: #666888;
+    color: snow;
 
     & span {
       font-weight: bold;
     }
+
 
   }
 
@@ -34,6 +40,7 @@
     margin: 10px 0px 0px 0px;
 
     & .nav {
+      color: snow;
       margin: 10px;
     }
   }

@@ -6,14 +6,15 @@
   & button {
   height: 30px;
   width: 100px;
-  border: .5px solid #666888;
+  border: 1px solid snow;
   border-radius: 8px;
 
     &:hover,
     &:focus {
+      font-weight: bold;
       font-style: italic;
-      color: #3EB560;
-      border: 1.5px solid #4A62C3;
+      color: #353EBA;
+      border: 1.5px solid #353EBA;
     }
 
   }

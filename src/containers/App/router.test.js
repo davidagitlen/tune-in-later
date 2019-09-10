@@ -1,37 +1,46 @@
-describe('Route', () => {
+// import React from 'react';
+// import { App } from './App';
+// import { BooksDisplay } from '../BooksDisplay/BooksDisplay';
+// import { LoginForm } from '../LoginForm/LoginForm';
+// import { NewUserForm } from '../NewUserForm/NewUserForm'; 
+// import { MemoryRouter } from 'react-router';
+// import { mount } from 'enzyme';
 
-  it('should route to the homepage by default and display BooksDisplays for the results of the landingFetch', () => {
 
-    const wrapper = mount(
-      <MemoryRouter initialEntries={['/']}>
-        <App />
-      </MemoryRouter>
-    );
+// describe('Route', () => {
 
-    expect(wrapper.find(BooksDisplay)).toHaveLength(5);
-  });
+//   it('should route to the homepage by default and display BooksDisplays for the results of the landingFetch', () => {
 
-  it('should route to the login form when the login link is clicked', () => {
+//     const wrapper = mount(
+//       <MemoryRouter initialEntries={['/']}>
+//         <App />
+//       </MemoryRouter>
+//     );
 
-    const wrapper = mount(
-      <MemoryRouter initialEntries={['/login']}>
-        <App />
-      </MemoryRouter>
-    );
+//     expect(wrapper.find(BooksDisplay)).toHaveLength(5);
+//   });
 
-    expect(wrapper.find(LoginForm)).toHaveLength(1);
-    expect(wrapper.find(NewUserForm)).toHaveLength(1);
-  });
+//   it('should route to the login form when the login link is clicked', () => {
 
-  it('should route to the user\'s personal collection and display them in a BooksDisplay when the my collection link is clicked', () => {
+//     const wrapper = mount(
+//       <MemoryRouter initialEntries={['/login']}>
+//         <App />
+//       </MemoryRouter>
+//     );
 
-    const wrapper = mount(
-      <MemoryRouter initialEntries={['/my-collection']}>
-        <App />
-      </MemoryRouter>
-    );
+//     expect(wrapper.find(LoginForm)).toHaveLength(1);
+//     expect(wrapper.find(NewUserForm)).toHaveLength(1);
+//   });
 
-    expect(wrapper.find(BooksDisplay)).toHaveLength(1);
-  });
+//   it('should route to the user\'s personal collection and display them in a BooksDisplay when the my collection link is clicked', () => {
 
-});
+//     const wrapper = mount(
+//       <MemoryRouter initialEntries={['/my-collection']}>
+//         <App />
+//       </MemoryRouter>
+//     );
+
+//     expect(wrapper.find(BooksDisplay)).toHaveLength(1);
+//   });
+
+// });

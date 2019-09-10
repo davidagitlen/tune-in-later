@@ -73,46 +73,106 @@ describe('Book', () => {
     expect(wrapper.instance().handleButtonClick).toHaveBeenCalledTimes(1);
   });
 
-  it('should fire addFavoriteToApi with the current book and user id passed in if handleButtonClick is called and the book is not currently a favorite', () => {
-    const mockEvent = {
-      stopPropagation: jest.fn(),
-      preventDefault: jest.fn()
-    }
-    
-    const wrapper = shallow(
-      <Book
+  describe('handleButtonClick', () => {
+
+    it('should update state appropriately when a click is detected', () => {
+
+      const wrapper = shallow(<Book
         book={mockBookProp}
-        favorites={[{book_id: 20}, {book_id: 30}]}
-        currentUser={{name: 'Brianna', id:12}}
+        favorites={[{ book_id: 1 }]}
+        currentUser={{ id: 2, name: 'Divad' }}
         setSelectedBook={mockSetSelectedBook}
         setCurrentUserFavorites={mockSetCurrentUserFavorites}
         addUserFavorite={mockAddUserFavorite}
         deleteUserFavorite={mockDeleteUserFavorite}
-      />
-    )
-    wrapper.instance().handleButtonClick(mockEvent);
-    expect(addFavoriteToApi).toHaveBeenCalledWith(mockBookProp, 12);
+      />);
+
+      const mockEvent = {
+        stopPropagation: jest.fn(),
+        preventDefault: jest.fn()
+      };
+
+      const initialState = {buttonWasClicked: true};
+
+      wrapper.instance().setState(initialState);
+
+      expect(wrapper.instance().state).toEqual({buttonWasClicked: true});
+
+      wrapper.instance().handleButtonClick(mockEvent);
+
+      expect(wrapper.instance().state).toEqual({buttonWasClicked: false});
+
+
+    });
   });
 
-  it('should fire deleteFavoriteFromApi with the current book and user id passed in if handleButtonClick is called and the book is currently a favorite', () => {
-    const mockEvent = {
-      stopPropagation: jest.fn(),
-      preventDefault: jest.fn()
-    }
+  describe('handleFavorite', () => {
 
-    const wrapper = shallow(
-      <Book
+    it('should be called when handleButtonClick is fired and a user is logged in', () => {
+      const wrapper = shallow(<Book
         book={mockBookProp}
-        favorites={[{ book_id: 1 }, { book_id: 30 }]}
-        currentUser={{ name: 'Brianna', id: 12 }}
+        favorites={[{ book_id: 1 }]}
+        currentUser={{id: 2, name: 'Divad'}}
         setSelectedBook={mockSetSelectedBook}
         setCurrentUserFavorites={mockSetCurrentUserFavorites}
         addUserFavorite={mockAddUserFavorite}
         deleteUserFavorite={mockDeleteUserFavorite}
-      />
-    );
-    wrapper.instance().handleButtonClick(mockEvent);
-    expect(deleteFavoriteFromApi).toHaveBeenCalledWith(mockBookProp, 12);
+      />);
+
+      const mockEvent = {
+        stopPropagation: jest.fn(),
+        preventDefault: jest.fn()
+      };
+
+      wrapper.instance().handleFavorite = jest.fn();
+      wrapper.instance().forceUpdate();
+      wrapper.instance().handleButtonClick(mockEvent);
+
+      expect(wrapper.instance().handleFavorite).toHaveBeenCalledWith(mockEvent);
+    });
+
+    it('should fire addFavoriteToApi with the current book and user id passed in if handleButtonClick is called and the book is not currently a favorite', () => {
+      const mockEvent = {
+        stopPropagation: jest.fn(),
+        preventDefault: jest.fn()
+      }
+
+      const wrapper = shallow(
+        <Book
+          book={mockBookProp}
+          favorites={[{ book_id: 20 }, { book_id: 30 }]}
+          currentUser={{ name: 'Brianna', id: 12 }}
+          setSelectedBook={mockSetSelectedBook}
+          setCurrentUserFavorites={mockSetCurrentUserFavorites}
+          addUserFavorite={mockAddUserFavorite}
+          deleteUserFavorite={mockDeleteUserFavorite}
+        />
+      )
+      wrapper.instance().handleButtonClick(mockEvent);
+      expect(addFavoriteToApi).toHaveBeenCalledWith(mockBookProp, 12);
+    });
+
+    it('should fire deleteFavoriteFromApi with the current book and user id passed in if handleButtonClick is called and the book is currently a favorite', () => {
+      const mockEvent = {
+        stopPropagation: jest.fn(),
+        preventDefault: jest.fn()
+      }
+
+      const wrapper = shallow(
+        <Book
+          book={mockBookProp}
+          favorites={[{ book_id: 1 }, { book_id: 30 }]}
+          currentUser={{ name: 'Brianna', id: 12 }}
+          setSelectedBook={mockSetSelectedBook}
+          setCurrentUserFavorites={mockSetCurrentUserFavorites}
+          addUserFavorite={mockAddUserFavorite}
+          deleteUserFavorite={mockDeleteUserFavorite}
+        />
+      );
+      wrapper.instance().handleButtonClick(mockEvent);
+      expect(deleteFavoriteFromApi).toHaveBeenCalledWith(mockBookProp, 12);
+    });
+
   });
 
   describe('mapStateToProps', () => {

@@ -8,15 +8,13 @@
       & input{
         width: 200px;
         margin: 0;
+        border: 1px solid snow;
       }
 
       & input[type="image"]{
         width: 30px;
         margin: 0px 0px 0px 15px;
-      }
-      
-      & button {
-        margin: 0;
+        border: 1px solid snow;
       }
   
   & img {

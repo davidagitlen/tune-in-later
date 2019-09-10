@@ -1,4 +1,3 @@
-import React from 'react';
 import { shallow } from 'enzyme';
 import { NewUserForm, mapDispatchToProps } from './NewUserForm';
 import { addNewUserFetch } from '../../util/apiCalls';
