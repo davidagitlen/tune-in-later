@@ -1,5 +1,4 @@
 import { 
-  landingFetch, 
   loginUser, 
   fetchSearch,
   addFavoriteToApi, 
