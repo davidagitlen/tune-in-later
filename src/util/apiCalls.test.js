@@ -196,6 +196,17 @@ describe('apiCalls', () => {
       expect(window.fetch).toHaveBeenCalledWith(`http://localhost:3001/api/v1/users/5/bookfavorites/2`, options)
     })
 
+    it('should return an ok status if successful', () => {
+      window.fetch = jest.fn().mockImplementation(() => {
+        return Promise.resolve({
+          ok: true,
+          json: () => Promise.resolve('success')
+        })
+      })
+    
+      expect(deleteFavoriteFromApi(mockBook, 5)).resolves.toEqual('success')
+    })
+
     it('should return an error if status is not ok', () => {
 
       window.fetch = jest.fn().mockImplementation(() => {
