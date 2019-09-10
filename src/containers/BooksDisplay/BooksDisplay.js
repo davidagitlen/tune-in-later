@@ -29,8 +29,6 @@ export const BooksDisplay = ({books, sectionGenre}) => {
   let bookList = booksToRender.map(book => 
     <Book book={book} key={book.id*Date.now()}/>
   );
-  
-  console.log(sectionGenre)
 
   return(
     <section className='BooksDisplay'>

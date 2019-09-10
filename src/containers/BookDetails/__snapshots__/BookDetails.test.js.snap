@@ -14,13 +14,11 @@ exports[`BookDetails should match the snapshot with correct data passed in 1`] =
     <h2>
       The Hell of Incessant Testing
     </h2>
-    <h3>
-      David Gitlen
-    </h3>
-    <p>
+    <h3 />
+    <h4>
       Memoir
        
-    </p>
+    </h4>
   </div>
   <div
     className="description"

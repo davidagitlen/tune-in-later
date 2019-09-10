@@ -10,21 +10,21 @@ exports[`NewUserForm should match the snapshot with correct data passed in 1`] =
   <input
     name="name"
     onChange={[Function]}
-    placeholder="Enter your name"
+    placeholder="Enter Your Name"
     type="text"
     value=""
   />
   <input
     name="email"
     onChange={[Function]}
-    placeholder="Enter your e-mail"
+    placeholder="Enter Your Email"
     type="text"
     value=""
   />
   <input
     name="password"
     onChange={[Function]}
-    placeholder="Enter a password"
+    placeholder="Enter A Password"
     type="password"
     value=""
   />
