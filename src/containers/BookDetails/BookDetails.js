@@ -13,7 +13,6 @@ const BookDetails = ({book}) => {
         <h2>{title}</h2>
         <h3>{author}</h3>
         <p>{genre} </p>
-        <p>${price}</p>
       </div>
       <div className="description">
       <p>{description}</p>
