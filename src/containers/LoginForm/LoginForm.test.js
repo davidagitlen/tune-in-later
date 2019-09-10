@@ -1,12 +1,14 @@
 import React from 'react'
 import { LoginForm, mapStateToProps, mapDispatchToProps } from './LoginForm';
 import { setCurrentUser, setCurrentUserFavorites } from '../../actions';
+import { loginUser, getUserFavoritesFromApi } from '../../util/apiCalls';
 import { shallow } from 'enzyme';
+jest.mock('../../util/apiCalls')
+
 
 describe('LoginFormContainer', () => {
   let wrapper;
 
-  const mockHandleInputs = jest.fn();
   const mockSetCurrentUser = jest.fn();
   const mockSetCurrentUserFavorites = jest.fn();
   const mockCurrentUser = {
@@ -29,9 +31,6 @@ describe('LoginFormContainer', () => {
 
   beforeEach(() => {
     wrapper = shallow(<LoginForm
-      handleInputs={mockHandleInputs}
-      loginUser={jest.fn()}
-      getUserFavoritesFromApi={jest.fn()}
       currentUser={mockCurrentUser}
       favorites={mockFavorites}
       setCurrentUser={mockSetCurrentUser}
@@ -53,6 +52,24 @@ describe('LoginFormContainer', () => {
         expect(wrapper.state('password')).toEqual('freedom');
       });
     });
+
+    it('should call loginUser from the apiCalls when checkLoginStatus is invoked on the click', () => {
+      loginUser.mockImplementation(() => {
+        return Promise.resolve()
+      });
+
+      wrapper.instance().checkLoginStatus({preventDefault: jest.fn()});
+      expect(loginUser).toHaveBeenCalled();
+    });
+
+  it('should call getUserFavoritesFromApi from the apiCalls when handleGetUserFavorites is invoked', () => {
+    getUserFavoritesFromApi.mockImplementation(() => {
+        return Promise.resolve()
+    });
+
+    wrapper.instance().handleGetUserFavorites(mockCurrentUser);
+    expect(getUserFavoritesFromApi).toHaveBeenCalledWith(1);
+  });
 
   describe('mapStateToProps', () => {
     

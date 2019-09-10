@@ -143,11 +143,5 @@ export const addNewUserFetch = ({name, email, password}) => {
       }
       return resp.json()
     })
-    .catch(err => 
-      this.setState({
-      name: '',
-      email: '',
-      password: '',
-      error: err.message})
-      )
+    .catch(err => {throw err})
 }

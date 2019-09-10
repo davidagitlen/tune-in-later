@@ -40,21 +40,13 @@ describe('apiCalls', () => {
         });
       });
 
-      const expected = [{ title: 'Romance', filterType: 'romance' }, { title: 'Fantasy', filterType: 'fantasy' }, { title: 'Biography', filterType: 'biography' }, { title: 'History', filterType: 'history' }, { title: 'Horror', filterType: 'horror' }]
-
-      landingFetch();
-
-      expect(landingFetch()).resolves.toEqual(expected);
-    });
-
-    it('should return an error message when the fetch is not successful(SAD)', () => {
+    it('should return an error message when the fetch is not successful(SAD)',  () => {
 
       window.fetch = jest.fn().mockImplementation(() => {
-        return Promise.reject('Landing fetch was not successful.')
+        return Promise.reject(Error('Landing fetch was not successful.'))
       });
 
-      landingFetch();
-      expect(landingFetch()).rejects.toEqual('Landing fetch was not successful');
+      expect(landingFetch()).rejects.toEqual(Error('Landing fetch was not successful.'));
     });
   });
 
@@ -213,7 +205,7 @@ describe('apiCalls', () => {
         })
       })
 
-      expect(addFavoriteToApi(mockBook, 2)).rejects.toEqual(Error('Error posting favorite'))
+      expect(addFavoriteToApi(mockBook, 2)).rejects.toEqual(Error('There was an error adding the favorite'))
     })
     it('should throw an error if fetch is unsuccessful', () => {
       window.fetch = jest.fn().mockImplementation(() => {
@@ -262,7 +254,7 @@ describe('apiCalls', () => {
         })
       })
     
-      expect(deleteFavoriteFromApi(mockBook, 5)).resolves.toEqual('success')
+      expect(deleteFavoriteFromApi(mockBook, 5)).resolves.toEqual(undefined)
     })
 
     it('should return an error if status is not ok', () => {
@@ -474,7 +466,7 @@ describe('apiCalls', () => {
         password: 'lieslieslies'
       };
 
-      expect(addNewUserFetch(mockUser)).rejects.toEqual('There was a problem adding the new user!');
+      expect(addNewUserFetch(mockUser)).rejects.toEqual(Error('There was a problem adding the new user!'));
     });
 
   });
