@@ -44,6 +44,13 @@ export const loginUser = (email, password) => {
     }
   }
   return fetch('http://localhost:3001/api/v1/login/', options)
+    .then(resp => {
+      if (!resp.ok) {
+        throw Error('Error logging in')
+      }
+      return resp.json();
+    })
+    .catch(err => err)
 }
 
 export const addFavoriteToApi = (book, userId) => {
@@ -68,7 +75,9 @@ export const addFavoriteToApi = (book, userId) => {
       if (!resp.ok) {
         throw Error('Error posting favorite');
       }
+      return resp.json();
     })
+    .catch(err => err)
 } 
 
 export const deleteFavoriteFromApi = (book, userId) => {

@@ -42,7 +42,11 @@ describe('apiCalls', () => {
    
 
     it('should call fetch with the correct url', () => {
-      window.fetch = jest.fn()
+      window.fetch = jest.fn().mockImplementation(() => {
+        return Promise.resolve({
+          ok: true
+        });
+      }) 
       loginUser('b@g.com', 'pass123')
 
       expect(window.fetch).toHaveBeenCalledWith('http://localhost:3001/api/v1/login/', mockOptions)
@@ -56,19 +60,29 @@ describe('apiCalls', () => {
       }
 
       window.fetch = jest.fn().mockImplementation(() => {
-        return Promise.resolve(expected)
+        return Promise.resolve({
+          ok: true,
+          json: () => Promise.resolve(expected)
       })
+    })
 
       expect(loginUser('lknope@pawnee.gov', 'MichelleObama')).resolves.toEqual(expected)      
 
     })
 
-    // it('should return an error(sad)', () => {
+    it('should return an error if the response is not ok (sad)', () => {
+      window.fetch = jest.fn().mockImplementation(() => {
+        return Promise.resolve({
+          ok: false,
+        })
+      })
 
-    // })
 
-    // Do we need to add in a catch here for the not ok resp?
-    // and a test...
+
+      expect(loginUser('lknope@pawnee.gov', 'MichelleObama')).resolves.toEqual(Error('Error logging in'))
+
+    })
+
   })
     
   describe('addFavoriteToApi', () => {
@@ -117,11 +131,11 @@ describe('apiCalls', () => {
     it('should throw an error if response is not ok', () => {
       window.fetch = jest.fn().mockImplementation(() => {
         return Promise.resolve({
-          ok: false;
+          ok: false
         })
       })
 
-      expect(addFavoriteToApi(mockBook, 2)).rejects.toEqual(Error('Error posting favorite'))
+      expect(addFavoriteToApi(mockBook, 2)).resolves.toEqual(Error('Error posting favorite'))
     })
 
   })
