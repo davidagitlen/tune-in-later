@@ -159,7 +159,7 @@ describe('apiCalls', () => {
     }
     it('should be called with the correct URL', () => {
 
-      window.fetch.mockImplementation(() => {
+      window.fetch = jest.fn().mockImplementation(() => {
         return Promise.resolve();
       })
   
@@ -174,6 +174,7 @@ describe('apiCalls', () => {
 
     it('should return an error if status is not ok', () => {
 
+      window.fetch.mockImplementation
     })
     
   })
