@@ -73,6 +73,47 @@ describe('apiCalls', () => {
     
   describe('addFavoriteToApi', () => {
   
+    let mockBook = {
+      id: 2,
+      artist: 'Andy Dwyer',
+      title: 'MouseRat Rules',
+      image: 'the_pit.jpeg',
+      date: 'today',
+      description: 'I fell in the pit',
+      genre: 'Musical Comedy'
+    }
+
+    let mockFavoriteBook = {
+      "book_id": 2,
+      "author_name": 'Andy Dwyer',
+      "book_name": 'MouseRat Rules',
+       "artwork_url": 'the_pit.jpeg',
+      "release_date": 'today',
+      "description": 'I fell in the pit',
+      "primary_genre_name": 'Musical Comedy'
+    }
+
+    let mockOptions = {
+      method: "POST",
+      body: JSON.stringify(mockFavoriteBook),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    }
+
+    it('should call fetch with the correct url', () => {
+
+
+      let expectedUrl = `http://localhost:3001/api/v1/users/2/bookfavorites`
+      window.fetch = jest.fn().mockImplementation(()=>{
+        return Promise.resolve()
+      })
+  
+      addFavoriteToApi(mockBook, 2)
+
+      expect(window.fetch).toHaveBeenCalledWith(expectedUrl, mockOptions)
+    })
+
   })
   
   describe('deleteFavoriteFromApi', () => {
