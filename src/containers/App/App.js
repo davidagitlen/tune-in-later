@@ -52,13 +52,12 @@ export class App extends Component{
     <div className="App">
       <header>
         <SearchForm />
-        <h1>ListenLater</h1>
+        <h1>Listen<span>Later</span></h1>
         <nav>
           <NavLink to='/' className='nav'>Home</NavLink>
           {this.props.currentUser && <NavLink to='/my-collection' className='nav'>My Collection</NavLink>}
           {!this.props.currentUser && <NavLink to='/login' className='nav'>Sign In</NavLink> }
           {this.props.currentUser && <NavLink to='/' className='nav' onClick={() => this.props.setCurrentUser(null)}>Sign Out</NavLink>}
-     
           {/* {this.props.currentUser && !this.props.favorites.length && <h2>You haven't favorited any books yet!</h2>} */}
         </nav>
       </header>

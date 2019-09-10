@@ -13,13 +13,22 @@
   }
 
   & h1 {
-    font-size: 50px
+    font-size: 50px;
+    margin: 0px auto;
+    color: #666888;
+
+    & span {
+      font-weight: bold;
+    }
+
   }
 
   & nav {
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
+    justify-content: center;
+    width: 245px;
+    margin: 10px 0px 0px 0px;
 
     & .nav {
       margin: 10px;
