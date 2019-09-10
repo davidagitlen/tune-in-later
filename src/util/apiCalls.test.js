@@ -174,7 +174,15 @@ describe('apiCalls', () => {
 
     it('should return an error if status is not ok', () => {
 
-      window.fetch.mockImplementation
+      window.fetch = jest.fn().mockImplementation(() => {
+        return Promise.resolve({
+          ok: false
+        })
+      })
+
+      deleteFavoriteFromApi(mockBook, 5)
+
+      expect(deleteFavoriteFromApi(mockBook, 5)).resolves.toEqual(Error('Error posting favorite'))
     })
     
   })
