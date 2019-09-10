@@ -1,9 +1,9 @@
 export const landingFetch = () => {
-  const romanceFetch = fetch('https://itunes.apple.com/search?media=audiobook&term=romance');
-  const fantasyFetch = fetch('https://itunes.apple.com/search?media=audiobook&term=fantasy');
-  const biographyFetch = fetch('https://itunes.apple.com/search?media=audiobook&term=biography');
-  const historyFetch = fetch('https://itunes.apple.com/search?media=audiobook&term=history');
-  const horrorFetch = fetch('https://itunes.apple.com/search?media=audiobook&term=horror');
+  const romanceFetch = fetch('https://itunes.apple.com/search?media=audiobook&term=romance&explicit=No');
+  const fantasyFetch = fetch('https://itunes.apple.com/search?media=audiobook&term=fantasy&explicit=No');
+  const biographyFetch = fetch('https://itunes.apple.com/search?media=audiobook&term=biography&explicit=No');
+  const historyFetch = fetch('https://itunes.apple.com/search?media=audiobook&term=history&explicit=No');
+  const horrorFetch = fetch('https://itunes.apple.com/search?media=audiobook&term=horror&explicit=No');
 
   return Promise.all([romanceFetch, fantasyFetch, biographyFetch, historyFetch, horrorFetch])
     .then(responses => Promise.all(responses.map(response => response.json())))
@@ -54,13 +54,14 @@ export const loginUser = (email, password) => {
 }
 
 export const addFavoriteToApi = (book, userId) => {
+  const regex = new RegExp('(&nbsp;|<([^>]+)>)', 'g');
   const favoriteBook = {
     "book_id": book.id,
     "author_name": book.artist,
     "book_name": book.title,
      "artwork_url": book.image,
     "release_date": book.date,
-    "description": book.description,
+    "description": book.description.replace(regex, ''),
     "primary_genre_name": book.genre
   }
   const options = {
@@ -73,11 +74,11 @@ export const addFavoriteToApi = (book, userId) => {
   return fetch(`http://localhost:3001/api/v1/users/${userId}/bookfavorites`, options)
     .then(resp => {
       if (!resp.ok) {
-        throw Error('Error posting favorite');
+        throw Error('There was an error adding the favorite')
       }
-      return resp.json();
+      return resp.json()
     })
-    .catch(err => {throw Error(err.message)})
+    .catch(err => {throw err})
 } 
 
 export const deleteFavoriteFromApi = (book, userId) => {
@@ -85,15 +86,13 @@ export const deleteFavoriteFromApi = (book, userId) => {
   const options = {
     method: "DELETE"
   }
-
   return fetch(`http://localhost:3001/api/v1/users/${userId}/bookfavorites/${bookId}`, options)
-  .then(resp => {
-    if (!resp.ok) {
-      throw Error('Error deleting favorite')
-    }
-    return resp.json();
-  })
-  .catch(err => {throw Error(err.message)})
+    .then(resp => {
+      if (!resp.ok) {
+        throw Error('There was an error deleting the favorite')
+      }
+    })
+
 }
 
 export const fetchSearch = searchTerm => {

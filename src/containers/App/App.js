@@ -28,13 +28,14 @@ export class App extends Component{
 
   handleInitialData = (data) => {
     const allBooks = data.map(datum => datum).flat();
+    let regex = new RegExp('(&nbsp;|<([^>]+)>)', 'g')
     const formattedBooks = allBooks.map(book => ({
       artist: book.artistName,
       image: book.artworkUrl100,
       price: book.collectionPrice,
       title: book.collectionName,
       genre: book.primaryGenreName,
-      description: book.description,
+      description: book.description.replace(regex, ''),
       date: book.releaseDate,
       filterType: book.filterType,
       id: book.collectionId
@@ -52,13 +53,12 @@ export class App extends Component{
     <div className="App">
       <header>
         <SearchForm />
-        <h1>ListenLater</h1>
+        <h1>Listen<span>Later</span></h1>
         <nav>
           <NavLink to='/' className='nav'>Home</NavLink>
           {this.props.currentUser && <NavLink to='/my-collection' className='nav'>My Collection</NavLink>}
           {!this.props.currentUser && <NavLink to='/login' className='nav'>Sign In</NavLink> }
           {this.props.currentUser && <NavLink to='/' className='nav' onClick={() => this.props.setCurrentUser(null)}>Sign Out</NavLink>}
-          {this.props.currentUser ? <h2 className='welcome-message'>Welcome {this.props.currentUser.name}</h2> : <h2>Welcome, please sign in!</h2>}
           {/* {this.props.currentUser && !this.props.favorites.length && <h2>You haven't favorited any books yet!</h2>} */}
         </nav>
       </header>
@@ -78,6 +78,8 @@ export class App extends Component{
             <>
           <section className="main-display">
             {this.props.selectedBook && <BookDetails book={this.props.selectedBook}/>}
+            {!this.props.selectedBook && this.props.currentUser && <h2 className='welcome-message'>Welcome {this.props.currentUser.name}!</h2>} 
+            {!this.props.selectedBook && !this.props.currentUser && <h2>Welcome, please sign in!</h2>}
           </section>
           <Route path='/my-collection' render={() => {
             return(
@@ -87,22 +89,22 @@ export class App extends Component{
             )
           }}
           />
-          {this.props.searchResults.length && <BooksDisplay 
+          {(this.props.searchResults.length || null ) && <BooksDisplay 
             books={this.props.searchResults}
             sectionGenre='Search Results' />}
-          {this.state.allBooks.length && <BooksDisplay 
+          {(this.state.allBooks.length || null ) && <BooksDisplay 
             books={this.filterAllBooks('romance')} 
             sectionGenre='Romances'/>}
-          {this.state.allBooks.length && <BooksDisplay 
+          {(this.state.allBooks.length || null ) && <BooksDisplay 
             books={this.filterAllBooks('fantasy')} 
             sectionGenre='Fantasies'/>}
-          {this.state.allBooks.length && <BooksDisplay 
+          {(this.state.allBooks.length || null ) && <BooksDisplay 
             books={this.filterAllBooks('biography')}
             sectionGenre='Biographies' />}
-          {this.state.allBooks.length && <BooksDisplay 
+          {(this.state.allBooks.length || null ) && <BooksDisplay 
             books={this.filterAllBooks('history')} 
             sectionGenre='Histories'/>}
-          {this.state.allBooks.length && <BooksDisplay 
+          {( this.state.allBooks.length || null ) && <BooksDisplay 
             books={this.filterAllBooks('horror')} 
             sectionGenre='Horrors'/>}
           </>

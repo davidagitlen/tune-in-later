@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addUserFavorite, setCurrentUserFavorites, setSelectedBook, deleteUserFavorite } from '../../actions';
+import { addUserFavorite, setSelectedBook, deleteUserFavorite } from '../../actions';
 import { addFavoriteToApi, deleteFavoriteFromApi } from '../../util/apiCalls';
 import star from '../../images/star.svg';
 import activeStar from '../../images/active-star.svg';
@@ -19,18 +19,13 @@ export class Book extends Component {
     e.preventDefault();
     if (!this.props.favorites.find(obj => obj.book_id === this.props.book.id)) {
       addFavoriteToApi(this.props.book, this.props.currentUser.id)
-        .then(response => response.json())
         .then(data => this.props.addUserFavorite(data, this.props.currentUser.id))
-        .then(data => console.log('added book', data))
         .catch(error => console.error(error));
     } else {
       deleteFavoriteFromApi(this.props.book, this.props.currentUser.id)
-        .then(resp => {
-          if(!resp.ok) {
-          throw Error('There was an error deleting the favorite')
-        }
+        .then(resp => 
           this.props.deleteUserFavorite(this.props.book)
-        })
+        )
         .catch(error => console.error(error.message));
     } 
   }
@@ -45,7 +40,6 @@ export class Book extends Component {
     }
   }
 
-  
   render() {
     const { title, artist, image } = this.props.book;
     const isFavorite = this.props.favorites.find(obj => obj.book_id === this.props.book.id);
@@ -60,7 +54,10 @@ export class Book extends Component {
         <h2>{title}</h2>
         <h3>{artist}</h3>
       </div>
-      <button onClick={this.handleButtonClick}><img src={favoriteStar} alt=''/>Favorite</button>
+      <button onClick={this.handleButtonClick}>
+        <img src={favoriteStar} alt=''/>
+        Favorite
+      </button>
     </article>;
 
     if (!this.props.currentUser && this.state.buttonWasClicked) {
@@ -81,14 +78,13 @@ export class Book extends Component {
 
 }
 
-const mapStateToProps = state => ({
+export const mapStateToProps = state => ({
   currentUser: state.currentUser,
   favorites: state.favorites
 })
 
-const mapDispatchToProps = dispatch => ({
+export const mapDispatchToProps = dispatch => ({
   setSelectedBook: book => dispatch(setSelectedBook(book)),
-  setCurrentUserFavorites: favorites => dispatch(setCurrentUserFavorites(favorites)),
   addUserFavorite: (favorite, id) => dispatch(addUserFavorite(favorite, id)),
   deleteUserFavorite: (favorite) => dispatch(deleteUserFavorite(favorite))
 })
@@ -100,7 +96,6 @@ Book.propTypes = {
   currentUser: PropTypes.object,
   favorites: PropTypes.array.isRequired,
   setSelectedBook: PropTypes.func.isRequired,
-  setCurrentUserFavorites: PropTypes.func.isRequired,
   addUserFavorite: PropTypes.func.isRequired,
   deleteUserFavorite: PropTypes.func.isRequired,
 }

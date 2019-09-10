@@ -1,4 +1,7 @@
 .App {
+  // background: linear-gradient(0.25turn, #F29A93, #F7E1DA, #F29A93);
+  // background: linear-gradient(0.25turn, #F7E1Da, #FFF, #F7E1DA);
+
   & header {
     display: flex;
     flex-direction: row;
@@ -13,13 +16,22 @@
   }
 
   & h1 {
-    font-size: 50px
+    font-size: 50px;
+    margin: 0px auto;
+    color: #666888;
+
+    & span {
+      font-weight: bold;
+    }
+
   }
 
   & nav {
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
+    justify-content: center;
+    width: 260px;
+    margin: 10px 0px 0px 0px;
 
     & .nav {
       margin: 10px;

@@ -4,6 +4,18 @@ import BookDetails from './BookDetails';
 
 describe('BookDetails', () => {
   it('should match the snapshot with correct data passed in', () => {
-    expect(true).toEqual(true)
-  })
-})
+    const mockBook = {
+      title:'The Hell of Incessant Testing',
+      author:'David Gitlen',
+      genre:'Memoir',
+      price: 1,
+      description:'Chilling true tales from the basement of the Guaranty Bank building!',
+      image:'http://www.davidgitlen.com/author.png'
+    }
+    const wrapper = shallow(<BookDetails 
+      book={mockBook}
+    />);
+
+    expect(wrapper).toMatchSnapshot();
+  });
+});

@@ -18,6 +18,7 @@ exports[`LoginFormContainer LoginForm should match the snapshot when a user is l
     name="password"
     onChange={[Function]}
     placeholder="type password here..."
+    type="password"
     value=""
   />
   <button

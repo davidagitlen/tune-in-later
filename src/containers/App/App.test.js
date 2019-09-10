@@ -1,6 +1,7 @@
 import React from 'react';
 import { mapDispatchToProps, App } from './App'
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
+import { MemoryRouter } from 'react-router';
 import { setCurrentUser } from '../../actions';
 import { landingFetch } from '../../util/apiCalls';
 
@@ -148,8 +149,10 @@ describe('App', () => {
       expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch)
 
     })
-  })
-
+  });
 
 })
+
+
+// })
 

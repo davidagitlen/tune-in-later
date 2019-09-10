@@ -19,15 +19,15 @@
   }
 
   &.favorited {
-    background-color: #F7E1DA;
+    background-color: #E8E8FF;
   }
 
   & .bookInfo {
     text-align: center;
     display: flex;
     flex-direction: column;
+    margin: 0px auto;
     height: 60%;
-    margin: 25px 0px 0px auto;
   }
 
   & h2 {
@@ -56,8 +56,8 @@
     width: 75px;
 
     & img {
-      height: 45px;
-      width: 45px;
+      height: 35px;
+      width: 35px;
       margin: 0px 0px 5px 0px;
     }
   }
