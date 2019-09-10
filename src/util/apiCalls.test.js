@@ -122,10 +122,12 @@ describe('apiCalls', () => {
       window.fetch = jest.fn().mockImplementation(()=>{
         return Promise.resolve()
       })
+    
   
       addFavoriteToApi(mockBook, 2)
 
       expect(window.fetch).toHaveBeenCalledWith(expectedUrl, mockOptions)
+    
     })
 
     it('should throw an error if response is not ok', () => {
@@ -140,8 +142,40 @@ describe('apiCalls', () => {
 
   })
   
+
+
+
   describe('deleteFavoriteFromApi', () => {
 
+
+    let mockBook = {
+      id: 2,
+      artist: 'Andy Dwyer',
+      title: 'MouseRat Rules',
+      image: 'the_pit.jpeg',
+      date: 'today',
+      description: 'I fell in the pit',
+      genre: 'Musical Comedy'
+    }
+    it('should be called with the correct URL', () => {
+
+      window.fetch.mockImplementation(() => {
+        return Promise.resolve();
+      })
+  
+      const options = {
+        method: "DELETE"
+      }
+  
+      deleteFavoriteFromApi(mockBook, 5)
+  
+      expect(window.fetch).toHaveBeenCalledWith(`http://localhost:3001/api/v1/users/5/bookfavorites/2`, options)
+    })
+
+    it('should return an error if status is not ok', () => {
+
+    })
+    
   })
 
   describe('fetchSearch', () => {

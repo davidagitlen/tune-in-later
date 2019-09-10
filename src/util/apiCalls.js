@@ -87,6 +87,13 @@ export const deleteFavoriteFromApi = (book, userId) => {
   }
 
   return fetch(`http://localhost:3001/api/v1/users/${userId}/bookfavorites/${bookId}`, options)
+    .then(resp => {
+      if (!resp.ok) {
+        throw Error('Error posting favorite');
+      }
+      return resp.json();
+    })
+    .catch(err => err)
 }
 
 export const fetchSearch = searchTerm => {
