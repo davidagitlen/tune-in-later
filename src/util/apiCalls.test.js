@@ -1,6 +1,7 @@
 import { 
   landingFetch, 
   loginUser, 
+  fetchSearch,
   addFavoriteToApi, 
   deleteFavoriteFromApi, 
 } from './apiCalls';
@@ -176,7 +177,8 @@ describe('apiCalls', () => {
 
       window.fetch = jest.fn().mockImplementation(() => {
         return Promise.resolve({
-          ok: false
+          ok: false,
+          
         })
       })
 
@@ -188,7 +190,33 @@ describe('apiCalls', () => {
   })
 
   describe('fetchSearch', () => {
+    it('should fire the fetch call with the correct URL', () => {
 
+      window.fetch = jest.fn().mockImplementation(() => {
+        return Promise.resolve({
+          ok: true,
+          json: () => Promise.resolve()
+        })
+      })
+
+      fetchSearch('Nick Offerman');
+
+      const expectedURL = 'https://itunes.apple.com/search?media=audiobook&term=Nick+Offerman'
+    
+      expect(window.fetch).toHaveBeenCalledWith(expectedURL)
+    })
+
+    it('should throw an error when status is not ok', () => {
+
+      window.fetch = jest.fn().mockImplementation(() => {
+        return Promise.resolve({
+          ok: false,
+          json: () => Promise.resolve()
+        }) 
+      })
+
+      
+    })
   })
   
   describe('getUserFavoritesFromApi', () => {
