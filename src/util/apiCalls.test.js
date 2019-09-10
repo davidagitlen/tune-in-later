@@ -46,7 +46,8 @@ describe('apiCalls', () => {
     it('should call fetch with the correct url', () => {
       window.fetch = jest.fn().mockImplementation(() => {
         return Promise.resolve({
-          ok: true
+          ok: true, 
+          json: () => Promise.resolve()
         });
       }) 
       loginUser('b@g.com', 'pass123')
@@ -72,6 +73,14 @@ describe('apiCalls', () => {
 
     })
 
+    it('should return an error if the fetch is not successful', () => {
+      window.fetch = jest.fn().mockImplementation(() => {
+        return Promise.reject(Error('Error logging in user'))
+      })
+
+      expect(loginUser('lknope@pawnee.gov', 'MichelleObama')).rejects.toEqual(Error('Error logging in user'))
+    })
+
     it('should return an error if the response is not ok (sad)', () => {
       window.fetch = jest.fn().mockImplementation(() => {
         return Promise.resolve({
@@ -79,7 +88,7 @@ describe('apiCalls', () => {
         })
       })
 
-      expect(loginUser('lknope@pawnee.gov', 'MichelleObama')).resolves.toEqual(Error('Error logging in'))
+      expect(loginUser('lknope@pawnee.gov', 'MichelleObama')).rejects.toEqual(Error('Error logging in'))
 
     })
 
@@ -120,7 +129,10 @@ describe('apiCalls', () => {
 
       let expectedUrl = `http://localhost:3001/api/v1/users/2/bookfavorites`
       window.fetch = jest.fn().mockImplementation(()=>{
-        return Promise.resolve()
+        return Promise.resolve({
+          ok: true,
+          json: () => Promise.resolve()
+        })
       })
     
   
@@ -164,13 +176,12 @@ describe('apiCalls', () => {
         })
       })
 
-      expect(addFavoriteToApi(mockBook, 2)).resolves.toEqual(Error('Error posting favorite'))
+      expect(addFavoriteToApi(mockBook, 2)).rejects.toEqual(Error('Error posting favorite'))
     })
 
   })
   
   describe('deleteFavoriteFromApi', () => {
-
 
     let mockBook = {
       id: 2,
@@ -184,7 +195,10 @@ describe('apiCalls', () => {
     it('should be called with the correct URL', () => {
 
       window.fetch = jest.fn().mockImplementation(() => {
-        return Promise.resolve();
+        return Promise.resolve({
+          ok: true,
+          json: () => Promise.resolve()
+        });
       })
   
       const options = {
@@ -216,9 +230,8 @@ describe('apiCalls', () => {
         })
       })
 
-      deleteFavoriteFromApi(mockBook, 5)
-
-      expect(deleteFavoriteFromApi(mockBook, 5)).resolves.toEqual(Error('Error posting favorite'))
+  
+      expect(deleteFavoriteFromApi(mockBook, 5)).rejects.toEqual(Error('Error deleting favorite'))
     })
     
   })
@@ -265,7 +278,7 @@ describe('apiCalls', () => {
         }) 
       })
 
-      expect(fetchSearch('blah')).resolves.toEqual(Error('Error getting search results'));
+      expect(fetchSearch('blah')).rejects.toEqual(Error('Error getting search results'));
     })
   })
   
@@ -312,7 +325,7 @@ describe('apiCalls', () => {
         }) 
       })
 
-      expect(getUserFavoritesFromApi(2)).resolves.toEqual(Error('Error getting favorites'))
+      expect(getUserFavoritesFromApi(2)).rejects.toEqual(Error('Error getting favorites'))
     })
 
   })

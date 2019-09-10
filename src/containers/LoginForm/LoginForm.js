@@ -27,12 +27,6 @@ export class LoginForm extends Component {
   checkLoginStatus = (e) => {
     e.preventDefault();
     loginUser(this.state.email, this.state.password)
-      .then(response => {
-        if(!response.ok){
-          throw Error('Can\'t get user')
-        }
-        return response.json()
-      })
       .then(data => {
         this.props.setCurrentUser(data)
         this.handleGetUserFavorites(data)

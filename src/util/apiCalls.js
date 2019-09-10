@@ -27,7 +27,7 @@ export const landingFetch = () => {
           })
         })
       })
-    .catch(err => console.log(err, 'error in apiCalls landingFetch'))
+      .catch(err => {throw Error(err.message)})
 }
 
 export const loginUser = (email, password) => {
@@ -50,7 +50,7 @@ export const loginUser = (email, password) => {
       }
       return resp.json();
     })
-    .catch(err => err)
+    .catch(err => {throw err})
 }
 
 export const addFavoriteToApi = (book, userId) => {
@@ -77,7 +77,7 @@ export const addFavoriteToApi = (book, userId) => {
       }
       return resp.json();
     })
-    .catch(err => err)
+    .catch(err => {throw Error(err.message)})
 } 
 
 export const deleteFavoriteFromApi = (book, userId) => {
@@ -87,13 +87,13 @@ export const deleteFavoriteFromApi = (book, userId) => {
   }
 
   return fetch(`http://localhost:3001/api/v1/users/${userId}/bookfavorites/${bookId}`, options)
-    .then(resp => {
-      if (!resp.ok) {
-        throw Error('Error posting favorite');
-      }
-      return resp.json();
-    })
-    .catch(err => err)
+  .then(resp => {
+    if (!resp.ok) {
+      throw Error('Error deleting favorite')
+    }
+    return resp.json();
+  })
+  .catch(err => {throw Error(err.message)})
 }
 
 export const fetchSearch = searchTerm => {
@@ -105,7 +105,7 @@ export const fetchSearch = searchTerm => {
       }
       return resp.json();
     })
-    .catch(err => err)
+    .catch(err => {throw Error(err.message)})
 }
 
 export const getUserFavoritesFromApi = userId => {
@@ -116,5 +116,5 @@ export const getUserFavoritesFromApi = userId => {
     }
     return resp.json();
   })
-  .catch(err => err)
+  .catch(err => {throw Error(err.message)})
 }
