@@ -79,8 +79,6 @@ describe('apiCalls', () => {
         })
       })
 
-
-
       expect(loginUser('lknope@pawnee.gov', 'MichelleObama')).resolves.toEqual(Error('Error logging in'))
 
     })
@@ -132,6 +130,33 @@ describe('apiCalls', () => {
     
     })
 
+    it('should return an object when fetch is successful', () => {
+      let expectedResponse = {
+        "id": 2, 
+        "user_id": 1, 
+        "album_id": 558262493, 
+        "artist_name": "alt-J", 
+        "album_name": "An Awesome Wave", 
+        "artwork_url": 
+        "https://is5-ssl.mzstatic.com/image/thumb/Music/v4/3b/43/9e/3b439e7f-9989-1dc1-9ffb-8d876ddb0da1/source/100x100bb.jpg", 
+        "release_date": "2012-09-18T07:00:00Z", 
+        "content_advisory_rating": "notExplicit", 
+        "primary_genre_name": "Alternative"
+      }
+
+      window.fetch = jest.fn().mockImplementation(()=>{
+        return Promise.resolve({
+          ok: true,
+          json: () => Promise.resolve(expectedResponse)
+        })
+      })
+
+     
+
+      expect(addFavoriteToApi(mockBook, 2)).resolves.toEqual(expectedResponse)
+
+    })
+
     it('should throw an error if response is not ok', () => {
       window.fetch = jest.fn().mockImplementation(() => {
         return Promise.resolve({
@@ -144,9 +169,6 @@ describe('apiCalls', () => {
 
   })
   
-
-
-
   describe('deleteFavoriteFromApi', () => {
 
 
@@ -237,9 +259,9 @@ describe('apiCalls', () => {
       expect(window.fetch).toHaveBeenCalledWith(expectedURL);
     })
 
-    it('should return favorites', () => {
+    // it('should return favorites', () => {
 
-    })
+    // })
 
     it('should throw an error if status is not ok', () => {
       window.fetch = jest.fn().mockImplementation(() => {
