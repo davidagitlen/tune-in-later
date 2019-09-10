@@ -92,6 +92,8 @@ export const deleteFavoriteFromApi = (book, userId) => {
         throw Error('There was an error deleting the favorite')
       }
     })
+    .catch(err => {throw err})
+
 
 }
 
@@ -104,7 +106,7 @@ export const fetchSearch = searchTerm => {
       }
       return resp.json();
     })
-    .catch(err => {throw Error(err.message)})
+    .catch(err => {throw err})
 }
 
 export const getUserFavoritesFromApi = userId => {
@@ -116,4 +118,36 @@ export const getUserFavoritesFromApi = userId => {
     return resp.json();
   })
   .catch(err => {throw Error(err.message)})
+}
+
+export const addNewUserFetch = ({name, email, password}) => {
+
+  const body = {
+    name,
+    email,
+    password
+  }
+
+  const options = {
+    method: "POST",
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(body)
+  }
+
+  return fetch('http://localhost:3001/api/v1/users', options)
+    .then(resp => {
+      if (!resp.ok) {
+        throw Error('Something went wrong');
+      }
+      return resp.json()
+    })
+    .catch(err => 
+      this.setState({
+      name: '',
+      email: '',
+      password: '',
+      error: err.message})
+      )
 }

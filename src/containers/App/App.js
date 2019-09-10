@@ -84,7 +84,7 @@ export class App extends Component{
           <Route path='/my-collection' render={() => {
             return(
               <>
-              <BooksDisplay books={this.props.favorites} sectionGenre='Favorites' />
+              {this.props.currentUser && <BooksDisplay books={this.props.favorites} sectionGenre='Favorites' />} 
               </>
             )
           }}
