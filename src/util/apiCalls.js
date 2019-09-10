@@ -92,6 +92,8 @@ export const deleteFavoriteFromApi = (book, userId) => {
         throw Error('There was an error deleting the favorite')
       }
     })
+    .catch(err => {throw err})
+
 
 }
 
@@ -104,7 +106,7 @@ export const fetchSearch = searchTerm => {
       }
       return resp.json();
     })
-    .catch(err => {throw Error(err.message)})
+    .catch(err => {throw err})
 }
 
 export const getUserFavoritesFromApi = userId => {

@@ -176,7 +176,7 @@ describe('apiCalls', () => {
         })
       })
 
-      expect(addFavoriteToApi(mockBook, 2)).rejects.toEqual(Error('Error posting favorite'))
+      expect(addFavoriteToApi(mockBook, 2)).rejects.toEqual(Error('There was an error adding the favorite'))
     })
 
   })
@@ -212,10 +212,7 @@ describe('apiCalls', () => {
 
     it('should return an ok status if successful', () => {
       window.fetch = jest.fn().mockImplementation(() => {
-        return Promise.resolve({
-          ok: true,
-          json: () => Promise.resolve('success')
-        })
+        return Promise.resolve('success');
       })
     
       expect(deleteFavoriteFromApi(mockBook, 5)).resolves.toEqual('success')
@@ -224,14 +221,9 @@ describe('apiCalls', () => {
     it('should return an error if status is not ok', () => {
 
       window.fetch = jest.fn().mockImplementation(() => {
-        return Promise.resolve({
-          ok: false,
-          
-        })
+        return Promise.reject(Error('There was an error deleting the favorite'))
       })
-
-  
-      expect(deleteFavoriteFromApi(mockBook, 5)).rejects.toEqual(Error('Error deleting favorite'))
+      expect(deleteFavoriteFromApi(mockBook, 5)).rejects.toEqual(Error('There was an error deleting the favorite'))
     })
     
   })
@@ -276,6 +268,14 @@ describe('apiCalls', () => {
           ok: false,
           json: () => Promise.resolve()
         }) 
+      })
+
+      expect(fetchSearch('blah')).rejects.toEqual(Error('Error getting search results'));
+    })
+
+    it('should throw an error when rejected', () => {
+      window.fetch = jest.fn().mockImplementation(() => {
+        return Promise.reject(Error('Error getting search results'))
       })
 
       expect(fetchSearch('blah')).rejects.toEqual(Error('Error getting search results'));
