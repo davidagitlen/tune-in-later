@@ -20,7 +20,67 @@ describe('NewUserForm', () => {
     expect(wrapper).toMatchSnapshot();
   })
 
-  describe('')
+  describe('handleNewUserInputs', () => {
+    it('should update name with input value', () => {
+      const mockEventNameChange = {
+          target: {
+            name: 'name',
+            value: 'Mork'
+          }
+      }
+
+      const expectedNameChangeState = {
+        name: 'Mork',
+        email: '',
+        password: '',
+        error: ''
+      }
+
+      wrapper.instance().handleNewUserInputs(mockEventNameChange);
+
+      expect(wrapper.state()).toEqual(expectedNameChangeState)
+    })
+
+    it('should update email with input value', () => {
+      const mockEventEmailChange = {
+          target: {
+            name: 'email',
+            value: 'blah@blah.blah'
+          }
+      }
+
+      const expectedEmailChangeState = {
+        name: '',
+        email: 'blah@blah.blah',
+        password: '',
+        error: ''
+      }
+
+      wrapper.instance().handleNewUserInputs(mockEventEmailChange);
+
+      expect(wrapper.state()).toEqual(expectedEmailChangeState)
+    })
+
+    it('should update password with input value', () => {
+      const mockEventPasswordChange = {
+          target: {
+            name: 'password',
+            value: 'Plassword'
+          }
+      }
+
+      const expectedPasswordChangeState = {
+        name: '',
+        email: '',
+        password: 'Plassword',
+        error: ''
+      }
+
+      wrapper.instance().handleNewUserInputs(mockEventPasswordChange);
+
+      expect(wrapper.state()).toEqual(expectedPasswordChangeState)
+    })
+  })
 
   describe('clearNewUserInputs', () => {
     it('should clear inputs', () => {
@@ -42,6 +102,10 @@ describe('NewUserForm', () => {
       expect(wrapper.state()).toEqual(expected)
       
     })
+  })
+
+  describe('handleSubmitNewUser', () => {
+    
   })
  
 })
