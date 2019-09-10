@@ -1,6 +1,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { NewUserForm } from './NewUserForm';
+import { addNewUserFetch } from '../../util/apiCalls';
+
+jest.mock('../../util/apiCalls')
 
 describe('NewUserForm', () => {
 
@@ -105,7 +108,36 @@ describe('NewUserForm', () => {
   })
 
   describe('handleSubmitNewUser', () => {
+
+    let mockEvent = { preventDefault: () => {}}
     
+
+    it('should fire addNewUserFetch', () => {
+
+
+      wrapper.instance().handleSubmitNewUser(mockEvent)
+      expect(addNewUserFetch).toHaveBeenCalled();
+    })
+
+    it('should fire setCurrentUser prop', () => {
+
+      wrapper.instance().handleSubmitNewUser(mockEvent)
+      expect(mockSetCurrentUser).toHaveBeenCalled();
+
+    })
+
+    it('should fire clearNewUserInputs', () => {
+
+      wrapper.instance().clearNewUserInputs = jest.fn()
+      wrapper.instance().forceUpdate();
+
+      wrapper.instance().handleSubmitNewUser(mockEvent)
+      expect(wrapper.instance().clearNewUserInputs).toHaveBeenCalled();
+    })
+  })
+
+  describe('mapDispatchToProps', () => {
+
   })
  
 })
