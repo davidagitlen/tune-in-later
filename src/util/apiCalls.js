@@ -47,13 +47,14 @@ export const loginUser = (email, password) => {
 }
 
 export const addFavoriteToApi = (book, userId) => {
+  const regex = new RegExp('(&nbsp;|<([^>]+)>)', 'g');
   const favoriteBook = {
     "book_id": book.id,
     "author_name": book.artist,
     "book_name": book.title,
      "artwork_url": book.image,
     "release_date": book.date,
-    "description": book.description,
+    "description": book.description.replace(regex, ''),
     "primary_genre_name": book.genre
   }
   const options = {

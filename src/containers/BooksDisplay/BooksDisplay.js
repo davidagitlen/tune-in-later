@@ -9,12 +9,13 @@ export const BooksDisplay = ({books, sectionGenre}) => {
   let booksToRender = books;  
 
   const handleFavoritesList = () => {
+      let regex = new RegExp('(&nbsp;|<([^>]+)>)', 'g')
       const formattedFavorites = books.map(book => ({
         artist: book.author_name,
         image: book.artwork_url,
         title: book.book_name,
         genre: book.primary_genre_name,
-        description: book.description,
+        description: book.description.replace(regex, ''),
         date: book.release_date,
         id: book.book_id
       }));
