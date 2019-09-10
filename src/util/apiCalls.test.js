@@ -229,6 +229,22 @@ describe('apiCalls', () => {
       expect(window.fetch).toHaveBeenCalledWith(expectedURL)
     })
 
+    it('should return an array of search results when successful', () => {
+      let expectedResponse = [
+        {title: 'Book234234'},
+        {title: 'Book23094823094'}
+      ]
+
+      window.fetch = jest.fn().mockImplementation(() => {
+        return Promise.resolve({
+          ok: true,
+          json: () => Promise.resolve(expectedResponse)
+        })
+      })
+
+      expect(fetchSearch('Nick Offerman')).resolves.toEqual(expectedResponse)
+    })
+
     it('should throw an error when status is not ok', () => {
 
       window.fetch = jest.fn().mockImplementation(() => {
