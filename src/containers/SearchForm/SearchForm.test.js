@@ -1,7 +1,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { SearchForm } from './SearchForm';
+import { SearchForm, mapDispatchToProps } from './SearchForm';
 import { fetchSearch } from '../../util/apiCalls';
+import { displaySearchResults } from '../../actions/index';
 
 jest.mock('../../util/apiCalls');
 
@@ -193,8 +194,22 @@ describe('SearchForm', () => {
     })
   })
 
-  describe('matchDispatchToProps', () => {
+  describe('mapDispatchToProps', () => {
+    it('calls dispatch with displaySearchResults action when search is initiated', () => {
+      const mockDispatch = jest.fn();
 
+      let mockSearchResults = [
+        {title: 'book1'},
+        {title: 'book2'}
+      ]
+
+      const actionToDispatch = displaySearchResults(mockSearchResults)
+
+      const mappedProps = mapDispatchToProps(mockDispatch);
+      mappedProps.displaySearchResults(mockSearchResults)
+
+      expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch)
+    })
   })
 
 })

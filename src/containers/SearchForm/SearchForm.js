@@ -77,7 +77,7 @@ export class SearchForm extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
+export const mapDispatchToProps = dispatch => ({
   displaySearchResults: (searchResults) => dispatch(displaySearchResults(searchResults))
 })
 

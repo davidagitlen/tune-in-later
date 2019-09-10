@@ -1,7 +1,6 @@
 import React from 'react';
 import { mapDispatchToProps, App } from './App'
-import { shallow, mount } from 'enzyme';
-import { MemoryRouter } from 'react-router';
+import { shallow } from 'enzyme';
 import { setCurrentUser } from '../../actions';
 import { landingFetch } from '../../util/apiCalls';
 
