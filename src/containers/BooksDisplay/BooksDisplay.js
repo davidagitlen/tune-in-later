@@ -30,6 +30,7 @@ export const BooksDisplay = ({books, sectionGenre}) => {
     <Book book={book} key={book.id*Date.now()}/>
   );
   
+  console.log(sectionGenre)
 
   return(
     <section className='BooksDisplay'>

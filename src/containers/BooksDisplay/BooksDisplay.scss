@@ -1,25 +1,16 @@
-/* body {
-  background-color: #EEB7AC;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-} */
-
 .genreLabel {
   z-index: 10;
   position: relative;
   top: 15px;
   font-size: 18px;
   left: 30px;
-  opacity: 0.4;
-  text-transform: lowercase;
+  opacity: 0.6;
+  text-transform: uppercase;
   margin: 0 0 -20px 0;
   height: 30px;
 }
 
 section {
-  // background-color: #F0F0F0;
   background-color: rgba(255, 255, 255, .6);
   width: 98%;
   margin: 20px;
@@ -40,6 +31,5 @@ section {
 
   & h2 {
     margin-bottom: 0px;
-    font-family: sans-serif;
   }
 }
