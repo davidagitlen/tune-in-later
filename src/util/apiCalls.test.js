@@ -259,9 +259,23 @@ describe('apiCalls', () => {
       expect(window.fetch).toHaveBeenCalledWith(expectedURL);
     })
 
-    // it('should return favorites', () => {
+    it('should return an array of favorites when successful', () => {
 
-    // })
+      let expectedResponse = [
+        {title: 'Book1'},
+        {title: 'Book2'}
+      ]
+
+      window.fetch = jest.fn().mockImplementation(() =>  {
+        return Promise.resolve({
+          ok: true,
+          json: () => Promise.resolve(expectedResponse)
+        })
+      }) 
+
+      expect(getUserFavoritesFromApi(6)).resolves.toEqual(expectedResponse);
+
+    })
 
     it('should throw an error if status is not ok', () => {
       window.fetch = jest.fn().mockImplementation(() => {
