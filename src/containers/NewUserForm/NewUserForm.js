@@ -93,7 +93,7 @@ class NewUserForm extends Component {
           placeholder="Enter your e-mail"></input>
         <input 
           name="password" 
-          type="text"
+          type="password"
           value={this.state.password}
           placeholder="Enter a password"
           onChange={this.handleNewUserInputs}

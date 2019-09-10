@@ -59,7 +59,7 @@ class LoginForm extends Component {
     return (
       <form className="login-form">
         <input className="email-input" placeholder="joanclarke@fempower.com" alt="email" name="email" value={this.state.email} onChange={this.handleInputs}></input>
-        <input className="password-input" placeholder="type password here..." alt="password" name="password" value={this.state.password} onChange={e => this.handleInputs(e)}></input>
+        <input className="password-input" type="password" placeholder="type password here..." alt="password" name="password" value={this.state.password} onChange={e => this.handleInputs(e)}></input>
         {this.state.error && <p>Email and Password do not match.</p>}
         <button className="login-btn" onClick={this.checkLoginStatus}>Login</button>
       </form>
