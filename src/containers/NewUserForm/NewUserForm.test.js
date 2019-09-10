@@ -20,5 +20,28 @@ describe('NewUserForm', () => {
     expect(wrapper).toMatchSnapshot();
   })
 
+  describe('')
+
+  describe('clearNewUserInputs', () => {
+    it('should clear inputs', () => {
+      
+      wrapper.setState({
+        name: 'Brianna',
+        email: 'B@gmail.com',
+        password: 'password'
+      })
+
+      const expected = {
+        name: '',
+        email: '',
+        password: '',
+        error: ''
+      }
+      wrapper.instance().clearNewUserInputs();
+
+      expect(wrapper.state()).toEqual(expected)
+      
+    })
+  })
  
 })
