@@ -1,6 +1,11 @@
 # Tune In Later
 
-ListenLater is an audiobooks streaming site. When a visitor arrives, there are several genres available to browse. A description pops up when a book is clicked. A search bar is available to search books by title, genre, or author. In order for the user to do anything beyond browsing at descriptions of the audiobooks available, the visitor must login. Once the user has signed in or created a login account, books are available to add to a collection of favorites by clicking the star on the cover. The user can come back to their collection anytime the user is logged in.
+ListenLater is an audiobooks streaming site. When a visitor arrives, there are several genres available to browse. When a book is clicked, a description pops up. A search bar is available to search books by title, genre, or author. In order for the user to do anything beyond browsing at descriptions of the audiobooks available, the visitor must login. Once the user has signed in or created a login account, books are available to add to a collection of favorites by clicking the star on the cover. The user can come back to their collection anytime the user is logged in.
+
+## Collaborators
+David Gitlen [github account](https://github.com/davidagitlen)<br>
+Brianna DelValle [github account](https://github.com/bld010)<br>
+Brandy Mello [github account](https://github.com/BrandyMello)<br>
 
 ## Learning Goals
 Write well refactored code using ES6 syntax
@@ -11,11 +16,16 @@ Use Redux’s lifecycle methods, actions, reducers, and connect them to React co
 Utilize React components, asynchronous code, route handling, and Redux testing.
 
 ## Technology Used
-JavaScript
-React/Router 4/Redux
-The Fetch API
-Webpack
-Jest & Enzyme
+* JavaScript
+* React/Router 4/Redux
+* The Fetch API
+* Webpack
+* Jest & Enzyme
+
+<img width="1373" alt="Screen Shot 2019-09-10 at 4 28 31 PM" src="https://user-images.githubusercontent.com/46384968/64654978-1766d780-d3e8-11e9-9e62-c95b9d2f0df9.png">
+<img width="1384" alt="Screen Shot 2019-09-10 at 4 24 10 PM" src="https://user-images.githubusercontent.com/46384968/64654862-ad4e3280-d3e7-11e9-8f91-0bb7e9db65f8.png">
+<img width="1383" alt="Screen Shot 2019-09-10 at 4 23 33 PM" src="https://user-images.githubusercontent.com/46384968/64654868-b17a5000-d3e7-11e9-9617-313a6badcd3a.png">
+<img width="1371" alt="Screen Shot 2019-09-10 at 4 24 53 PM" src="https://user-images.githubusercontent.com/46384968/64654869-b3dcaa00-d3e7-11e9-8bc2-3b3f626b0fa9.png">
 
 ## How To Interact with ListenLater
 ### Project Setup
