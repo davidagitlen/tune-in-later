@@ -138,7 +138,7 @@ describe('SearchForm', () => {
 
     })
   })
-
+/*eslint-disable */
   describe('cleanSearchResults', () => {
     it('should return properly formatted books', () => {
       
@@ -164,7 +164,7 @@ describe('SearchForm', () => {
       "description":"Recently named the #1 piece of 20th century literature, <i>The Lord of the Rings<\/i> trilogy is more than a great story. It's a much-needed reminder that, like J.R.R. Tolkien's hobbits, Christians are all on an epic quest. In examining the Christian themes in the trilogy, authors Kurt Bruner and Jim Ware find that truth and fiction are not as far apart as they seem. Even though Tolkien never intended for these books to present the Gospel, when read in the light of the Scripture, they offer a rich tapestry of redemption, values, and faith against all odds.",
       "filterType": "History"  
     }
-
+ 
      
       let mockSearchResults = [
         mockBook,
@@ -183,7 +183,7 @@ describe('SearchForm', () => {
         description: "Recently named the #1 piece of 20th century literature, The Lord of the Rings trilogy is more than a great story. It\'s a much-needed reminder that, like J.R.R. Tolkien\'s hobbits, Christians are all on an epic quest. In examining the Christian themes in the trilogy, authors Kurt Bruner and Jim Ware find that truth and fiction are not as far apart as they seem. Even though Tolkien never intended for these books to present the Gospel, when read in the light of the Scripture, they offer a rich tapestry of redemption, values, and faith against all odds.",
         filterType: "History"
         }
-        
+    /*eslint-enable */
       let expected = [
         mockCleanedBook,
         mockCleanedBook

@@ -39,6 +39,7 @@ describe('apiCalls', () => {
           json: () => Promise.resolve([{ results:[{ title: 'Romance' }]}], [{results: [{ title: 'Fantasy' }]}], [{ results: [{ title: 'Biography' }]}], [{ results: [{ title: 'History' }] }], [{ results: [{ title: 'Horror' }]}] )
         });
       });
+    });
 
     it('should return an error message when the fetch is not successful(SAD)',  () => {
 
@@ -471,4 +472,4 @@ describe('apiCalls', () => {
 
   });
   
-})
+});
