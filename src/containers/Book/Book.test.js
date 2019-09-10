@@ -1,6 +1,6 @@
 import React from 'react';
 import { Book, mapStateToProps, mapDispatchToProps } from './Book';
-import { setSelectedBook, setCurrentUserFavorites, addUserFavorite, deleteUserFavorite } from '../../actions';
+import { setSelectedBook, addUserFavorite, deleteUserFavorite } from '../../actions';
 import {addFavoriteToApi, deleteFavoriteFromApi} from '../../util/apiCalls';
 import { shallow } from 'enzyme';
 
@@ -8,11 +8,12 @@ jest.mock('../../util/apiCalls');
 
 describe('Book', () => {
   let wrapper, mockDispatch, mappedProps;
-  const mockBookProp = { id: 1, title: 'Book', artist: 'David Gitlen', image: 'https://davidgitlen.com/author.png' }
+  const mockBookProp = { id: 1, title: 'Book', artist: 'David Gitlen', image: 'https://davidgitlen.com/author.png' };
   const mockSetSelectedBook = jest.fn();
   const mockSetCurrentUserFavorites = jest.fn();
   const mockAddUserFavorite = jest.fn();
   const mockDeleteUserFavorite = jest.fn();
+
   beforeEach(() => {
     addFavoriteToApi.mockImplementation(() => {
       return Promise.resolve({
@@ -20,8 +21,13 @@ describe('Book', () => {
         json: () => {
           return Promise.resolve(mockBookProp)
         }
-      })
-    })
+      });
+    });
+    deleteFavoriteFromApi.mockImplementation(() => {
+      return Promise.resolve({
+        ok: true
+      });
+    });
     mockDispatch = jest.fn();
     mappedProps = mapDispatchToProps(mockDispatch);
     wrapper=shallow(
@@ -35,7 +41,7 @@ describe('Book', () => {
         deleteUserFavorite={mockDeleteUserFavorite}
       />
     )
-  })
+  });
 
   it('should match the snapshot with all data passed in correctly', () => {
     expect(wrapper).toMatchSnapshot();
@@ -53,7 +59,6 @@ describe('Book', () => {
     />);
 
     expect(wrapper).toMatchSnapshot();
-
   });
 
   it('should fire handleButtonClick when the favorites button is clicked', () => {
@@ -74,7 +79,7 @@ describe('Book', () => {
       preventDefault: jest.fn()
     }
     
-    wrapper = shallow(
+    const wrapper = shallow(
       <Book
         book={mockBookProp}
         favorites={[{book_id: 20}, {book_id: 30}]}
@@ -87,11 +92,27 @@ describe('Book', () => {
     )
     wrapper.instance().handleButtonClick(mockEvent);
     expect(addFavoriteToApi).toHaveBeenCalledWith(mockBookProp, 12);
-
   });
 
   it('should fire deleteFavoriteFromApi with the current book and user id passed in if handleButtonClick is called and the book is currently a favorite', () => {
-    
+    const mockEvent = {
+      stopPropagation: jest.fn(),
+      preventDefault: jest.fn()
+    }
+
+    const wrapper = shallow(
+      <Book
+        book={mockBookProp}
+        favorites={[{ book_id: 1 }, { book_id: 30 }]}
+        currentUser={{ name: 'Brianna', id: 12 }}
+        setSelectedBook={mockSetSelectedBook}
+        setCurrentUserFavorites={mockSetCurrentUserFavorites}
+        addUserFavorite={mockAddUserFavorite}
+        deleteUserFavorite={mockDeleteUserFavorite}
+      />
+    );
+    wrapper.instance().handleButtonClick(mockEvent);
+    expect(deleteFavoriteFromApi).toHaveBeenCalledWith(mockBookProp, 12);
   });
 
   describe('mapStateToProps', () => {
@@ -118,9 +139,7 @@ describe('Book', () => {
   describe('mapDispatchToProps', () => {
 
     it('calls dispatch with action object from setSelectedBook when card is clicked', () => {
-      // const mockDispatch = jest.fn();
       const actionToDispatch = setSelectedBook(mockBookProp);
-      // const mappedProps = mapDispatchToProps(mockDispatch);
 
       mappedProps.setSelectedBook(mockBookProp);
 
@@ -128,9 +147,7 @@ describe('Book', () => {
     });
 
     it('calls dispatch with action object from addUserFavorite when addFavoriteToApi fetch resolves', () => {
-      // const mockDispatch = jest.fn();
       const actionToDispatch = addUserFavorite(mockBookProp);
-      // const mappedProps = mapDispatchToProps(mockDispatch);
 
       mappedProps.addUserFavorite(mockBookProp);
 
@@ -138,14 +155,11 @@ describe('Book', () => {
     });
 
     it('calls dispatch with action object from deleteUserFavorite when deleteFavoriteFromApi fetch resolves', () => {
-
-      // const mockDispatch = jest.fn();
       const actionToDispatch = deleteUserFavorite(mockBookProp);
-      // const mappedProps = mapDispatchToProps(mockDispatch);
 
       mappedProps.deleteUserFavorite(mockBookProp);
 
       expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
     });
   });
-})
+});
