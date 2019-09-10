@@ -1,68 +1,49 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Tune In Later
 
-## Available Scripts
+ListenLater is an audiobooks streaming site. When a visitor arrives, there are several genres available to browse. A description pops up when a book is clicked. A search bar is available to search books by title, genre, or author. In order for the user to do anything beyond browsing at descriptions of the audiobooks available, the visitor must login. Once the user has signed in or created a login account, books are available to add to a collection of favorites by clicking the star on the cover. The user can come back to their collection anytime the user is logged in.
 
-In the project directory, you can run:
+## Learning Goals
+Write well refactored code using ES6 syntax
+Create a user-friendly design
+Utilize network requests including GET, POST, & DELETE
+Create re-usable and clean components with React
+Use Redux’s lifecycle methods, actions, reducers, and connect them to React components
+Utilize React components, asynchronous code, route handling, and Redux testing.
 
-### `npm start`
+## Technology Used
+JavaScript
+React/Router 4/Redux
+The Fetch API
+Webpack
+Jest & Enzyme
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## How To Interact with ListenLater
+### Project Setup
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+* Clone down this(https://github.com/davidagitlen/tune-in-later) repo and run 
+`npm install`, `npm start` and visit `localhost:3000/`
+* In a separate directory, clone down this(https://github.com/turingschool-examples/favorites-tracker-api) repo and run `npm install`
+* If you don't have postgresSQl, scroll down to `Setup Postgresql` and follow those steps
+* Run `npm start` - visit `localhost:3001/` - you should see a JSON response some information
 
-### `npm test`
+## Setup Postgresql
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+#### IMPORTANT: If you already have Postgresql on your computer for some reason, you will need to uninstall it
+For information on how to do this read [this](https://postgresapp.com/documentation/remove.html)
 
-### `npm run build`
+#### What is PostgreSQL?
+* PostgreSQL is a powerful, open-source relational database system
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+#### Installation:
+* Head over to [Postgres.app](http://postgresapp.com/) to download and install PostgreSQL
+* When you click `initialize`, you should now be able to see that postgreSQL is running
+* To be able to use the command line tools, you will need to run the following commannd in your terminal to configure your $PATH `sudo mkdir -p /etc/paths.d && echo /Applications/Postgres.app/Contents/Versions/latest/bin | sudo tee /etc/paths.d/postgresapp`
+* You will need to close your terminal window and re-open it for the changes to take effect
+  
+#### Creating our database
+* Make sure you are in the `favorties-tracker-api` directory
+* From the command line, run the following command to create a users database `psql -f ./db/tables.sql`
+* When you start up the server (`npm install` and `npm start`
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+#### [PSQL Commands](http://postgresguide.com/utilities/psql.html)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
