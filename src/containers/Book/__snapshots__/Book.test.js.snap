@@ -1,5 +1,42 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Book should match the snapshot if the book has been favorited 1`] = `
+<Fragment>
+  <article
+    className="Book favorited"
+    onClick={[Function]}
+  >
+    <div
+      className="img"
+    >
+      <img
+        alt=""
+        src="https://davidgitlen.com/author.png"
+      />
+    </div>
+    <div
+      className="bookInfo"
+    >
+      <h2>
+        Book
+      </h2>
+      <h3>
+        David Gitlen
+      </h3>
+    </div>
+    <button
+      onClick={[Function]}
+    >
+      <img
+        alt=""
+        src="active-star.svg"
+      />
+      Favorite
+    </button>
+  </article>
+</Fragment>
+`;
+
 exports[`Book should match the snapshot with all data passed in correctly 1`] = `
 <Fragment>
   <article
@@ -11,6 +48,7 @@ exports[`Book should match the snapshot with all data passed in correctly 1`] = 
     >
       <img
         alt=""
+        src="https://davidgitlen.com/author.png"
       />
     </div>
     <div
@@ -19,13 +57,19 @@ exports[`Book should match the snapshot with all data passed in correctly 1`] = 
       <h2>
         Book
       </h2>
-      <h3 />
-      <button
-        onClick={[Function]}
-      >
-        Favorite
-      </button>
+      <h3>
+        David Gitlen
+      </h3>
     </div>
+    <button
+      onClick={[Function]}
+    >
+      <img
+        alt=""
+        src="star.svg"
+      />
+      Favorite
+    </button>
   </article>
 </Fragment>
 `;

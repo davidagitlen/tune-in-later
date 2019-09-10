@@ -1,7 +1,7 @@
 import React from 'react';
 import Book from '../Book/Book';
 import './BooksDisplay.scss';
-import { setCurrentUserFavorites } from '../../actions';
+// import { setCurrentUserFavorites } from '../../actions';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -49,11 +49,13 @@ const mapStateToProps = state => ({
   favorites : state.favorites
 })
 
-const mapDispatchToProps = dispatch => ({
-  setCurrentUserFavorites : favorites => dispatch(setCurrentUserFavorites(favorites))
-});
+// const mapDispatchToProps = dispatch => ({
+//   setCurrentUserFavorites : favorites => dispatch(setCurrentUserFavorites(favorites))
+// });
 
-export default connect(mapStateToProps, mapDispatchToProps)(BooksDisplay);
+// export default connect(mapStateToProps, mapDispatchToProps)(BooksDisplay);
+
+export default connect(mapStateToProps)(BooksDisplay);
 
 BooksDisplay.propTypes = {
   currentUser: PropTypes.object,
