@@ -115,14 +115,19 @@ describe('NewUserForm', () => {
 
     it('should fire addNewUserFetch', () => {
 
-
+      addNewUserFetch.mockImplementation(() => {
+        return Promise.resolve({
+          ok: true
+        });
+      })
       wrapper.instance().handleSubmitNewUser(mockEvent)
       expect(addNewUserFetch).toHaveBeenCalled();
     })
 
-    it('should fire setCurrentUser prop', () => {
+    it('should fire setCurrentUser prop', async () => {
 
-      wrapper.instance().handleSubmitNewUser(mockEvent)
+      await wrapper.instance().handleSubmitNewUser(mockEvent);
+
       expect(mockSetCurrentUser).toHaveBeenCalled();
 
     })
