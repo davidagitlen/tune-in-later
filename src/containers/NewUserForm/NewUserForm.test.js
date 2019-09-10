@@ -1,7 +1,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { NewUserForm } from './NewUserForm';
+import { NewUserForm, mapDispatchToProps } from './NewUserForm';
 import { addNewUserFetch } from '../../util/apiCalls';
+import { setCurrentUser } from '../../actions/index';
 
 jest.mock('../../util/apiCalls')
 
@@ -137,7 +138,16 @@ describe('NewUserForm', () => {
   })
 
   describe('mapDispatchToProps', () => {
-
+    it('calls dispatch with a setCurrentUser action when setCurrentUser is called', () => {
+      
+      const mockDispatch = jest.fn();
+      const actionToDispatch = setCurrentUser({name: 'Dorbid'})
+      const mappedProps = mapDispatchToProps(mockDispatch);
+      
+      mappedProps.setCurrentUser({name: 'Dorbid'})
+      
+      expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch)
+    })
   })
  
 })

@@ -115,27 +115,6 @@ describe('App', () => {
       expect(landingFetch).toHaveBeenCalled();
     })
     
-    // it('should catch an Error if fetch isrejected', () => {
-
-
-    //   landingFetch.mockImplementation(() => {
-    //     return Promise.reject(Error('There was an error'))
-    //   })
-  
-    
-    //   const wrapper2 = shallow(
-    //     <App 
-    //       favorites={mockFavorites}
-    //       currentUser={mockCurrentUser}
-    //       searchResults={mockSearchResults}
-    //       selectedBook={mockSelectedBook}
-    //       setCurrentUser={jest.fn()}
-    //     />
-    //   )
-
-        
-    // })
-
   })
 
   describe('mapDispatchToProps', () => {
@@ -153,6 +132,4 @@ describe('App', () => {
 
 })
 
-
-// })
 
