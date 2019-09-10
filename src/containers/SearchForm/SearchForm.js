@@ -6,7 +6,7 @@ import { fetchSearch } from '../../util/apiCalls';
 import { displaySearchResults } from '../../actions/';
 import PropTypes from 'prop-types';
 
-class SearchForm extends Component {
+export class SearchForm extends Component {
   constructor() {
     super();
     this.state = {
@@ -77,7 +77,7 @@ class SearchForm extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
+export const mapDispatchToProps = dispatch => ({
   displaySearchResults: (searchResults) => dispatch(displaySearchResults(searchResults))
 })
 
