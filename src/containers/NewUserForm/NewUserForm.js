@@ -83,19 +83,19 @@ class NewUserForm extends Component {
           type="text"
           value={this.state.name}
           onChange={this.handleNewUserInputs}
-          placeholder="Enter your name"
+          placeholder="Enter Your Name"
           ></input>
         <input 
           name="email" 
           type="text"
           value={this.state.email}
           onChange={this.handleNewUserInputs}
-          placeholder="Enter your e-mail"></input>
+          placeholder="Enter Your Email"></input>
         <input 
           name="password" 
           type="password"
           value={this.state.password}
-          placeholder="Enter a password"
+          placeholder="Enter A Password"
           onChange={this.handleNewUserInputs}
           ></input>
           {this.state.error && <p>Sorry, that e-mail is already associated with an account.</p>}

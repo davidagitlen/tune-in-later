@@ -9,7 +9,7 @@ exports[`LoginFormContainer LoginForm should match the snapshot when a user is l
     className="email-input"
     name="email"
     onChange={[Function]}
-    placeholder="joanclarke@fempower.com"
+    placeholder="Enter Your Email"
     value=""
   />
   <input
@@ -17,7 +17,7 @@ exports[`LoginFormContainer LoginForm should match the snapshot when a user is l
     className="password-input"
     name="password"
     onChange={[Function]}
-    placeholder="type password here..."
+    placeholder="Enter Your Password"
     type="password"
     value=""
   />

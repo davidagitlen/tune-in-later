@@ -1,4 +1,5 @@
-import { 
+import {
+  landingFetch,
   loginUser, 
   fetchSearch,
   addFavoriteToApi, 
@@ -10,14 +11,58 @@ import {
 describe('apiCalls', () => {
 
 
+  describe('landingFetch', () => {
 
-  // describe('landingFetch', () => {
-    //mock out 4 arrays of objects
-    //mock out all genre fetches
-    //check them for being called with the correct url
-    //mock out expected response
-    //check for any error response
-  // })
+    it('should call fetch with the correct urls passed in', () => {
+      window.fetch = jest.fn().mockImplementation(() => {
+        return Promise.resolve({
+          ok: true,
+          json: () => Promise.resolve()
+        });
+      });
+
+      const mockUrlsArray = ['https://itunes.apple.com/search?media=audiobook&term=romance&explicit=No', 'https://itunes.apple.com/search?media=audiobook&term=fantasy&explicit=No', 'https://itunes.apple.com/search?media=audiobook&term=biography&explicit=No', 'https://itunes.apple.com/search?media=audiobook&term=history&explicit=No', 'https://itunes.apple.com/search?media=audiobook&term=horror&explicit=No'];
+
+      landingFetch();
+      expect(window.fetch).toHaveBeenCalledWith(mockUrlsArray[0]);
+      expect(window.fetch).toHaveBeenCalledWith(mockUrlsArray[1]);
+      expect(window.fetch).toHaveBeenCalledWith(mockUrlsArray[2]);
+      expect(window.fetch).toHaveBeenCalledWith(mockUrlsArray[3]);
+      expect(window.fetch).toHaveBeenCalledWith(mockUrlsArray[4]);
+    });
+
+    it('should return an array of objects with the appropriate keys added (HAPPY)', () => {
+      window.fetch = jest.fn().mockImplementation(() => {
+        return Promise.resolve({
+          ok: true,
+          json: () => Promise.resolve([{title: 'Romance'}, {title: 'Fantasy'}, {title: 'Biography'}, {title: 'History'}, {title: 'Horror'} ])
+        });
+      });
+
+      const expected = [{ title: 'Romance', filterType: 'romance' }, { title: 'Fantasy', filterType: 'fantasy' }, { title: 'Biography', filterType: 'biography' }, { title: 'History', filterType: 'history' }, { title: 'Horror', filterType: 'horror' }]
+
+      landingFetch();
+
+      expect(landingFetch()).resolves.toEqual(expected);
+    });
+
+    it('should return an error message when the fetch is not successful(SAD)', () => {
+
+      window.fetch = jest.fn().mockImplementation(() => {
+        return Promise.reject('Landing fetch was not successful.')
+      });
+
+      landingFetch();
+      expect(landingFetch()).rejects.toEqual('Landing fetch was not successful');
+    })
+ 
+
+    // mock out 4 arrays of objects
+    // mock out all genre fetches
+    // check them for being called with the correct url
+    // mock out expected response
+    // check for any error response
+  })
 
   describe('loginUser', () => {
 
@@ -88,7 +133,6 @@ describe('apiCalls', () => {
       })
 
       expect(loginUser('lknope@pawnee.gov', 'MichelleObama')).rejects.toEqual(Error('Error logging in'))
-
     })
 
   })
