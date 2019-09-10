@@ -21,9 +21,6 @@ exports[`BookDetails should match the snapshot with correct data passed in 1`] =
       Memoir
        
     </p>
-    <p>
-      1
-    </p>
   </div>
   <div
     className="description"
