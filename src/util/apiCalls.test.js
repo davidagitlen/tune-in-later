@@ -6,6 +6,7 @@ import {
   deleteFavoriteFromApi, 
   getUserFavoritesFromApi
 } from './apiCalls';
+import { placeholder } from '@babel/types';
 
 
 describe('apiCalls', () => {
@@ -179,6 +180,14 @@ describe('apiCalls', () => {
       expect(addFavoriteToApi(mockBook, 2)).rejects.toEqual(Error('There was an error adding the favorite'))
     })
 
+    it('should throw an error if fetch is unsuccessful', () => {
+      window.fetch = jest.fn().mockImplementation(() => {
+        return Promise.reject(Error('There was an error adding the favorite'))
+      })
+
+      expect(addFavoriteToApi(mockBook, 2)).rejects.toEqual(Error('There was an error adding the favorite'))
+    })
+
   })
   
   describe('deleteFavoriteFromApi', () => {
@@ -221,12 +230,25 @@ describe('apiCalls', () => {
     it('should return an error if status is not ok', () => {
 
       window.fetch = jest.fn().mockImplementation(() => {
-        return Promise.reject(Error('There was an error deleting the favorite'))
+        return Promise.resolve({
+          ok: false
+        })
       })
       expect(deleteFavoriteFromApi(mockBook, 5)).rejects.toEqual(Error('There was an error deleting the favorite'))
     })
+
+    it('should throw an error if fetch is not successful', () => {
+      window.fetch = jest.fn().mockImplementation(() => {
+        return Promise.reject(Error('There was an error deleting the favorite'))
+      })
+
+      
+      expect(deleteFavoriteFromApi(mockBook, 5)).rejects.toEqual(Error('There was an error deleting the favorite'))
+
     
   })
+
+})
 
   describe('fetchSearch', () => {
     it('should fire the fetch call with the correct URL', () => {
@@ -326,6 +348,15 @@ describe('apiCalls', () => {
       })
 
       expect(getUserFavoritesFromApi(2)).rejects.toEqual(Error('Error getting favorites'))
+    })
+
+    it('should throw an error if fetch is not successful', () => {
+      window.fetch = jest.fn().mockImplementation(() => {
+        return Promise.reject(Error('Error getting favorites'))
+      })
+
+      expect(getUserFavoritesFromApi(2)).rejects.toEqual(Error('Error getting favorites'))
+
     })
 
   })

@@ -3,9 +3,10 @@ import { connect } from 'react-redux';
 import './NewUserForm.scss';
 import { setCurrentUser } from '../../actions';
 import PropTypes from 'prop-types';
+import { addNewUserFetch } from '../../util/apiCalls';
 
 
-class NewUserForm extends Component {
+export class NewUserForm extends Component {
   constructor() {
     super();
     this.state = {
@@ -16,39 +17,7 @@ class NewUserForm extends Component {
     }
   }
 
-  addNewUserFetch = () => {
-
-    const body = {
-      name: this.state.name,
-      email: this.state.email,
-      password: this.state.password
-    }
-
-    const options = {
-      method: "POST",
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(body)
-    }
-
-    fetch('http://localhost:3001/api/v1/users', options)
-      .then(resp => {
-        if (!resp.ok) {
-          throw Error('Something went wrong');
-        }
-        return resp.json()
-      })
-      .then(data => console.log(data))
-      .catch(err => 
-        this.setState({
-        name: '',
-        email: '',
-        password: '',
-        error: err.message})
-        )
-  }
-
+ 
 
   handleNewUserInputs = (e) => {
     this.setState({ [e.target.name]: e.target.value})
@@ -65,7 +34,11 @@ class NewUserForm extends Component {
 
   handleSubmitNewUser = (e) => {
     e.preventDefault();
-    this.addNewUserFetch();
+    addNewUserFetch({
+      name: this.state.name,
+      email: this.state.email,
+      password: this.state.password
+    });
     this.props.setCurrentUser({
       name: this.state.name,
       email: this.state.email,
@@ -105,7 +78,7 @@ class NewUserForm extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
+export const mapDispatchToProps = dispatch => ({
   setCurrentUser: user => dispatch(setCurrentUser(user))
 })
 

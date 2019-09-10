@@ -119,3 +119,36 @@ export const getUserFavoritesFromApi = userId => {
   })
   .catch(err => {throw Error(err.message)})
 }
+
+export const addNewUserFetch = ({name, email, password}) => {
+
+  const body = {
+    name,
+    email,
+    password
+  }
+
+  const options = {
+    method: "POST",
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(body)
+  }
+
+  fetch('http://localhost:3001/api/v1/users', options)
+    .then(resp => {
+      if (!resp.ok) {
+        throw Error('Something went wrong');
+      }
+      return resp.json()
+    })
+    .then(data => console.log(data))
+    .catch(err => 
+      this.setState({
+      name: '',
+      email: '',
+      password: '',
+      error: err.message})
+      )
+}
