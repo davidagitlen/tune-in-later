@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoginFormContainer LoginForm should match the snapshot when a user is logged in 1`] = `
+<form
+  className="login-form"
+>
+  <input
+    alt="email"
+    className="email-input"
+    name="email"
+    onChange={[Function]}
+    placeholder="joanclarke@fempower.com"
+    value=""
+  />
+  <input
+    alt="password"
+    className="password-input"
+    name="password"
+    onChange={[Function]}
+    placeholder="type password here..."
+    type="password"
+    value=""
+  />
+  <button
+    className="login-btn"
+    onClick={[Function]}
+  >
+    Login
+  </button>
+</form>
+`;

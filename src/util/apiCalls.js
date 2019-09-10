@@ -27,7 +27,7 @@ export const landingFetch = () => {
           })
         })
       })
-    .catch(err => console.log(err, 'error in apiCalls landingFetch'))
+      .catch(err => {throw Error(err.message)})
 }
 
 export const loginUser = (email, password) => {
@@ -44,6 +44,13 @@ export const loginUser = (email, password) => {
     }
   }
   return fetch('http://localhost:3001/api/v1/login/', options)
+    .then(resp => {
+      if (!resp.ok) {
+        throw Error('Error logging in')
+      }
+      return resp.json();
+    })
+    .catch(err => {throw err})
 }
 
 export const addFavoriteToApi = (book, userId) => {
@@ -91,12 +98,22 @@ export const deleteFavoriteFromApi = (book, userId) => {
 export const fetchSearch = searchTerm => {
   const searchURL = searchTerm.split(' ').join('+')
   return fetch(`https://itunes.apple.com/search?media=audiobook&term=${searchURL}`)
-    .then(response => response.json())
-    .catch(err => console.log(err, 'error in apiCalls fetchSearch'))
+    .then(resp => {
+      if (!resp.ok) {
+        throw Error('Error getting search results')
+      }
+      return resp.json();
+    })
+    .catch(err => {throw Error(err.message)})
 }
 
 export const getUserFavoritesFromApi = userId => {
   return fetch(`http://localhost:3001/api/v1/users/${userId}/bookfavorites/`)
-    .then(resp => resp.json())
-    .catch(err => console.log('error in apiCalls getUserFavoritesFromApi', err))
+  .then (resp => {
+    if (!resp.ok) {
+      throw Error('Error getting favorites')
+    }
+    return resp.json();
+  })
+  .catch(err => {throw Error(err.message)})
 }
