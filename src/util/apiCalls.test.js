@@ -49,13 +49,26 @@ describe('apiCalls', () => {
     })
 
     it('should return  a user object (happy)', () => {
-      
-    })
-    it('should return an error(sad)', () => {
+      let expected = {
+        id: 2,
+        name: 'Leslie Knope',
+        password: 'MichelleObama'
+      }
+
+      window.fetch = jest.fn().mockImplementation(() => {
+        return Promise.resolve(expected)
+      })
+
+      expect(loginUser('lknope@pawnee.gov', 'MichelleObama')).resolves.toEqual(expected)      
 
     })
 
-    loginUser('b@g.com', 'blah')
+    // it('should return an error(sad)', () => {
+
+    // })
+
+    // Do we need to add in a catch here for the not ok resp?
+    // and a test...
   })
     
   describe('addFavoriteToApi', () => {
