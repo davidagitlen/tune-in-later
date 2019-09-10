@@ -39,8 +39,10 @@ class SearchForm extends Component {
 
   cleanSearchResults = (rawSearchResults) => {
     const allBooks = rawSearchResults.map(datum => datum).flat();
-    let regex = new RegExp('(&nbsp;|<([^>]+)>)', 'g')
+    let regex = new RegExp('(&nbsp;|<([^>]+)>)', 'g');
+    console.log(allBooks)
     const formattedBooks = allBooks.map(book => ({
+      id: book.collectionId,
       artist: book.artistName,
       image: book.artworkUrl100,
       price: book.collectionPrice,
