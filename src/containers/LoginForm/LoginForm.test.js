@@ -1,5 +1,6 @@
 import React from 'react'
 import { LoginForm, mapStateToProps, mapDispatchToProps } from './LoginForm';
+import { setCurrentUser, setCurrentUserFavorites } from '../../actions';
 import { shallow } from 'enzyme';
 
 describe('LoginFormContainer', () => {
@@ -54,8 +55,23 @@ describe('LoginFormContainer', () => {
   });
 
   describe('mapDispatchToProps', () => {
+    const mockDispatch = jest.fn();
+    it('calls dispatch on setCurrentUser action with the currentUser', () => {
+      const dispatchedAction = setCurrentUser(mockCurrentUser);
+      const mappedDispatchedProps = mapDispatchToProps(mockDispatch);
+      
+      mappedDispatchedProps.setCurrentUser(mockCurrentUser);
+      
+      expect(mockDispatch).toHaveBeenCalledWith(dispatchedAction);
+    });
 
-    it('calls', () => {
+    it('calls dispatch on setCurrentUserFavorites action with the currentUser', () => {
+      const dispatchedAction = setCurrentUser(mockCurrentUser);
+      const mappedDispatchedProps = mapDispatchToProps(mockDispatch);
+
+      mappedDispatchedProps.setCurrentUser(mockCurrentUser);
+
+      expect(mockDispatch).toHaveBeenCalledWith(dispatchedAction);
     });
   });
 });
