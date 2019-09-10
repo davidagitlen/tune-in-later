@@ -40,6 +40,11 @@ export class NewUserForm extends Component {
       password: this.state.password
     })
     .then(resp => this.props.setCurrentUser(resp))
+    .catch(err => this.setState({
+        name: '',
+        email: '',
+        password: '',
+        error: err.message}));
     this.clearNewUserInputs();
   }
 

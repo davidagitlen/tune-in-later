@@ -1,3 +1,38 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`NewUserForm should match the snapshot with correct data passed in 1`] = `undefined`;
+exports[`NewUserForm should match the snapshot with correct data passed in 1`] = `
+<form
+  className="NewUserForm"
+>
+  <h2>
+    New here? Create an account below:
+  </h2>
+  <input
+    name="name"
+    onChange={[Function]}
+    placeholder="Enter Your Name"
+    type="text"
+    value=""
+  />
+  <input
+    name="email"
+    onChange={[Function]}
+    placeholder="Enter Your Email"
+    type="text"
+    value=""
+  />
+  <input
+    name="password"
+    onChange={[Function]}
+    placeholder="Enter A Password"
+    type="password"
+    value=""
+  />
+  <button
+    onClick={[Function]}
+    type="submit"
+  >
+    Create Account
+  </button>
+</form>
+`;
