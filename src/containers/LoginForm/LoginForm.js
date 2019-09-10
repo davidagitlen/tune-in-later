@@ -5,7 +5,7 @@ import { setCurrentUser, setCurrentUserFavorites } from '../../actions';
 import PropTypes from 'prop-types';
 import './LoginForm.scss';
 
-class LoginForm extends Component {
+export class LoginForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -56,6 +56,7 @@ class LoginForm extends Component {
   }
 
   render() {
+    console.log(this.state.currentUser)
     return (
       <form className="login-form">
         <input className="email-input" placeholder="joanclarke@fempower.com" alt="email" name="email" value={this.state.email} onChange={this.handleInputs}></input>
@@ -67,12 +68,12 @@ class LoginForm extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+export const mapStateToProps = state => ({
   currentUser: state.currentUser,
   favorites: state.favorites
 })
 
-const mapDispatchToProps = dispatch => ({
+export const mapDispatchToProps = dispatch => ({
   setCurrentUser: user => dispatch(setCurrentUser(user)),
   setCurrentUserFavorites: favorites => dispatch(setCurrentUserFavorites(favorites))
 })
