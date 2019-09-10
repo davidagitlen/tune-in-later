@@ -5,8 +5,6 @@ export const setCurrentUserFavoritesReducer = (state=[], action) => {
     case 'ADD_USER_FAVORITE':
       return [...state, action.favorite];
     case 'DELETE_USER_FAVORITE' :
-      console.log(state)
-      console.log(action.favorite)
       const filteredFavorites = state.filter(book => book.book_id !== action.favorite.id);
       return filteredFavorites;
     default:

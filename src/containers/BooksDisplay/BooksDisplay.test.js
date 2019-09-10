@@ -63,7 +63,6 @@ describe('BooksDisplay', () => {
 
   describe('mapStateToProps', () => {
     it('should return an object with appropriate data', () => {
-
       const mockState = {
         currentUser: {id: 1, name: 'David'},
         favorites: [{id: 12, title: 'Twelve'}, {id: 13, title: 'Thirteen'}],
