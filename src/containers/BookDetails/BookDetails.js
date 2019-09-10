@@ -3,7 +3,7 @@ import './BookDetails.scss';
 
 const BookDetails = ({book}) => {
   
-  const {title, author, genre, price, description, image} = book
+  const {title, author, genre, description, image} = book
   
   return(
   

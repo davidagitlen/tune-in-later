@@ -60,7 +60,7 @@ export const addFavoriteToApi = (book, userId) => {
     "author_name": book.artist,
     "book_name": book.title,
      "artwork_url": book.image,
-    "release_date": Date.now(),
+    "release_date": book.date,
     "description": book.description.replace(regex, ''),
     "primary_genre_name": book.genre
   }
