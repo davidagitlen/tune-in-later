@@ -223,7 +223,18 @@ describe('apiCalls', () => {
   describe('getUserFavoritesFromApi', () => {
 
     it('should fire fetch with the correct url', () => {
+      window.fetch = jest.fn().mockImplementation(() => {
+        return Promise.resolve({
+          ok: true,
+          json: () => Promise.resolve()
+        }) 
+      })
 
+      let expectedURL = 'http://localhost:3001/api/v1/users/6/bookfavorites/'
+
+      getUserFavoritesFromApi(6);
+
+      expect(window.fetch).toHaveBeenCalledWith(expectedURL);
     })
 
     it('should return favorites', () => {
