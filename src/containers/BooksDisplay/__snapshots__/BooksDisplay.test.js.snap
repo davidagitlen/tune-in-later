@@ -1,0 +1,79 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BooksDisplay should match the snapshot with correct data passed in 1`] = `
+<section
+  className="BooksDisplay"
+>
+  <div>
+    <h2
+      className="genreLabel"
+    >
+      Horror
+    </h2>
+  </div>
+  <div>
+    <Connect(Book)
+      book={
+        Object {
+          "artist": "Dante Alighieri",
+          "date": "09/09/1320",
+          "description": "Welcome to the secret 10th circle of Hell too chilling to be included in the Inferno!",
+          "filterType": "Horror",
+          "genre": "Horror",
+          "id": 666,
+          "image": "http://someimage.com/",
+          "price": 1,
+          "title": "A Tour of Turing",
+        }
+      }
+      key="8221770"
+    />
+    <Connect(Book)
+      book={
+        Object {
+          "artist": "David Gitlen",
+          "date": "09/09/2019",
+          "description": "699 years to the day, somebody save me!",
+          "filterType": "History",
+          "genre": "Memoir",
+          "id": 111,
+          "image": "http://davidgitlen.com/author.png",
+          "price": 1,
+          "title": "Dante Was Right!",
+        }
+      }
+      key="1370295"
+    />
+  </div>
+</section>
+`;
+
+exports[`BooksDisplay should match the snapshot with correct data passed in if the books are from the user's favorites 1`] = `
+<section
+  className="BooksDisplay"
+>
+  <div>
+    <h2
+      className="genreLabel"
+    >
+      Favorites
+    </h2>
+  </div>
+  <div>
+    <Connect(Book)
+      book={
+        Object {
+          "artist": "Brianna DelValle",
+          "date": "09/09/2019",
+          "description": "It is gonna be great!",
+          "genre": "Autobiography",
+          "id": 222,
+          "image": "http://artwork.com/art.png",
+          "title": "It's gonna be great!",
+        }
+      }
+      key="2740590"
+    />
+  </div>
+</section>
+`;

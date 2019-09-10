@@ -5,7 +5,7 @@ import BookDetails from './BookDetails';
 describe('BookDetails', () => {
   it('should match the snapshot with correct data passed in', () => {
     const mockBook = {
-      title:'The Hell of Incessent Testing',
+      title:'The Hell of Incessant Testing',
       author:'David Gitlen',
       genre:'Memoir',
       price: 1,

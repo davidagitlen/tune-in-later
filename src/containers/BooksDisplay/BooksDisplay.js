@@ -1,12 +1,11 @@
 import React from 'react';
 import Book from '../Book/Book';
 import './BooksDisplay.scss';
-// import { setCurrentUserFavorites } from '../../actions';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 
-const BooksDisplay = ({books, sectionGenre}) => {
+export const BooksDisplay = ({books, sectionGenre}) => {
   let booksToRender = books;  
 
   const handleFavoritesList = () => {
@@ -24,7 +23,6 @@ const BooksDisplay = ({books, sectionGenre}) => {
 
   if (sectionGenre === "Favorites") {
     booksToRender = handleFavoritesList();
-    console.log(booksToRender, 'books to render')
   } 
 
   let bookList = booksToRender.map(book => 
@@ -44,21 +42,14 @@ const BooksDisplay = ({books, sectionGenre}) => {
   )
 }
 
-const mapStateToProps = state => ({
+export const mapStateToProps = state => ({
   currentUser : state.currentUser,
   favorites : state.favorites
 })
-
-// const mapDispatchToProps = dispatch => ({
-//   setCurrentUserFavorites : favorites => dispatch(setCurrentUserFavorites(favorites))
-// });
-
-// export default connect(mapStateToProps, mapDispatchToProps)(BooksDisplay);
 
 export default connect(mapStateToProps)(BooksDisplay);
 
 BooksDisplay.propTypes = {
   currentUser: PropTypes.object,
-  favorites: PropTypes.array.isRequired,
-  setCurrentUserFavorites: PropTypes.func.isRequired
+  favorites: PropTypes.array.isRequired
 }

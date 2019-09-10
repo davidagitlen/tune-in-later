@@ -5,14 +5,14 @@ exports[`BookDetails should match the snapshot with correct data passed in 1`] =
   className="BookDetails"
 >
   <img
-    alt="The Hell of Incessent Testing"
+    alt="The Hell of Incessant Testing"
     src="http://www.davidgitlen.com/author.png"
   />
   <div
     className="bookInfo"
   >
     <h2>
-      The Hell of Incessent Testing
+      The Hell of Incessant Testing
     </h2>
     <h3>
       David Gitlen
