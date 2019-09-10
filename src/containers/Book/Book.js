@@ -19,21 +19,13 @@ export class Book extends Component {
     e.preventDefault();
     if (!this.props.favorites.find(obj => obj.book_id === this.props.book.id)) {
       addFavoriteToApi(this.props.book, this.props.currentUser.id)
-        .then(resp => {
-          if (!resp.ok) {
-            throw Error('There was an error adding the favorite')
-          }
-          return resp.json()})
         .then(data => this.props.addUserFavorite(data, this.props.currentUser.id))
         .catch(error => console.error(error));
     } else {
       deleteFavoriteFromApi(this.props.book, this.props.currentUser.id)
-        .then(resp => {
-          if(!resp.ok) {
-          throw Error('There was an error deleting the favorite')
-        }
+        .then(resp => 
           this.props.deleteUserFavorite(this.props.book)
-        })
+        )
         .catch(error => console.error(error.message));
     } 
   }

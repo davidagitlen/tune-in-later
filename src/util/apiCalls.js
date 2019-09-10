@@ -65,6 +65,13 @@ export const addFavoriteToApi = (book, userId) => {
     }
   }
   return fetch(`http://localhost:3001/api/v1/users/${userId}/bookfavorites`, options)
+    .then(resp => {
+      if (!resp.ok) {
+        throw Error('There was an error adding the favorite')
+      }
+      return resp.json()
+    })
+    .catch(err => {throw err})
 } 
 
 export const deleteFavoriteFromApi = (book, userId) => {
@@ -73,6 +80,12 @@ export const deleteFavoriteFromApi = (book, userId) => {
     method: "DELETE"
   }
   return fetch(`http://localhost:3001/api/v1/users/${userId}/bookfavorites/${bookId}`, options)
+    .then(resp => {
+      if (!resp.ok) {
+        throw Error('There was an error deleting the favorite')
+      }
+    })
+
 }
 
 export const fetchSearch = searchTerm => {
