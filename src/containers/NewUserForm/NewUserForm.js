@@ -38,12 +38,8 @@ export class NewUserForm extends Component {
       name: this.state.name,
       email: this.state.email,
       password: this.state.password
-    });
-    this.props.setCurrentUser({
-      name: this.state.name,
-      email: this.state.email,
-      password: this.state.password
-    });
+    })
+    .then(resp => this.props.setCurrentUser(resp))
     this.clearNewUserInputs();
   }
 

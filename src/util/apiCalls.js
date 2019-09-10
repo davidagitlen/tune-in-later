@@ -136,14 +136,13 @@ export const addNewUserFetch = ({name, email, password}) => {
     body: JSON.stringify(body)
   }
 
-  fetch('http://localhost:3001/api/v1/users', options)
+  return fetch('http://localhost:3001/api/v1/users', options)
     .then(resp => {
       if (!resp.ok) {
         throw Error('Something went wrong');
       }
       return resp.json()
     })
-    .then(data => console.log(data))
     .catch(err => 
       this.setState({
       name: '',
