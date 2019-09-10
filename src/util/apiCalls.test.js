@@ -18,7 +18,7 @@ describe('apiCalls', () => {
       window.fetch = jest.fn().mockImplementation(() => {
         return Promise.resolve({
           ok: true,
-          json: () => Promise.resolve()
+          json: () => Promise.resolve([{ results: [{ title: 'Romance' }] }], [{ results: [{ title: 'Fantasy' }] }], [{ results: [{ title: 'Biography' }] }], [{ results: [{ title: 'History' }] }], [{ results: [{ title: 'Horror' }] }])
         });
       });
 
@@ -36,7 +36,7 @@ describe('apiCalls', () => {
       window.fetch = jest.fn().mockImplementation(() => {
         return Promise.resolve({
           ok: true,
-          json: () => Promise.resolve([{title: 'Romance'}, {title: 'Fantasy'}, {title: 'Biography'}, {title: 'History'}, {title: 'Horror'} ])
+          json: () => Promise.resolve([{ results:[{ title: 'Romance' }]}], [{results: [{ title: 'Fantasy' }]}], [{ results: [{ title: 'Biography' }]}], [{ results: [{ title: 'History' }] }], [{ results: [{ title: 'Horror' }]}] )
         });
       });
 
