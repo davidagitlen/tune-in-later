@@ -1,9 +1,9 @@
 export const landingFetch = () => {
-  const romanceFetch = fetch('https://itunes.apple.com/search?media=audiobook&term=romance');
-  const fantasyFetch = fetch('https://itunes.apple.com/search?media=audiobook&term=fantasy');
-  const biographyFetch = fetch('https://itunes.apple.com/search?media=audiobook&term=biography');
-  const historyFetch = fetch('https://itunes.apple.com/search?media=audiobook&term=history');
-  const horrorFetch = fetch('https://itunes.apple.com/search?media=audiobook&term=horror');
+  const romanceFetch = fetch('https://itunes.apple.com/search?media=audiobook&term=romance&explicit=No');
+  const fantasyFetch = fetch('https://itunes.apple.com/search?media=audiobook&term=fantasy&explicit=No');
+  const biographyFetch = fetch('https://itunes.apple.com/search?media=audiobook&term=biography&explicit=No');
+  const historyFetch = fetch('https://itunes.apple.com/search?media=audiobook&term=history&explicit=No');
+  const horrorFetch = fetch('https://itunes.apple.com/search?media=audiobook&term=horror&explicit=No');
 
   return Promise.all([romanceFetch, fantasyFetch, biographyFetch, historyFetch, horrorFetch])
     .then(responses => Promise.all(responses.map(response => response.json())))
