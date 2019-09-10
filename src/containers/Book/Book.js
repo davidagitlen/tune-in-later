@@ -23,7 +23,7 @@ export class Book extends Component {
           if (!resp.ok) {
             throw Error('There was an error adding the favorite')
           }
-          resp.json()})
+          return resp.json()})
         .then(data => this.props.addUserFavorite(data, this.props.currentUser.id))
         .catch(error => console.error(error));
     } else {

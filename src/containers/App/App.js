@@ -78,7 +78,8 @@ export class App extends Component{
             <>
           <section className="main-display">
             {this.props.selectedBook && <BookDetails book={this.props.selectedBook}/>}
-            {!this.props.selectedBook && this.props.currentUser ? <h2 className='welcome-message'>Welcome {!this.props.selectedBook && this.props.currentUser.name}</h2> : <h2>Welcome, please sign in!</h2>}
+            {!this.props.selectedBook && this.props.currentUser && <h2 className='welcome-message'>Welcome {this.props.currentUser.name}!</h2>} 
+            {!this.props.selectedBook && !this.props.currentUser && <h2>Welcome, please sign in!</h2>}
           </section>
           <Route path='/my-collection' render={() => {
             return(
