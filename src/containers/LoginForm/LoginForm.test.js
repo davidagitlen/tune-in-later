@@ -56,22 +56,21 @@ describe('LoginFormContainer', () => {
 
   describe('mapDispatchToProps', () => {
     const mockDispatch = jest.fn();
+    const mappedDispatchedProps = mapDispatchToProps(mockDispatch);
     it('calls dispatch on setCurrentUser action with the currentUser', () => {
       const dispatchedAction = setCurrentUser(mockCurrentUser);
-      const mappedDispatchedProps = mapDispatchToProps(mockDispatch);
       
       mappedDispatchedProps.setCurrentUser(mockCurrentUser);
       
       expect(mockDispatch).toHaveBeenCalledWith(dispatchedAction);
     });
 
-    it('calls dispatch on setCurrentUserFavorites action with the currentUser', () => {
-      const dispatchedAction = setCurrentUser(mockCurrentUser);
-      const mappedDispatchedProps = mapDispatchToProps(mockDispatch);
+    it('calls dispatch on setCurrentUserFavorites action with the favorites', () => {
+      const dispatchedFavAction = setCurrentUserFavorites(mockFavorites);
 
-      mappedDispatchedProps.setCurrentUser(mockCurrentUser);
+      mappedDispatchedProps.setCurrentUserFavorites(mockFavorites);
 
-      expect(mockDispatch).toHaveBeenCalledWith(dispatchedAction);
+      expect(mockDispatch).toHaveBeenCalledWith(dispatchedFavAction);
     });
   });
 });
