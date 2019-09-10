@@ -45,30 +45,6 @@ describe('LoginFormContainer', () => {
         expect(wrapper).toMatchSnapshot();
       });
 
-      it('should call checkLoginStatus when the login button is clicked', () => {
-        // const mockCheckLoginStatus = jest.fn();
-        // wrapper.instance().checkLoginStatus = mockCheckLoginStatus;
-        // wrapper.update()
-        // console.log(wrapper.debug());
-        // const mockEvent = {};
-        // const mockPreventDefault = {preventDefault: () => {}}
-
-        // wrapper.find('button').simulate('click', mockPreventDefault);
-        // expect(mockPreventDefault).toHaveBeenCalled(1)
-        //tried adding loginUser to wrapper and calling on wrapper also when trying the one below
-        // expect(mockCheckLoginStatus).toHaveBeenCalled();
-      });
-
-      it('should call loginUser when the login button is clicked', () => {
-        // const mockLoginUser = loginUser() = jest.fn();
-        // const mockLoginUser = jest.fn();
-        // const mockPreventDefault = { preventDefault: () => { } }
-
-        // wrapper.find('button').simulate('click', mockPreventDefault);
-        
-        // expect(mockLoginUser).toHaveBeenCalled();
-      });
-
       it('should change the state on the input change within the form', () => {
         wrapper.find('input').at(0).simulate('change', {target: {value: 'joanclarke@turing.io', name: 'email'}});
         wrapper.find('input').at(1).simulate('change', {target: {value: 'freedom', name: 'password'}})
