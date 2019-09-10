@@ -9,7 +9,6 @@ jest.mock('../../util/apiCalls')
 describe('LoginFormContainer', () => {
   let wrapper;
 
-  // const mockHandleInputs = jest.fn();
   const mockSetCurrentUser = jest.fn();
   const mockSetCurrentUserFavorites = jest.fn();
   const mockCurrentUser = {
@@ -32,9 +31,6 @@ describe('LoginFormContainer', () => {
 
   beforeEach(() => {
     wrapper = shallow(<LoginForm
-      // handleInputs={mockHandleInputs}
-      // loginUser={jest.fn()}
-      // getUserFavoritesFromApi={jest.fn()}
       currentUser={mockCurrentUser}
       favorites={mockFavorites}
       setCurrentUser={mockSetCurrentUser}
@@ -64,9 +60,16 @@ describe('LoginFormContainer', () => {
 
       wrapper.instance().checkLoginStatus({preventDefault: jest.fn()});
       expect(loginUser).toHaveBeenCalled();
-      // expect(wrapper.instance().clearLoginInputs).toHaveBeenCalled()
-
     });
+
+  it('should call getUserFavoritesFromApi from the apiCalls when handleGetUserFavorites is invoked', () => {
+    getUserFavoritesFromApi.mockImplementation(() => {
+        return Promise.resolve()
+    });
+
+    wrapper.instance().handleGetUserFavorites(mockCurrentUser);
+    expect(getUserFavoritesFromApi).toHaveBeenCalledWith(1);
+  });
 
   describe('mapStateToProps', () => {
     
